@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { TrendingUp, AlertTriangle, DollarSign, BarChart2 } from "lucide-react";
+import FinancialMetricsDashboard from "../components/FinancialMetricsDashboard";
 
 // Types
 interface StockData {
@@ -35,6 +36,15 @@ interface FinancialMetrics {
   profitMargin: number;
 }
 
+interface MetricCardProps {
+  title: string;
+  value: number;
+  icon: React.ReactNode;
+  description: string;
+  trend?: "positive" | "negative";
+}
+
+// Sample Data
 const stockRecommendations: StockData[] = [
   {
     symbol: "AAPL",
@@ -52,7 +62,6 @@ const stockRecommendations: StockData[] = [
     keyMetrics: "Cloud revenue: $25 billion (+22% YoY)",
     rationale: "Dominance in cloud computing",
   },
-  // Add more stocks as needed
 ];
 
 const realtimeStocks: RealtimeStock[] = [
@@ -68,10 +77,8 @@ const realtimeStocks: RealtimeStock[] = [
     change: 2.0,
     marketCap: "$2.5 trillion",
   },
-  // Add more stocks as needed
 ];
 
-// Sample data for the growth chart
 const growthData = [
   { month: "Jan", revenue: 1200 },
   { month: "Feb", revenue: 1400 },
@@ -79,6 +86,14 @@ const growthData = [
   { month: "Apr", revenue: 1500 },
   { month: "May", revenue: 1700 },
 ];
+
+const sampleMetrics: FinancialMetrics = {
+  peRatio: 25.4,
+  psRatio: 3.2,
+  revenueGrowth: 15.7,
+  earningsGrowth: 22.3,
+  profitMargin: 18.5,
+};
 
 const CustomCard = ({ title, icon: Icon, children }) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -112,116 +127,130 @@ const CustomTable = ({ headers, children }) => (
   </div>
 );
 
-const Learn = () => {
+const FinancialDashboard = () => {
   return (
-    <div className="p-6 space-y-6 bg-gray-50">
-      {/* Executive Summary */}
-      <CustomCard title="Executive Summary" icon={TrendingUp}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 bg-purple-50 rounded-lg">
-            <h3 className="font-semibold mb-2">Sector Growth</h3>
-            <p className="text-2xl font-bold text-purple-600">12% YoY</p>
-            <p className="text-sm text-gray-600">Q3 2023</p>
-          </div>
-          <div className="p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-semibold mb-2">Cloud Services</h3>
-            <p className="text-2xl font-bold text-blue-600">$250B</p>
-            <p className="text-sm text-gray-600">+25% from Q2</p>
-          </div>
-          <div className="p-4 bg-green-50 rounded-lg">
-            <h3 className="font-semibold mb-2">AI Revenue</h3>
-            <p className="text-2xl font-bold text-green-600">$50B</p>
-            <p className="text-sm text-gray-600">30% Growth</p>
-          </div>
+    <div className="min-h-screen bg-gray-100">
+      <div className="max-w-7xl mx-auto p-6 space-y-6">
+        {/* Header Section */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Smart Reports Dashboard
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Key insights and recommendations for your portfolio
+          </p>
         </div>
-        <div className="px-4 pt-4 text-gray-600 text-lg leading-relaxed">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sapiente
-          obcaecati, possimus voluptatibus, laboriosam corrupti illum eius
-          eveniet doloribus ipsam praesentium fuga architecto id! Vitae nobis
-          nisi adipisci neque quia? Lorem ipsum dolor sit amet consectetur,
-          adipisicing elit. Repellendus libero quisquam nam ducimus illum
-          temporibus. Mollitia optio, reiciendis architecto voluptatibus odio
-          incidunt, exercitationem saepe similique deserunt, aspernatur atque?
-          Placeat, earum!
-        </div>
-      </CustomCard>
+        {/* Executive Summary */}
+        <CustomCard title="Executive Summary" icon={TrendingUp}>
+          <div className="px-4 pb-4 text-gray-600 leading-relaxed">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
+            maiores explicabo ut quas ipsum nemo accusamus aut, veritatis natus,
+            iure maxime. Atque veniam itaque delectus fuga omnis commodi
+            reprehenderit! Id? Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Dolores amet similique possimus obcaecati
+            laboriosam nemo dignissimos consequatur cum id tenetur illum tempora
+            sequi ipsum sapiente, dolorem harum ea esse. Incidunt!
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-purple-50 rounded-lg">
+              <h3 className="font-semibold mb-2">Sector Growth</h3>
+              <p className="text-2xl font-bold text-purple-600">12% YoY</p>
+              <p className="text-sm text-gray-600">Q3 2023</p>
+            </div>
+            <div className="p-4 bg-blue-50 rounded-lg">
+              <h3 className="font-semibold mb-2">Cloud Services</h3>
+              <p className="text-2xl font-bold text-blue-600">$250B</p>
+              <p className="text-sm text-gray-600">+25% from Q2</p>
+            </div>
+            <div className="p-4 bg-green-50 rounded-lg">
+              <h3 className="font-semibold mb-2">AI Revenue</h3>
+              <p className="text-2xl font-bold text-green-600">$50B</p>
+              <p className="text-sm text-gray-600">30% Growth</p>
+            </div>
+          </div>
+        </CustomCard>
 
-      {/* Growth Chart */}
-      <CustomCard title="Revenue Growth Trend" icon={BarChart2}>
-        <div className="h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={growthData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Line type="monotone" dataKey="revenue" stroke="#8884d8" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </CustomCard>
+        {/* Growth Chart */}
+        <CustomCard title="Revenue Growth Trend" icon={BarChart2}>
+          <div className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={growthData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="revenue" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </CustomCard>
 
-      {/* Stock Recommendations */}
-      <CustomCard title="Stock Recommendations" icon={DollarSign}>
-        <CustomTable
-          headers={[
-            "Stock",
-            "Price",
-            "P/E Ratio",
-            "Growth (YoY)",
-            "Key Metrics",
-            "Rationale",
-          ]}
-        >
-          <tbody className="bg-white divide-y divide-gray-200">
-            {stockRecommendations.map((stock) => (
-              <tr key={stock.symbol}>
-                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                  {stock.symbol}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">${stock.price}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {stock.peRatio}x
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {stock.revenueGrowth}%
-                </td>
-                <td className="px-6 py-4">{stock.keyMetrics}</td>
-                <td className="px-6 py-4">{stock.rationale}</td>
-              </tr>
-            ))}
-          </tbody>
-        </CustomTable>
-      </CustomCard>
+        {/* Stock Recommendations */}
+        <CustomCard title="Stock Recommendations" icon={DollarSign}>
+          <CustomTable
+            headers={[
+              "Stock",
+              "Price",
+              "P/E Ratio",
+              "Growth (YoY)",
+              "Key Metrics",
+              "Rationale",
+            ]}
+          >
+            <tbody className="bg-white divide-y divide-gray-200">
+              {stockRecommendations.map((stock) => (
+                <tr key={stock.symbol}>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                    {stock.symbol}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    ${stock.price}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {stock.peRatio}x
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {stock.revenueGrowth}%
+                  </td>
+                  <td className="px-6 py-4">{stock.keyMetrics}</td>
+                  <td className="px-6 py-4">{stock.rationale}</td>
+                </tr>
+              ))}
+            </tbody>
+          </CustomTable>
+        </CustomCard>
 
-      {/* Real-time Stock Prices */}
-      <CustomCard title="Real-time Stock Prices" icon={AlertTriangle}>
-        <CustomTable headers={["Stock", "Price", "Change (%)", "Market Cap"]}>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {realtimeStocks.map((stock) => (
-              <tr key={stock.symbol}>
-                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                  {stock.symbol}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">${stock.price}</td>
-                <td
-                  className={`px-6 py-4 whitespace-nowrap ${
-                    stock.change >= 0 ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {stock.change >= 0 ? "+" : ""}
-                  {stock.change}%
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {stock.marketCap}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </CustomTable>
-      </CustomCard>
+        {/* Real-time Stock Prices */}
+        <CustomCard title="Real-time Stock Prices" icon={AlertTriangle}>
+          <CustomTable headers={["Stock", "Price", "Change (%)", "Market Cap"]}>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {realtimeStocks.map((stock) => (
+                <tr key={stock.symbol}>
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                    {stock.symbol}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    ${stock.price}
+                  </td>
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap ${
+                      stock.change >= 0 ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {stock.change >= 0 ? "+" : ""}
+                    {stock.change}%
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {stock.marketCap}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </CustomTable>
+        </CustomCard>
+      </div>
     </div>
   );
 };
 
-export default Learn;
+export default FinancialDashboard;

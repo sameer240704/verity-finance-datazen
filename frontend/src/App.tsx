@@ -17,6 +17,7 @@ import Chatbot from "./pages/Chatbot";
 import MoneyPulse from "./components/MoneyPulse";
 import MoneyCalc from "./components/MoneyCalc";
 import StockAnalyzer from "./pages/StockAnalyzer";
+import MarketAnalysisAgents from "./pages/AgentsPage";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -135,6 +136,16 @@ function App() {
                     <ProtectedRoute>
                       <DashboardLayout>
                         <StockAnalyzer />
+                      </DashboardLayout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/portfolio/agents"
+                  element={
+                    <ProtectedRoute>
+                      <DashboardLayout>
+                        <MarketAnalysisAgents />
                       </DashboardLayout>
                     </ProtectedRoute>
                   }
