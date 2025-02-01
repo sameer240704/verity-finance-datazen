@@ -1,27 +1,19 @@
 {
     "market_metrics": {},
     "analysis_report": {},
-    "sources": [
+    "sources": [],
+    "top_5_stocks": [
         {
-            "name": "IRENA",
-            "url": "https://www.irena.org/"
+            "stock_name": "Market Performance:** Share price increased 15% YTD as of Q3 2023\n    - **Justification:** Market leader in renewable energy; strong growth driven by aggressive solar and wind project expansion\n\n2. **Tesla Inc.",
+            "ticker": "TSLA",
+            "market_performance": "Share price up 20% YTD due to growth in energy storage deployments",
+            "justification": "Tesla's solar panels and energy storage (Powerwall, Megapack) complement its EV business, boosting overall performance\n\n3. **Vestas Wind Systems (VWS):**"
         },
         {
-            "name": "Bloomberg Green",
-            "url": "https://www.bloomberg.com/green"
-        },
-        {
-            "name": "International Energy Agency",
-            "url": "https://www.iea.org/"
-        },
-        {
-            "name": "U.S. Department of Energy",
-            "url": "https://www.energy.gov/"
-        },
-        {       
-            "name": "WindEurope",
-            "url": "https://windeurope.org/"
+            "stock_name": "Market Performance:** 18% stock price appreciation YTD\n    - **Justification:** Continues to dominate the global wind turbine market with innovations in offshore wind technology\n\n4. **SolarEdge Technologies",
+            "ticker": "SEDG",
+            "market_performance": "25% YTD gain",
+            "justification": "Leader in inverter technology; strong adoption in residential and commercial solar installations\n\n5. **Brookfield Renewable Partners (BEP):**"
         }
-    ],
-    "top_5_stocks": []
+    ]
 }

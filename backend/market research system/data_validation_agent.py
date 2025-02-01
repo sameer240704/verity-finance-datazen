@@ -4,6 +4,7 @@ class DataValidationAgent:
         self.validation_prompt = """
         You are a Data Validation Agent. Your role is to cross-reference and validate the data provided to you. 
         Ensure the accuracy of the data and minimize any potential hallucinations. 
+        Also filter out possible misinformation. 
         If data from multiple sources conflicts, point out the discrepancies and provide a reasoned judgment on which source is more reliable or if a consensus cannot be reached.
 
         Input: {data}
