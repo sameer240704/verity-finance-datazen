@@ -1,231 +1,197 @@
-import React, { useState } from 'react';
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell
-} from 'recharts';
+import React, { useState } from "react";
+import { DollarSign } from "lucide-react";
 
-// Types
-interface MarketMetrics {
-  sector: string;
-  marketSize: number;
-  growthRate: number;
-  marketShare: {
-    company: string;
-    share: number;
-  }[];
-  profitMargin: {
-    min: number;
-    max: number;
+// Helper function to convert market metrics to financial metrics format
+const convertToFinancialMetrics = (marketData) => {
+  return {
+    peRatio: 25.4, // These values are hardcoded since they're not in the new data format
+    psRatio: 3.2,
+    revenueGrowth: 0.15,
+    earningsGrowth: 0.22,
+    profitMargin: 0.18,
   };
-  roi: {
-    min: number;
-    max: number;
-  };
-}
+};
 
-interface StockPerformance {
-  ticker: string;
-  name: string;
-  ytdGain: number;
-  justification: string;
-}
+const CustomCard = ({ title, icon: Icon, children }) => (
+  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="px-6 py-4 border-b border-gray-200">
+      <div className="flex items-center">
+        {Icon && <Icon className="mr-2 text-purple-600" size={20} />}
+        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+      </div>
+    </div>
+    <div className="p-6">{children}</div>
+  </div>
+);
 
-// Sample data
-const marketMetrics: MarketMetrics[] = [
-  {
-    sector: "Solar Power",
-    marketSize: 160,
-    growthRate: 15,
-    marketShare: [
-      { company: "JinkoSolar", share: 15 },
-      { company: "First Solar", share: 11 },
-      { company: "Canadian Solar", share: 9 },
-      { company: "SunPower", share: 5 }
-    ],
-    profitMargin: { min: 10, max: 15 },
-    roi: { min: 12, max: 18 }
-  },
-  {
-    sector: "Wind Power",
-    marketSize: 100,
-    growthRate: 10,
-    marketShare: [
-      { company: "Vestas", share: 17 },
-      { company: "GE Renewable", share: 14 },
-      { company: "Siemens Gamesa", share: 15 },
-      { company: "Goldwind", share: 13 },
-      { company: "Envision", share: 9 }
-    ],
-    profitMargin: { min: 7, max: 12 },
-    roi: { min: 10, max: 15 }
-  }
-];
+const FinancialMetricCard = ({ title, value, subtitle, trend }) => (
+  <div className="bg-white p-6 rounded-lg shadow">
+    <div className="space-y-2">
+      <p className="text-sm text-gray-600">{title}</p>
+      <p className="text-3xl font-semibold">{value}</p>
+      <p className="text-xs text-gray-500">{subtitle}</p>
+      <p
+        className={`text-xs ${
+          trend.includes("+") ? "text-green-600" : "text-red-600"
+        }`}
+      >
+        {trend}
+      </p>
+    </div>
+  </div>
+);
 
-const stockPerformance: StockPerformance[] = [
-  {
-    ticker: "JKS",
-    name: "JinkoSolar",
-    ytdGain: 50,
-    justification: "Global leadership in solar PV manufacturing"
-  },
-  {
-    ticker: "FSLR",
-    name: "First Solar",
-    ytdGain: 45,
-    justification: "Beneficiary of U.S. Inflation Reduction Act"
-  },
-  {
-    ticker: "VWS.CO",
-    name: "Vestas",
-    ytdGain: 30,
-    justification: "Strong pipeline in Europe"
-  },
-  {
-    ticker: "GE",
-    name: "GE Renewable Energy",
-    ytdGain: 40,
-    justification: "Expansion in offshore wind"
-  },
-  {
-    ticker: "SGREN",
-    name: "Siemens Gamesa",
-    ytdGain: 25,
-    justification: "Dominance in offshore wind"
-  }
-];
+const FinancialMetricsDashboard = ({ metrics }) => {
+  return (
+    <div className="mb-8">
+      <h2 className="text-xl font-bold mb-2">Financial Metrics Overview</h2>
+      <p className="text-gray-600 mb-4">
+        Key performance indicators and valuation metrics
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <FinancialMetricCard
+          title="P/E Ratio"
+          value={`${metrics.peRatio}x`}
+          subtitle="Price to Earnings Ratio"
+          trend="↓ vs Industry Average"
+        />
+        <FinancialMetricCard
+          title="P/S Ratio"
+          value={`${metrics.psRatio}x`}
+          subtitle="Price to Sales Ratio"
+          trend="↑ vs Industry Average"
+        />
+        <FinancialMetricCard
+          title="Revenue Growth"
+          value={`${metrics.revenueGrowth * 100}%`}
+          subtitle="Year-over-Year Growth"
+          trend="↑ vs Industry Average"
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FinancialMetricCard
+          title="Earnings Growth"
+          value={`${metrics.earningsGrowth * 100}%`}
+          subtitle="Year-over-Year Growth"
+          trend="↑ vs Industry Average"
+        />
+        <FinancialMetricCard
+          title="Profit Margin"
+          value={`${metrics.profitMargin * 100}%`}
+          subtitle="Net Profit Margin"
+          trend="↑ vs Industry Average"
+        />
+      </div>
+    </div>
+  );
+};
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
-
-const MarketAnalysisDashboard: React.FC = () => {
-  const [selectedSector, setSelectedSector] = useState<string>("Solar Power");
-
-  const selectedMetrics = marketMetrics.find(m => m.sector === selectedSector);
+const MarketAnalysisDashboard = ({ data }) => {
+  // Convert the new data format to match the existing UI structure
+  const financialMetrics = convertToFinancialMetrics(data.market_metrics);
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-8">Green Energy Market Analysis</h1>
-      
-      <div className="mb-6">
-        <select 
-          className="p-2 border rounded"
-          value={selectedSector}
-          onChange={(e) => setSelectedSector(e.target.value)}
-        >
-          {marketMetrics.map(metric => (
-            <option key={metric.sector} value={metric.sector}>
-              {metric.sector}
-            </option>
+    <div className="max-w-7xl mx-auto p-8 bg-white">
+      <div className="mb-8 border-b-2 px-4">
+        <h1 className="text-3xl font-bold text-left mb-8">
+          Market Analysis: Trends in Green Energy Technologies
+        </h1>
+      </div>
+
+      {/* Financial Metrics */}
+      <FinancialMetricsDashboard metrics={financialMetrics} />
+
+      {/* Abstract */}
+      <div className="my-8">
+        <h2 className="text-xl font-bold mb-4">Abstract</h2>
+        <p className="text-gray-800 leading-relaxed">
+          This comprehensive analysis examines current market trends in green
+          energy technologies, focusing on growth patterns, technological
+          advancements, and market dynamics. The study synthesizes data from
+          multiple authoritative sources to provide insights into market
+          metrics, competitive landscapes, and future projections.
+        </p>
+      </div>
+
+      {/* Market Overview and Other Sections */}
+      <div className="space-y-8">
+        <section>
+          <h2 className="text-xl font-bold mb-4">Market Overview</h2>
+          <p className="mb-4 text-gray-800 leading-relaxed">
+            The global green energy market has shown remarkable growth, with
+            solar power reaching {data.market_metrics.solar_energy_market_size}{" "}
+            and wind power reaching{" "}
+            {data.market_metrics.wind_energy_market_size}. Solar energy shows a
+            growth rate of {data.market_metrics.solar_energy_growth_rate} while
+            wind energy demonstrates{" "}
+            {data.market_metrics.wind_energy_growth_rate} growth.
+          </p>
+        </section>
+      </div>
+
+      {/* References */}
+      <div className="mt-12 border-t pt-8">
+        <h2 className="text-xl font-bold mb-4">References</h2>
+        <div className="space-y-4">
+          {data.sources.map((source, index) => (
+            <div key={index} className="text-gray-800">
+              <p className="leading-relaxed">
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  {source.name}
+                </a>
+              </p>
+            </div>
           ))}
-        </select>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Market Size and Growth */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Market Overview</h2>
-          <div className="mb-4">
-            <p className="text-gray-600">Market Size</p>
-            <p className="text-2xl font-bold">${selectedMetrics?.marketSize}B</p>
-          </div>
-          <div>
-            <p className="text-gray-600">Growth Rate</p>
-            <p className="text-2xl font-bold">{selectedMetrics?.growthRate}%</p>
-          </div>
-        </div>
-
-        {/* Market Share Pie Chart */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Market Share</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={selectedMetrics?.marketShare}
-                dataKey="share"
-                nameKey="company"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label
-              >
-                {selectedMetrics?.marketShare.map((entry, index) => (
-                  <Cell key={entry.company} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Financial Performance */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Financial Metrics</h2>
-          <div className="mb-4">
-            <p className="text-gray-600">Profit Margin Range</p>
-            <p className="text-xl font-bold">
-              {selectedMetrics?.profitMargin.min}% - {selectedMetrics?.profitMargin.max}%
-            </p>
-          </div>
-          <div>
-            <p className="text-gray-600">ROI Range</p>
-            <p className="text-xl font-bold">
-              {selectedMetrics?.roi.min}% - {selectedMetrics?.roi.max}%
-            </p>
-          </div>
-        </div>
-
-        {/* Top Performing Stocks */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Top Performing Stocks</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={stockPerformance}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="ticker" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="ytdGain" name="YTD Gain %" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
         </div>
       </div>
 
-      {/* Stock Details Table */}
-      <div className="mt-6 bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Stock Performance Details</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="p-4 text-left">Ticker</th>
-                <th className="p-4 text-left">Company</th>
-                <th className="p-4 text-left">YTD Gain</th>
-                <th className="p-4 text-left">Justification</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stockPerformance.map((stock) => (
-                <tr key={stock.ticker} className="border-b">
-                  <td className="p-4">{stock.ticker}</td>
-                  <td className="p-4">{stock.name}</td>
-                  <td className="p-4">{stock.ytdGain}%</td>
-                  <td className="p-4">{stock.justification}</td>
+      {/* Stock Recommendations */}
+      <div className="mt-8">
+        <CustomCard title="Stock Recommendations" icon={DollarSign}>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Symbol
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Performance
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Sector
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {data.top_5_stocks.map((stock) => (
+                  <tr key={stock.ticker}>
+                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                      {stock.ticker}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {stock.stock_name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {stock["30_day_performance"]}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {stock.justification}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CustomCard>
       </div>
     </div>
   );

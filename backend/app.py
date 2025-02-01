@@ -6,6 +6,16 @@ from openai_model import OpenAIModel
 import gemini_fin_path
 import os
 from tavily import TavilyClient
+import sys
+import os
+
+# Get the absolute path of the 'market research system' directory
+market_research_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'market research system'))
+
+# Add the directory to Python's system path
+sys.path.append(market_research_path)
+
+from orchestrator import OrchestratorAgent 
 
 app = Flask(__name__)
 CORS(app)
@@ -79,6 +89,31 @@ def ai_financial_path():
     except Exception as e:
         print(e)
         return jsonify({'error': 'Something went wrong'}), 500
+    
+@app.route('/market-analysis-agent', methods=['POST'])
+def market_analysis_agent():
+    try:
+        data = request.json
+        agent_type = data.get('scope')
+        agent_name = data.get('name')
+        stock_name = data.get('stockName')
+        brief_aim = data.get('aim')
+        sector = data.get('sector')
+
+        print("Agent Type:", data)
+        
+        orchestrator = OrchestratorAgent()
+
+        final_report = orchestrator.create_and_run_agents(
+            agent_type, agent_name, stock_name, brief_aim, sector
+        )
+
+        return jsonify(final_report)
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "An error occurred while processing your request."}), 500
+    
+
 
 # =================== STATIC APIS ===================
 @app.route('/auto-bank-data', methods=['get'])

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Bot, Trash2, X, FileText, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, useNavigate, useParams } from "react-router-dom";
+import MarketAnalysisDashboard from "./MarketAnalysisDashboard";
+import axios from "axios";
 
 interface Agent {
   id: string;
@@ -235,28 +237,48 @@ const AgentsPage = () => {
     alert("Navigating to agent details page... (Implementation pending)");
   };
 
-  const handleCreateReport = async (e: React.MouseEvent, agentId: string) => {
-    e.stopPropagation();
-    setGeneratingReportFor(agentId);
+  
+const handleCreateReport = async (e: React.MouseEvent, agentId: string) => {
+  e.stopPropagation();
+  setGeneratingReportFor(agentId);
 
-    // Simulate report generation
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setAgents((prev) =>
-        prev.map((agent) =>
-          agent.id === agentId ? { ...agent, hasReport: true } : agent
-        )
-      );
-    } finally {
-      setGeneratingReportFor(null);
-    }
-  };
+  const agent = agents.find((agent) => agent.id === agentId);
+  if (!agent) {
+    console.error("Agent not found!");
+    setGeneratingReportFor(null);
+    return;
+  }
+
+  console.log("Agent Data:", agent);
+
+  try {
+    const config = {
+      method: "post",
+      url: "http://127.0.0.1:5000/market-analysis-agent",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: agent,
+    };
+
+    const response = await axios.request(config);
+    console.log("Response Data:", response.data);
+  } catch (error) {
+    console.error("Error creating report:", error);
+  } finally {
+    setGeneratingReportFor(null);
+  }
+};
 
   const navigate = useNavigate();
 
   const handleOpenReport = (e: React.MouseEvent, agent: Agent) => {
     e.stopPropagation();
-    navigate(`${agent.name.toLowerCase().replace(/\s/g, "-")}`);
+    navigate(`${agent.scope}/${agent.name.toLowerCase().replace(/\s/g, "-")}`);
+    <Route
+      path="/portfolio/agents/:scope/:name"
+      element={<MarketAnalysisDashboard data={data} />}
+    />;
   };
 
   const handleUpdateFrequencyChange = (

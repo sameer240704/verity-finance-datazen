@@ -152,7 +152,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/portfolio/agents/:id"
+                  path="/portfolio/agents/:scope/:name"
                   element={
                     <ProtectedRoute>
                       <DashboardLayout>
