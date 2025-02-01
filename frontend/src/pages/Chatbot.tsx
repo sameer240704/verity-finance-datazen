@@ -147,7 +147,7 @@ const Chatbot = () => {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://2ecd-111-125-219-62.ngrok-free.app/agent',
+        url: 'http://127.0.0.1:5000/',
         data: formData
       };
 
