@@ -46,7 +46,7 @@ llm = ChatOllama(model="deepseek-r1:8b", temperature=0.5)
 
 # Gemini
 # llm = ChatGoogleGenerativeAI(
-#     model="gemini-1.5-flash",
+#     model="gemini-2.0-flash-exp",
 #     temperature=0.5,
 #     max_tokens=None,
 #     timeout=None,
