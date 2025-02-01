@@ -6,11 +6,13 @@ class StockNewsSentimentAnalysisAgent:
         You are a News and Sentiment Analysis Agent.
         Your task is to analyze news sentiment and its potential impact on a stock based on the provided data.
         Input: {data}
-        Output the analysis in the following format:
+        Output the analysis in the following format (STRICTLY FOLLOW THE GIVEN FORMAT):
+        ```json
         {{
             "news_sentiment": "...",
             "potential_impact": "..."
         }}
+        ```
         """
 
     def run(self, data):
@@ -18,5 +20,5 @@ class StockNewsSentimentAnalysisAgent:
         Performs news and sentiment analysis on the given data.
         """
         prompt = self.prompt_template.format(data=data)
-        response = self.openai_model.get_response(prompt)
+        response = self.openai_model.get_json_response(prompt)
         return response

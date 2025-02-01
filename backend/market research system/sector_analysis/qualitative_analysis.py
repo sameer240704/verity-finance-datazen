@@ -7,13 +7,15 @@ class QualitativeAnalysisAgent:
         Your task is to analyze the qualitative aspects of the sector based on the provided data.
         Consider technological advancements, regulatory impacts, competitive landscape, and market sentiment.
         Input: {data}
-        Output the analysis in the following format:
+        Output the analysis in the following format (STRICTLY FOLLOW THE GIVEN FORMAT):
+        ```json
         {{
             "technological_advancements": "...",
             "regulatory_impacts": "...",
             "competitive_landscape": "...",
             "market_sentiment": "..."
         }}
+        ```
         """
 
     def run(self, data):
@@ -21,5 +23,5 @@ class QualitativeAnalysisAgent:
         Performs qualitative analysis on the given data.
         """
         prompt = self.prompt_template.format(data=data)
-        response = self.openai_model.get_response(prompt)
+        response = self.openai_model.get_json_response(prompt)
         return response

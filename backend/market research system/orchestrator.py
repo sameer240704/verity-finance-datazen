@@ -10,6 +10,7 @@ from data_validation_agent import DataValidationAgent
 from models.openai_model import OpenAIModel
 from models.gemini_model import GeminiModel
 import os
+import json
 
 class OrchestratorAgent:
     def __init__(self):
@@ -36,8 +37,9 @@ class OrchestratorAgent:
 
             # Run Sector Analysis Agents
             data_collection_output = data_collection_agent.run()
-            quantitative_analysis_input = data_validation_agent.validate(data_collection_output["quantitative_data"])
-            qualitative_analysis_input = data_validation_agent.validate(data_collection_output["qualitative_data"])
+            
+            quantitative_analysis_input = data_validation_agent.validate(data_collection_output)
+            qualitative_analysis_input = data_validation_agent.validate(data_collection_output)
 
             quantitative_analysis_output = quantitative_analysis_agent.run(quantitative_analysis_input)
             qualitative_analysis_output = qualitative_analysis_agent.run(qualitative_analysis_input)
@@ -46,6 +48,7 @@ class OrchestratorAgent:
                 data_collection_output,
                 quantitative_analysis_output,
                 qualitative_analysis_output,
+                agent_name
             )
             print(final_report)
 
@@ -63,14 +66,15 @@ class OrchestratorAgent:
 
             # Run Stock Analysis Agents
             stock_data_output = stock_data_collection_agent.run()
-            financial_analysis_input = data_validation_agent.validate(stock_data_output["financial_data"])
-            news_sentiment_input = data_validation_agent.validate(stock_data_output["news_data"])
+
+            financial_analysis_input = data_validation_agent.validate(stock_data_output)
+            news_sentiment_input = data_validation_agent.validate(stock_data_output)
 
             financial_analysis_output = financial_analysis_agent.run(financial_analysis_input)
             news_sentiment_output = news_sentiment_analysis_agent.run(news_sentiment_input)
 
             final_report = stock_reporting_agent.run(
-                stock_data_output, financial_analysis_output, news_sentiment_output
+                stock_data_output, financial_analysis_output, news_sentiment_output, agent_name
             )
             print(final_report)
 

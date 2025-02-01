@@ -5,8 +5,9 @@ from langchain.retrievers import BM25Retriever, EnsembleRetriever
 import os
 
 class FAISSIndex:
-    def __init__(self, index_path="faiss_index", embedding_model_name="sentence-transformers/all-mpnet-base-v2"):
+    def __init__(self, index_path="f_index", embedding_model_name="sentence-transformers/all-mpnet-base-v2"):
         self.index_path = index_path
+        #self.index_path = self.index_path
         self.embedding_model_name = embedding_model_name
         self.embedding_model = None
         self.faiss_index = None

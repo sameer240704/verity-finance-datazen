@@ -7,7 +7,8 @@ class QuantitativeAnalysisAgent:
         Your task is to perform in-depth quantitative analysis on the data provided.
         Calculate market size, growth rates, market share, financial ratios, and other relevant metrics.
         Input: {data}
-        Output the analysis in the following format:
+        Output the analysis in the following format (STRICTLY FOLLOW THE GIVEN FORMAT):
+        ```json
         {{
             "market_size": "...",
             "growth_rate": "...",
@@ -15,6 +16,7 @@ class QuantitativeAnalysisAgent:
             "financial_ratios": {{ /* ... */ }},
             "other_metrics": {{ /* ... */ }}
         }}
+        ```
         """
 
     def run(self, data):
@@ -22,5 +24,5 @@ class QuantitativeAnalysisAgent:
         Performs quantitative analysis on the given data.
         """
         prompt = self.prompt_template.format(data=data)
-        response = self.openai_model.get_response(prompt)
+        response = self.openai_model.get_json_response(prompt)
         return response

@@ -1,0 +1,27 @@
+{
+    "market_metrics": {},
+    "analysis_report": {},
+    "sources": [
+        {
+            "name": "IRENA",
+            "url": "https://www.irena.org/"
+        },
+        {
+            "name": "Bloomberg Green",
+            "url": "https://www.bloomberg.com/green"
+        },
+        {
+            "name": "International Energy Agency",
+            "url": "https://www.iea.org/"
+        },
+        {
+            "name": "U.S. Department of Energy",
+            "url": "https://www.energy.gov/"
+        },
+        {       
+            "name": "WindEurope",
+            "url": "https://windeurope.org/"
+        }
+    ],
+    "top_5_stocks": []
+}
