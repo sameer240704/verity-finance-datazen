@@ -1,0 +1,46 @@
+[
+    {
+        "stockName": "Apple",
+        "tickerSymbol": "AAPL",
+        "numberOfShares": 100,
+        "purchasePrice": 200,
+        "purchaseDate": "2022-03-17",
+        "currentPrice": 236.0,
+        "unrealizedGainsLosses": 3600.0,
+        "dividendYield": 0.42,
+        "weightageInPortfolio": 7.17
+    },
+    {
+        "stockName": "TCS",
+        "tickerSymbol": "TCS.NS",
+        "numberOfShares": 50,
+        "purchasePrice": 100,
+        "purchaseDate": "2022-07-02",
+        "currentPrice": 4073.15,
+        "unrealizedGainsLosses": 198657.5,
+        "dividendYield": 2.8,
+        "weightageInPortfolio": 61.86
+    },
+    {
+        "stockName": "NVIDIA",
+        "tickerSymbol": "NVDA",
+        "numberOfShares": 41,
+        "purchasePrice": 200,
+        "purchaseDate": "2021-07-08",
+        "currentPrice": 120.07,
+        "unrealizedGainsLosses": -3277.13,
+        "dividendYield": 0.03,
+        "weightageInPortfolio": 1.5
+    },
+    {
+        "stockName": "Amazon",
+        "tickerSymbol": "AMZN",
+        "numberOfShares": 198,
+        "purchasePrice": 300,
+        "purchaseDate": "2025-02-02",
+        "currentPrice": 237.68,
+        "unrealizedGainsLosses": -12339.36,
+        "dividendYield": 0.0,
+        "weightageInPortfolio": 14.29
+    }
+]
