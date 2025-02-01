@@ -20,7 +20,7 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4">
             {isSignedIn ? (
-              <Link to="/portfolio" className="btn-primary">
+              <Link to="/dashboard" className="btn-primary">
                 Go to Dashboard
               </Link>
             ) : (
