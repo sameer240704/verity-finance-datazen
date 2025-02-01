@@ -9,7 +9,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { TrendingUp, AlertTriangle, DollarSign, BarChart2 } from "lucide-react";
-import FinancialMetricsDashboard from "../components/FinancialMetricsDashboard";
 
 // Types
 interface StockData {
