@@ -16,7 +16,7 @@ const DashboardTour = ({ children }: DashboardTourProps) => {
     if (user?.lastSignInAt) {
       const lastSignInTime = new Date(user.lastSignInAt).getTime();
       const lastTourTime = localStorage.getItem("lastTourTime");
-      
+
       // Show tour if this is a new sign in (lastTourTime is before lastSignInTime)
       if (!lastTourTime || new Date(lastTourTime).getTime() < lastSignInTime) {
         openTour();
@@ -29,15 +29,18 @@ const DashboardTour = ({ children }: DashboardTourProps) => {
   const steps = [
     {
       selector: ".tour-logo",
-      content: "Welcome to WealthWise! This is your personal financial dashboard.",
+      content:
+        "Welcome to Verity Finance! This is your firm's financial dashboard.",
+    },
+    {
+      selector: ".tour-dashboard",
+      content:
+        "View your portfolio overview, including total assets, investments, and performance metrics.",
     },
     {
       selector: ".tour-portfolio",
-      content: "View your portfolio overview, including total assets, investments, and performance metrics.",
-    },
-    {
-      selector: ".tour-my-data",
-      content: "Manage your financial data, including assets, liabilities, and income streams.",
+      content:
+        "Manage your financial data, including assets, liabilities, and income streams.",
     },
   ];
 
@@ -49,12 +52,24 @@ const DashboardTour = ({ children }: DashboardTourProps) => {
           isOpen={isTourOpen}
           onRequestClose={closeTour}
           nextButton={
-            <button style={{ padding: "8px 16px", backgroundColor: "#4F46E5", color: "#FFF" }}>
+            <button
+              style={{
+                padding: "8px 16px",
+                backgroundColor: "#7D4EC8",
+                color: "#FFF",
+              }}
+            >
               Next →
             </button>
           }
           prevButton={
-            <button style={{ padding: "8px 16px", backgroundColor: "#4F46E5", color: "#FFF" }}>
+            <button
+              style={{
+                padding: "8px 16px",
+                backgroundColor: "#7D4EC8",
+                color: "#FFF",
+              }}
+            >
               ← Prev
             </button>
           }
@@ -79,7 +94,7 @@ const DashboardTour = ({ children }: DashboardTourProps) => {
               onClick={closeTour}
               style={{
                 padding: "8px 16px",
-                backgroundColor: "#4F46E5",
+                backgroundColor: "#7D4EC8",
                 color: "#FFF",
               }}
             >
@@ -87,7 +102,13 @@ const DashboardTour = ({ children }: DashboardTourProps) => {
             </button>
           }
           customComponents={{
-            Navigation: ({ currentStep, stepsLength }: { currentStep: number; stepsLength: number }) => (
+            Navigation: ({
+              currentStep,
+              stepsLength,
+            }: {
+              currentStep: number;
+              stepsLength: number;
+            }) => (
               <div style={{ marginTop: "16px", textAlign: "center" }}>
                 {currentStep + 1} of {stepsLength}
               </div>
@@ -95,9 +116,11 @@ const DashboardTour = ({ children }: DashboardTourProps) => {
           }}
           styles={{
             options: {
-              backgroundColor: user?.publicMetadata?.darkMode ? "#1F2937" : "#FFFFFF",
+              backgroundColor: user?.publicMetadata?.darkMode
+                ? "#1F2937"
+                : "#FFFFFF",
               textColor: user?.publicMetadata?.darkMode ? "#F3F4F6" : "#1F2937",
-              arrowColor: "#4F46E5",
+              arrowColor: "#7D4EC8",
             },
           }}
         />
