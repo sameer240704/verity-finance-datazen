@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { User, Bot, Volume2, VolumeX } from "lucide-react";
+import { User, BotMessageSquare, Volume2, VolumeX } from "lucide-react";
 
 interface Message {
   type: "user" | "bot";
@@ -21,21 +21,33 @@ const MessageFormatter: React.FC<MessageFormatterProps> = ({
   isSpeaking,
   messagesEndRef,
 }) => {
-  // Function to format text with bold styling
+  // Function to format text with links and bold styling
   const formatMessage = (content: string | string[]): React.ReactNode => {
     if (typeof content !== "string") return content;
 
-    // Split the text by bold markers (****)
-    const parts = content.split(/(\*\*.*?\*\*)/g);
-
-    return parts.map((part, index) => {
+    return content.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g).map((part, index) => {
       if (part.startsWith("**") && part.endsWith("**")) {
-        // Remove the ** markers and wrap in strong tag
         return (
           <strong key={index} className="font-bold">
             {part.slice(2, -2)}
           </strong>
         );
+      }
+      if (part.startsWith("[") && part.includes("](")) {
+        const match = part.match(/\[(.*?)\]\((.*?)\)/);
+        if (match) {
+          return (
+            <a
+              key={index}
+              href={match[2]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              {match[1]}
+            </a>
+          );
+        }
       }
       return <span key={index}>{part}</span>;
     });
@@ -68,7 +80,7 @@ const MessageFormatter: React.FC<MessageFormatterProps> = ({
               {message.type === "user" ? (
                 <User className="h-5 w-5 text-white" />
               ) : (
-                <Bot className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                <BotMessageSquare className="h-5 w-5 text-primary-600 dark:text-primary-400" />
               )}
             </div>
             <div
