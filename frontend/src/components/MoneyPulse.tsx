@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  TrendingUp,
-  DollarSign,
-  Globe,
-  Clock,
-  ExternalLink,
-  Search,
-  Filter,
-  Loader,
-} from "lucide-react";
+import { Globe, Clock, ExternalLink, Search, Loader } from "lucide-react";
 
 // Add environment variable type declaration
 declare global {
@@ -109,7 +100,7 @@ const MoneyPulse = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Money Pulse
+            Financial Insights Hub
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
             Stay updated with the latest financial news and market insights
@@ -125,7 +116,7 @@ const MoneyPulse = () => {
               placeholder="Search news..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
           <div className="flex items-center space-x-2 overflow-x-auto pb-2 sm:pb-0">
@@ -135,7 +126,7 @@ const MoneyPulse = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
                   selectedCategory === category
-                    ? "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400"
+                    ? "bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400"
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
               >
@@ -148,7 +139,7 @@ const MoneyPulse = () => {
         {/* Loading State */}
         {loading && (
           <div className="flex items-center justify-center py-12">
-            <Loader className="h-8 w-8 text-indigo-600 animate-spin" />
+            <Loader className="h-8 w-8 text-primary-600 animate-spin" />
             <span className="ml-2 text-gray-600 dark:text-gray-400">
               Loading news...
             </span>
@@ -203,7 +194,7 @@ const MoneyPulse = () => {
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
+                    className="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-500"
                   >
                     Read full article <ExternalLink className="h-4 w-4 ml-1" />
                   </a>

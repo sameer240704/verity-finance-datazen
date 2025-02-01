@@ -6,7 +6,7 @@ import {
   User,
   LineChart,
   LayoutDashboard,
-  Database,
+  BriefcaseBusiness,
   MessageSquare,
   Newspaper,
   Calculator,
@@ -23,16 +23,16 @@ const Sidebar = () => {
 
   const menuItems = [
     {
-      path: "/portfolio",
+      path: "/dashboard",
       icon: LayoutDashboard,
-      label: "Portfolio",
-      tourClass: "tour-portfolio",
+      label: "Dashboard",
+      tourClass: "tour-dashboard",
     },
     {
-      path: "/portfolio/my-data",
-      icon: Database,
-      label: "My Data",
-      tourClass: "tour-my-data",
+      path: "/portfolio/my-portfolio",
+      icon: BriefcaseBusiness,
+      label: "My Portfolio",
+      tourClass: "tour-portfolio",
     },
     {
       path: "/portfolio/recommendations",
@@ -67,7 +67,7 @@ const Sidebar = () => {
     {
       path: "/portfolio/money-pulse",
       icon: Newspaper,
-      label: "Money Pulse",
+      label: "Financial Insights Hub",
       tourClass: "tour-money-pulse",
     },
     {
