@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
-import { BarChart2 } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
+import { Logo } from "../../public/images";
 
 const Navbar = () => {
   const { isSignedIn } = useUser();
@@ -11,8 +11,10 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link to="/" className="flex items-center">
-              <BarChart2 className="h-8 w-8 text-indigo-600 " />
-              <span className="ml-2 text-xl font-bold text-gray-900">WealthWise</span>
+              <img src={Logo} alt="Logo" className="h-8 w-auto" />
+              <span className="ml-2 mt-1 text-2xl font-bold text-gray-900">
+                Verity Finance
+              </span>
             </Link>
           </div>
 
@@ -23,8 +25,12 @@ const Navbar = () => {
               </Link>
             ) : (
               <>
-                <Link to="/sign-in" className="btn-primary">Sign In</Link>
-                <Link to="/sign-up" className="btn-secondary">Sign Up</Link>
+                <Link to="/sign-in" className="btn-primary">
+                  Sign In
+                </Link>
+                <Link to="/sign-up" className="btn-secondary">
+                  Sign Up
+                </Link>
               </>
             )}
           </div>
