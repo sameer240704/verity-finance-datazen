@@ -1,67 +1,83 @@
 from flask import Flask, request, jsonify
 from onboard import *
 from flask_cors import CORS
-import subprocess
 import re
-from jgaad_ai_agent_backup import jgaad_chat_with_gemini
+from openai_model import OpenAIModel
 import gemini_fin_path
+import os
+from tavily import TavilyClient
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/', methods=['GET'])
+# Initialize OpenAIModel
+api_key = os.getenv("AZURE_OPENAI_API_KEY")
+openai_model = OpenAIModel(api_key)
+
+# Initialize Tavily Client
+tavily_api_key = os.getenv("TAVILY_API_KEY")
+tavily_client = TavilyClient(api_key=tavily_api_key)
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return jsonify("HI")
+    print("Request received at /")
+    print("Method:", request.method)
+    print("Headers:", request.headers)
+    print("Data:", request.get_data())
+
+    if request.method == 'POST':
+        return jsonify({"message": "POST request received at /"})
+    else:
+        return jsonify("HI")
 
 # =================== DYNAMIC APIS ===================
 @app.route('/agent', methods=['POST'])
 def agent():
     inp = request.form.get('input')
-    # response = get_agent_response(inp)
-    if inp:
-        # run in terminal
-        print(inp)
-        process = subprocess.Popen(['python', 'agent.py', inp], 
-                     stdout=subprocess.PIPE, 
-                     stderr=subprocess.PIPE,
-                     universal_newlines=True)
-        
-        output = []
-        # Stream output in real-time
-        while True:
-            line = process.stdout.readline()
-            if not line and process.poll() is not None:
-                break
-            if line:
-                print(line.strip())  # Print to terminal in real-time
-                output.append(line)
-        
-        output_str = ''.join(output)
-        process.wait()
+    if not inp:
+        return jsonify({"error": "No input provided"}), 400
 
-        # Use regex to extract the response between <Response> tags
-        final_answer = re.search(r'<Response>(.*?)</Response>', output_str, re.DOTALL)
-        if final_answer:
-            final_answer = final_answer.group(1).strip()
+    print("Input query:", inp)
+
+    try:
+        # Use Tavily Search for financial queries
+        search_result = tavily_client.search(query=inp, search_depth="advanced", max_results=5)
+
+        print("Tavily Search Results:", search_result)  # Debugging
+
+        # Extract relevant information from Tavily results
+        tavily_response = ""
+        if search_result and search_result['results']:
+          for res in search_result['results']:
+              tavily_response += f"Source: {res['url']}\nContent: {res['content']}\n\n"
         else:
-            final_answer = jgaad_chat_with_gemini(inp, output_str)
-        # response = get_agent_response(inp)
-        return jsonify({'output': final_answer, 'thought': output_str})
-    return "no input"
+            tavily_response = "Could not find relevant information from Tavily Search."
+
+        # Use OpenAI to summarize the findings (optional)
+        final_answer = openai_model.get_response(
+            f"Based on the user query '{inp}', here is the information from Tavily Search:\n\n{tavily_response}\n\nPlease provide a concise and helpful answer to the user."
+        )
+        print("Final Answer from OpenAI:", final_answer)
+
+        return jsonify({'output': final_answer, 'thought': tavily_response})
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"error": "An error occurred while processing your request."}), 500
 
 @app.route('/ai-financial-path', methods=['POST'])
 def ai_financial_path():
     if 'input' not in request.form:
-        print(request.form['input'])
         return jsonify({'error': 'No input provided'}), 400
-        
-    input_text = request.form.get('input','')
+
+    input_text = request.form.get('input', '')
     risk = request.form.get('risk', 'conservative')
     print(input_text)
     try:
         response = gemini_fin_path.get_gemini_response(input_text, risk)
         return jsonify(response)
     except Exception as e:
+        print(e)
         return jsonify({'error': 'Something went wrong'}), 500
 
 # =================== STATIC APIS ===================
@@ -72,12 +88,6 @@ def AutoBankData():
 @app.route('/auto-mf-data', methods=['get'])
 def AutoMFData():
     return mf_data
-
-
-# =================== CONENCTION APIS ===================
-
-# =================== BOTS ===================
-# @
 
 if __name__ == "__main__":
     app.run(debug=True)
