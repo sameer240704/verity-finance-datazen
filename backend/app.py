@@ -6,6 +6,7 @@ from openai_model import OpenAIModel
 import gemini_fin_path
 import os
 from tavily import TavilyClient
+import stocks_data
 
 app = Flask(__name__)
 CORS(app)
@@ -79,6 +80,86 @@ def ai_financial_path():
     except Exception as e:
         print(e)
         return jsonify({'error': 'Something went wrong'}), 500
+    
+@app.route('/stocks', methods=['POST'])
+def stocks_json_data():
+    """
+    Handles POST requests to store stock data in a JSON file.
+    
+    Expects JSON data in the request body with stock information.
+    """
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No JSON data provided'}), 400
+
+        required_fields = ["stockName", "tickerSymbol", "numberOfShares", "purchasePrice"]
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'Missing required field: {field}'}), 400
+
+        stock_info = stocks_data.fetch_stock_data(data["tickerSymbol"])
+        if stock_info["currentPrice"] is None:
+            return jsonify({'error': 'Failed to fetch stock data'}), 400
+
+        number_of_shares = data["numberOfShares"]
+        purchase_price = data["purchasePrice"]
+        unrealized_gains_losses = round((stock_info["currentPrice"] - purchase_price) * number_of_shares, 2)
+
+        stocks_list = stocks_data.load_stocks_data()
+
+        data.update({
+            "currentPrice": stock_info["currentPrice"],
+            "unrealizedGainsLosses": unrealized_gains_losses,
+            "dividendYield": stock_info["dividendYield"],
+        })
+
+        stocks_list.append(data)
+        stocks_data.save_stocks_data(stocks_list)
+        stocks_data.update_portfolio_weightages()
+
+        return jsonify({'message': 'Stock data stored successfully', 'data': data}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/portfolio_data', methods=['GET'])
+def get_stocks_data():
+    """
+    Handles GET requests to return the stored stock data in JSON format.
+    """
+    try:
+        stocks_df = stocks_data.load_stocks_data()
+        bonds_data = stocks_data.load_bonds_data()
+        return jsonify({'stocks': stocks_df, 'bonds': bonds_data}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+# BONDS DATA
+
+@app.route('/bonds', methods=['POST'])
+def bonds_json_data():
+    """
+    Handles POST requests to store bonds data in a JSON file.
+    
+    Expects JSON data in the request body with bonds information.
+    """
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No JSON data provided'}), 400
+        
+        bonds_data = stocks_data.load_bonds_data()
+        bonds_data.append(data)
+
+        stocks_data.save_bonds_data(bonds_data)
+        stocks_data.update_portfolio_weightages()
+
+        return jsonify({'message': 'Bond data received and stored successfully', 'data': data}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 # =================== STATIC APIS ===================
 @app.route('/auto-bank-data', methods=['get'])

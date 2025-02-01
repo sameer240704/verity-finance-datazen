@@ -1,0 +1,11 @@
+[
+    {
+        "bondType": "Government",
+        "maturityDate": "2030-12-31",
+        "couponRate": 6.5,
+        "principal": 50000,
+        "yieldToMaturity": 13,
+        "interestEarned": 3250,
+        "weightageInPortfolio": 15.19
+    }
+]
