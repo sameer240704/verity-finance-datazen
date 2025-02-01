@@ -1,340 +1,225 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  BookOpen,
-  GraduationCap,
-  TrendingUp,
-  Shield,
-  Brain,
-  PlayCircle,
-} from "lucide-react";
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { TrendingUp, AlertTriangle, DollarSign, BarChart2 } from "lucide-react";
 
-const videos = {
-  Beginner: [
-    {
-      videolink: "https://www.youtube.com/watch?v=p3OUFMpT7B0",
-      title: "How to Invest For Beginners (2023 Step-by-Step Guide)",
-      description:
-        "A comprehensive guide for beginners on how to start investing in 2023, covering various investment strategies and tips.",
-      duration: "45 min",
-      modules: 1,
-      progress: 0,
-    },
-    {
-      videolink: "https://www.youtube.com/watch?v=ZCFkWDdmXG8",
-      title: "Understanding the Stock Market for Beginners",
-      description:
-        "An easy-to-understand explanation of how the stock market works, tailored for those new to investing.",
-      duration: "30 min",
-      modules: 1,
-      progress: 0,
-    },
-  ],
-  Intermediate: [
-    {
-      videolink: "https://www.youtube.com/watch?v=gFQNPmLKj1k",
-      title: "5 Ways to Save Money Fast - Financial Hacks",
-      description:
-        "Learn five effective strategies to save money quickly and improve your financial situation with practical tips.",
-      duration: "25 min",
-      modules: 1,
-      progress: 0,
-    },
-    {
-      videolink: "https://www.youtube.com/watch?v=M3r2XDceM6A",
-      title: "Investment Strategies and Portfolio Management",
-      description:
-        "Learn about different investment strategies and how to manage your portfolio effectively.",
-      duration: "35 min",
-      modules: 1,
-      progress: 0,
-    },
-  ],
-  Advanced: [
-    {
-      videolink: "https://www.youtube.com/watch?v=WEDIj9JBTC8",
-      title: "Advanced Stock Trading Strategies",
-      description:
-        "Discover advanced trading strategies and techniques for experienced investors.",
-      duration: "40 min",
-      modules: 1,
-      progress: 0,
-    },
-  ],
-};
+// Types
+interface StockData {
+  symbol: string;
+  price: number;
+  peRatio: number;
+  revenueGrowth: number;
+  keyMetrics: string;
+  rationale: string;
+}
 
-const courses = [
+interface RealtimeStock {
+  symbol: string;
+  price: number;
+  change: number;
+  marketCap: string;
+}
+
+interface FinancialMetrics {
+  peRatio: number;
+  psRatio: number;
+  revenueGrowth: number;
+  earningsGrowth: number;
+  profitMargin: number;
+}
+
+const stockRecommendations: StockData[] = [
   {
-    level: "Beginner",
-    icon: BookOpen,
-    courses: [
-      {
-        title: "Introduction to Investing",
-        description: "Learn the basics of investing and financial markets",
-        duration: "2 hours",
-        modules: 5,
-        progress: 80,
-      },
-      {
-        title: "Understanding Stocks",
-        description: "Master the fundamentals of stock market investing",
-        duration: "3 hours",
-        modules: 8,
-        progress: 60,
-      },
-    ],
+    symbol: "AAPL",
+    price: 180.5,
+    peRatio: 28,
+    revenueGrowth: 8,
+    keyMetrics: "Services revenue: $20 billion (+12% YoY)",
+    rationale: "Strong growth in services segment",
   },
   {
-    level: "Intermediate",
-    icon: TrendingUp,
-    courses: [
-      {
-        title: "Technical Analysis",
-        description: "Learn to analyze market trends and patterns",
-        duration: "4 hours",
-        modules: 10,
-        progress: 30,
-      },
-      {
-        title: "Portfolio Management",
-        description: "Master the art of building and managing investments",
-        duration: "3 hours",
-        modules: 6,
-        progress: 0,
-      },
-    ],
+    symbol: "MSFT",
+    price: 330.25,
+    peRatio: 32,
+    revenueGrowth: 15,
+    keyMetrics: "Cloud revenue: $25 billion (+22% YoY)",
+    rationale: "Dominance in cloud computing",
   },
-  {
-    level: "Advanced",
-    icon: Brain,
-    courses: [
-      {
-        title: "AI in Trading",
-        description: "Explore how AI is revolutionizing trading",
-        duration: "5 hours",
-        modules: 12,
-        progress: 0,
-      },
-      {
-        title: "Risk Management",
-        description: "Advanced strategies for managing investment risks",
-        duration: "4 hours",
-        modules: 8,
-        progress: 0,
-      },
-    ],
-  },
+  // Add more stocks as needed
 ];
 
-const Learn = () => {
-  const [selectedLevel, setSelectedLevel] = useState("Beginner");
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+const realtimeStocks: RealtimeStock[] = [
+  {
+    symbol: "AAPL",
+    price: 180.5,
+    change: 1.5,
+    marketCap: "$2.8 trillion",
+  },
+  {
+    symbol: "MSFT",
+    price: 330.25,
+    change: 2.0,
+    marketCap: "$2.5 trillion",
+  },
+  // Add more stocks as needed
+];
 
-  const getVideoId = (url: string) => {
-    const regExp =
-      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[7].length === 11 ? match[7] : null;
-  };
+// Sample data for the growth chart
+const growthData = [
+  { month: "Jan", revenue: 1200 },
+  { month: "Feb", revenue: 1400 },
+  { month: "Mar", revenue: 1300 },
+  { month: "Apr", revenue: 1500 },
+  { month: "May", revenue: 1700 },
+];
 
-  return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            Learning Center
-          </h1>
-          <button className="btn-primary">
-            <GraduationCap className="h-5 w-5 mr-2" />
-            Track Progress
-          </button>
-        </div>
-
-        {/* Video Player */}
-        {selectedVideo && (
-          <div className="mb-8 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-            <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-              <iframe
-                src={`https://www.youtube.com/embed/${getVideoId(
-                  selectedVideo
-                )}?autoplay=1`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute top-0 left-0 w-full h-full rounded-lg"
-              ></iframe>
-            </div>
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="mt-4 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
-            >
-              Close Video
-            </button>
-          </div>
-        )}
-
-        {/* Level Selection */}
-        <div className="flex space-x-4 mb-8">
-          {courses.map(({ level, icon: Icon }) => (
-            <button
-              key={level}
-              onClick={() => setSelectedLevel(level)}
-              className={`flex-1 p-4 rounded-lg border ${
-                selectedLevel === level
-                  ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20"
-                  : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
-              }`}
-            >
-              <div className="flex items-center justify-center">
-                <Icon
-                  className={`h-6 w-6 ${
-                    selectedLevel === level
-                      ? "text-indigo-500"
-                      : "text-gray-400 dark:text-gray-500"
-                  }`}
-                />
-                <span
-                  className={`ml-2 font-medium ${
-                    selectedLevel === level
-                      ? "text-indigo-700 dark:text-indigo-400"
-                      : "text-gray-700 dark:text-gray-300"
-                  }`}
-                >
-                  {level}
-                </span>
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* Course and Video Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Regular Courses */}
-          {courses
-            .find((c) => c.level === selectedLevel)
-            ?.courses.map((course, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                      {course.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                      {course.description}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <Shield className="h-4 w-4" />
-                    <span>{course.modules} modules</span>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Progress
-                    </span>
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {course.progress}%
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                    <div
-                      className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${course.progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between">
-                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4 mr-1" />
-                    <span>{course.duration}</span>
-                  </div>
-                  <button className="btn-secondary">
-                    {course.progress > 0 ? "Continue" : "Start Course"}
-                  </button>
-                </div>
-              </div>
-            ))}
-
-          {/* Video Courses */}
-          {videos[selectedLevel as keyof typeof videos]?.map((video, index) => (
-            <div
-              key={`video-${index}`}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
-            >
-              <div className="flex items-start space-x-4">
-                <button
-                  onClick={() => setSelectedVideo(video.videolink)}
-                  className="flex-shrink-0 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg p-3"
-                >
-                  <PlayCircle className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-                </button>
-                <div className="flex-1">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                        {video.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                        {video.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <BookOpen className="h-4 w-4 mr-1" />
-                      <span>{video.duration}</span>
-                    </div>
-                    <button
-                      onClick={() => setSelectedVideo(video.videolink)}
-                      className="btn-secondary"
-                    >
-                      Watch Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Learning Path */}
-        <div className="mt-12">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-            Your Learning Path
-          </h2>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-            <div className="relative">
-              {[
-                "Complete Beginner Courses",
-                "Start Technical Analysis",
-                "Master Portfolio Management",
-                "Explore Advanced Topics",
-              ].map((step, index) => (
-                <div key={index} className="flex items-start mb-8 last:mb-0">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 font-medium text-sm">
-                    {index + 1}
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                      {step}
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                      {index === 0 ? "In Progress" : "Upcoming"}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+const CustomCard = ({ title, icon: Icon, children }) => (
+  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="px-6 py-4 border-b border-gray-200">
+      <div className="flex items-center">
+        {Icon && <Icon className="mr-2 text-purple-600" size={20} />}
+        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
       </div>
+    </div>
+    <div className="p-6">{children}</div>
+  </div>
+);
+
+const CustomTable = ({ headers, children }) => (
+  <div className="overflow-x-auto">
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          {headers.map((header, index) => (
+            <th
+              key={index}
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              {header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      {children}
+    </table>
+  </div>
+);
+
+const Learn = () => {
+  return (
+    <div className="p-6 space-y-6 bg-gray-50">
+      {/* Executive Summary */}
+      <CustomCard title="Executive Summary" icon={TrendingUp}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-4 bg-purple-50 rounded-lg">
+            <h3 className="font-semibold mb-2">Sector Growth</h3>
+            <p className="text-2xl font-bold text-purple-600">12% YoY</p>
+            <p className="text-sm text-gray-600">Q3 2023</p>
+          </div>
+          <div className="p-4 bg-blue-50 rounded-lg">
+            <h3 className="font-semibold mb-2">Cloud Services</h3>
+            <p className="text-2xl font-bold text-blue-600">$250B</p>
+            <p className="text-sm text-gray-600">+25% from Q2</p>
+          </div>
+          <div className="p-4 bg-green-50 rounded-lg">
+            <h3 className="font-semibold mb-2">AI Revenue</h3>
+            <p className="text-2xl font-bold text-green-600">$50B</p>
+            <p className="text-sm text-gray-600">30% Growth</p>
+          </div>
+        </div>
+        <div className="px-4 pt-4 text-gray-600 text-lg leading-relaxed">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sapiente
+          obcaecati, possimus voluptatibus, laboriosam corrupti illum eius
+          eveniet doloribus ipsam praesentium fuga architecto id! Vitae nobis
+          nisi adipisci neque quia? Lorem ipsum dolor sit amet consectetur,
+          adipisicing elit. Repellendus libero quisquam nam ducimus illum
+          temporibus. Mollitia optio, reiciendis architecto voluptatibus odio
+          incidunt, exercitationem saepe similique deserunt, aspernatur atque?
+          Placeat, earum!
+        </div>
+      </CustomCard>
+
+      {/* Growth Chart */}
+      <CustomCard title="Revenue Growth Trend" icon={BarChart2}>
+        <div className="h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={growthData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="revenue" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </CustomCard>
+
+      {/* Stock Recommendations */}
+      <CustomCard title="Stock Recommendations" icon={DollarSign}>
+        <CustomTable
+          headers={[
+            "Stock",
+            "Price",
+            "P/E Ratio",
+            "Growth (YoY)",
+            "Key Metrics",
+            "Rationale",
+          ]}
+        >
+          <tbody className="bg-white divide-y divide-gray-200">
+            {stockRecommendations.map((stock) => (
+              <tr key={stock.symbol}>
+                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                  {stock.symbol}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">${stock.price}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {stock.peRatio}x
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {stock.revenueGrowth}%
+                </td>
+                <td className="px-6 py-4">{stock.keyMetrics}</td>
+                <td className="px-6 py-4">{stock.rationale}</td>
+              </tr>
+            ))}
+          </tbody>
+        </CustomTable>
+      </CustomCard>
+
+      {/* Real-time Stock Prices */}
+      <CustomCard title="Real-time Stock Prices" icon={AlertTriangle}>
+        <CustomTable headers={["Stock", "Price", "Change (%)", "Market Cap"]}>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {realtimeStocks.map((stock) => (
+              <tr key={stock.symbol}>
+                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                  {stock.symbol}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">${stock.price}</td>
+                <td
+                  className={`px-6 py-4 whitespace-nowrap ${
+                    stock.change >= 0 ? "text-green-600" : "text-red-600"
+                  }`}
+                >
+                  {stock.change >= 0 ? "+" : ""}
+                  {stock.change}%
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {stock.marketCap}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </CustomTable>
+      </CustomCard>
     </div>
   );
 };

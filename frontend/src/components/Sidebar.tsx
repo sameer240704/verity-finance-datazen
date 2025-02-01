@@ -43,7 +43,7 @@ const Sidebar = () => {
     {
       path: "/portfolio/learn",
       icon: BookOpen,
-      label: "Money Matters",
+      label: "Reports & Insights",
       tourClass: "tour-learn",
     },
     {
