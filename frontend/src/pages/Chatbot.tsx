@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, Bot, Mic, MicOff, X } from "lucide-react";
+import { Send, BotMessageSquare, Mic, MicOff, X } from "lucide-react";
 import axios from "axios";
 import MessageFormatter from "../components/MessageFormatter";
 
@@ -15,17 +15,19 @@ const thinkingPhrases = [
   "Analyzing your financial data...",
   "Crunching the numbers...",
   "Reviewing market trends...",
-  "Calculating optimal solutions...",
   "Processing financial insights...",
   "Examining investment patterns...",
   "Evaluating market conditions...",
   "Generating personalized advice...",
+  "Predicting market movements using AI...",
+  "Unlocking growth opportunities in emerging markets...",
+  "Simulating risk-adjusted return scenarios...",
 ];
 
 const defaultPrompts = [
-  "what is the stock price of Adani green",
-  "give me last week return of tata motors",
-  "give me last 3days stock price of tata consultancy services",
+  "Compare Nifty 50 and Sensex performance over the last month",
+  "What is the year-to-date return of HDFC Bank?",
+  "How did TCS perform post its latest quarterly earnings?",
 ];
 
 const Chatbot = () => {
@@ -367,7 +369,7 @@ const Chatbot = () => {
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-4">
             <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-              <Bot className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+              <BotMessageSquare className="h-6 w-6 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
