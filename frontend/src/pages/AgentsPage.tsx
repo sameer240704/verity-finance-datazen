@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Bot, Trash2, X, FileText, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Agent {
   id: string;
@@ -251,10 +252,11 @@ const AgentsPage = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleOpenReport = (e: React.MouseEvent, agent: Agent) => {
     e.stopPropagation();
-    // This would typically open the report in a new view
-    alert(`Opening report for ${agent.name}...`);
+    navigate(`${agent.name.toLowerCase().replace(/\s/g, "-")}`);
   };
 
   const handleUpdateFrequencyChange = (
@@ -269,188 +271,243 @@ const AgentsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex justify-between items-center mb-6"
-        >
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              Market Analysis Agents
-            </h1>
-            <p className="text-gray-600">
-              Create and manage your AI market analysis agents
-            </p>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setIsModalOpen(true);
-              setShowTemplates(false);
-              setFormData({
-                name: "",
-                sector: "",
-                scope: "",
-                stockName: "",
-                aim: "",
-              });
-            }}
-            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 flex items-center gap-2"
-          >
-            <Plus size={20} />
-            New Agent
-          </motion.button>
-        </motion.div>
-
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <AnimatePresence>
-            {agents.map((agent) => (
-              <motion.div
-                key={agent.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-lg shadow-md p-6 cursor-pointer group"
-                onClick={() => handleAgentClick(agent)}
+    <div className="h-screen bg-gray-50 p-6">
+      <div className="h-full max-w-7xl mx-auto">
+        {agents.length === 0 ? (
+          <div className="h-full flex flex-col bg-white p-3 rounded-xl shadow-xl">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center space-x-4">
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex justify-between items-center"
+                >
+                  <div>
+                    <h1 className="text-2xl font-bold text-gray-900">
+                      Market Analysis Agents
+                    </h1>
+                    <p className="text-gray-600">
+                      Create and manage your AI market analysis agents
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+            <div className="h-full w-full flex flex-col items-center justify-center">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                No Agents Added Yet
+              </h2>
+              <p className="text-gray-600 mb-4">
+                Click on an agent to view more details or generate a report
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setShowTemplates(false);
+                  setFormData({
+                    name: "",
+                    sector: "",
+                    scope: "",
+                    stockName: "",
+                    aim: "",
+                  });
+                }}
+                className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 flex items-center gap-2"
               >
-                <div className="flex justify-between items-start">
-                  <div className="flex items-center gap-2">
-                    <Bot className="text-primary-600" size={24} />
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {agent.name}
-                    </h3>
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.1, color: "#EF4444" }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteAgent(agent.id);
-                    }}
-                    className="text-gray-400"
+                <Plus size={20} />
+                New Agent
+              </motion.button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex justify-between items-center mb-6"
+            >
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  Market Analysis Agents
+                </h1>
+                <p className="text-gray-600">
+                  Create and manage your AI market analysis agents
+                </p>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setShowTemplates(false);
+                  setFormData({
+                    name: "",
+                    sector: "",
+                    scope: "",
+                    stockName: "",
+                    aim: "",
+                  });
+                }}
+                className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 flex items-center gap-2"
+              >
+                <Plus size={20} />
+                New Agent
+              </motion.button>
+            </motion.div>
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <AnimatePresence>
+                {agents.map((agent) => (
+                  <motion.div
+                    key={agent.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    whileHover={{ y: -5 }}
+                    className="bg-white rounded-lg shadow-lg p-6 cursor-pointer group"
+                    onClick={() => handleAgentClick(agent)}
                   >
-                    <Trash2 size={20} />
-                  </motion.button>
-                </div>
-                <div className="mt-4">
-                  <p className="text-sm text-gray-600 font-medium">Sector</p>
-                  <p className="text-gray-900">{agent.sector}</p>
-                </div>
-                <div className="mt-4">
-                  <p className="text-sm text-gray-600 font-medium">
-                    Analysis Scope
-                  </p>
-                  <p className="text-gray-900">
-                    {agent.scope.charAt(0).toUpperCase() + agent.scope.slice(1)}
-                    {agent.stockName && ` - ${agent.stockName}`}
-                  </p>
-                </div>
-                <div className="mt-4">
-                  <p className="text-sm text-gray-600 font-medium">Aim</p>
-                  <p className="text-gray-900">{agent.aim}</p>
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-sm text-gray-500">
-                    Created {new Date(agent.created).toLocaleDateString()}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <motion.span
-                      whileHover={{ scale: 1.05 }}
-                      className="px-2 py-1 bg-green-100 text-green-800 text-sm rounded-full"
-                    >
-                      Active
-                    </motion.span>
-                  </div>
-                </div>
+                    <div className="flex justify-between items-start">
+                      <div className="flex items-center gap-2">
+                        <Bot className="text-primary-600" size={24} />
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {agent.name}
+                        </h3>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.1, color: "#EF4444" }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteAgent(agent.id);
+                        }}
+                        className="text-gray-400"
+                      >
+                        <Trash2 size={20} />
+                      </motion.button>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600 font-medium">
+                        Sector
+                      </p>
+                      <p className="text-gray-900">{agent.sector}</p>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600 font-medium">
+                        Analysis Scope
+                      </p>
+                      <p className="text-gray-900">
+                        {agent.scope.charAt(0).toUpperCase() +
+                          agent.scope.slice(1)}
+                        {agent.stockName && ` - ${agent.stockName}`}
+                      </p>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600 font-medium">Aim</p>
+                      <p className="text-gray-900">{agent.aim}</p>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-sm text-gray-500">
+                        Created {new Date(agent.created).toLocaleDateString()}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          className="px-2 py-1 bg-green-100 text-green-800 text-sm rounded-full"
+                        >
+                          Active
+                        </motion.span>
+                      </div>
+                    </div>
 
-                <div className="mt-4 flex justify-center w-full relative">
-                  <div className="inline-flex relative bg-gray-100 p-1 rounded-full">
-                    <motion.div
-                      className="absolute inset-0 h-full"
-                      initial={false}
-                      animate={{
-                        x: agent.updateFrequency === "weekly" ? "100%" : "0%",
-                        scale: 0.95,
-                      }}
-                      transition={{
-                        type: "spring",
-                        bounce: 0.2,
-                        duration: 0.6,
-                      }}
-                    >
-                      <div className="h-full bg-white rounded-full shadow-sm" />
-                    </motion.div>
-                    <motion.button
-                      className={`relative px-4 py-1 rounded-full text-sm font-medium transition-colors ${
-                        agent.updateFrequency === "daily"
-                          ? "text-blue-600"
-                          : "text-gray-500"
-                      }`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleUpdateFrequencyChange(agent.id, "daily");
-                      }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Daily Update
-                    </motion.button>
-                    <motion.button
-                      className={`relative px-4 py-1 rounded-full text-sm font-medium transition-colors ${
-                        agent.updateFrequency === "weekly"
-                          ? "text-blue-600"
-                          : "text-gray-500"
-                      }`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleUpdateFrequencyChange(agent.id, "weekly");
-                      }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Weekly Update
-                    </motion.button>
-                  </div>
-                </div>
+                    <div className="mt-4 flex justify-center w-full relative">
+                      <div className="inline-flex relative p-1 rounded-full">
+                        <motion.div
+                          className="absolute inset-0 h-full w-1/2"
+                          initial={false}
+                          animate={{
+                            x:
+                              agent.updateFrequency === "weekly" ? "95%" : "0%",
+                            scale: 0.95,
+                          }}
+                          transition={{
+                            type: "spring",
+                            bounce: 0.2,
+                            duration: 0.6,
+                          }}
+                        >
+                          <div className="h-full  rounded-full shadow-sm bg-primary-50" />
+                        </motion.div>
+                        <motion.button
+                          className={`relative px-4 py-1 rounded-full text-sm font-medium transition-colors ${
+                            agent.updateFrequency === "daily"
+                              ? "text-primary-600"
+                              : ""
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleUpdateFrequencyChange(agent.id, "daily");
+                          }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Daily Update
+                        </motion.button>
+                        <motion.button
+                          className={`relative px-4 py-1 rounded-full text-sm font-medium transition-colors ${
+                            agent.updateFrequency === "weekly"
+                              ? "text-primary-600"
+                              : ""
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleUpdateFrequencyChange(agent.id, "weekly");
+                          }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Weekly Update
+                        </motion.button>
+                      </div>
+                    </div>
 
-                {/* Report Actions */}
-                <div className="mt-4 flex gap-2">
-                  {agent.hasReport ? (
-                    <button
-                      onClick={(e) => handleOpenReport(e, agent)}
-                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-green-50 text-green-700 rounded-md hover:bg-green-100 transition-colors"
-                    >
-                      <FileText size={16} />
-                      Open Report
-                    </button>
-                  ) : (
-                    <button
-                      onClick={(e) => handleCreateReport(e, agent.id)}
-                      disabled={generatingReportFor === agent.id}
-                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 transition-colors disabled:bg-gray-50 disabled:text-gray-500"
-                    >
-                      {generatingReportFor === agent.id ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          Generating...
-                        </>
-                      ) : (
-                        <>
+                    {/* Report Actions */}
+                    <div className="mt-4 flex gap-2">
+                      {agent.hasReport ? (
+                        <button
+                          onClick={(e) => handleOpenReport(e, agent)}
+                          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 transition-colors"
+                        >
                           <FileText size={16} />
-                          Create Report
-                        </>
+                          Open Report
+                        </button>
+                      ) : (
+                        <button
+                          onClick={(e) => handleCreateReport(e, agent.id)}
+                          disabled={generatingReportFor === agent.id}
+                          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 transition-colors disabled:bg-gray-50 disabled:text-gray-500"
+                        >
+                          {generatingReportFor === agent.id ? (
+                            <>
+                              <Loader2 size={16} className="animate-spin" />
+                              Generating...
+                            </>
+                          ) : (
+                            <>
+                              <FileText size={16} />
+                              Create Report
+                            </>
+                          )}
+                        </button>
                       )}
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          </>
+        )}
 
         <Modal
           isOpen={isModalOpen}
@@ -472,7 +529,7 @@ const AgentsPage = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => loadTemplate(template)}
-                    className="w-full p-4 text-left border rounded-lg hover:bg-gray-50"
+                    className="w-full p-4 text-left border rounded-lg hover:bg-primary-50 hover:border-purple-400"
                   >
                     <h3 className="font-medium text-gray-900">
                       {template.name}
