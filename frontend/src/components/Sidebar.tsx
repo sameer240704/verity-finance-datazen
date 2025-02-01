@@ -11,6 +11,7 @@ import {
   Newspaper,
   Calculator,
   HelpCircle,
+  Brain,
 } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 import { useTour } from "../context/TourContext";
@@ -75,6 +76,12 @@ const Sidebar = () => {
       icon: LineChart,
       label: "Stock Analyzer",
       tourClass: "tour-stock-analyzer",
+    },
+    {
+      path: "/portfolio/agents",
+      icon: Brain,
+      label: "Market Analysis Agents",
+      tourClass: "tour-agents",
     },
   ];
 
