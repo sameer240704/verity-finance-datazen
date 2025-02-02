@@ -16,7 +16,7 @@ market_research_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '
 # Add the directory to Python's system path
 sys.path.append(market_research_path)
 
-from orchestrator import OrchestratorAgent 
+from market_research_system.orchestrator import OrchestratorAgent 
 
 portfolio_analysis_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'portfolio_analysis'))
 sys.path.append(portfolio_analysis_path)

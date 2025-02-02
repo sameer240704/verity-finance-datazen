@@ -81,10 +81,18 @@ class StockReportingAgent:
         if not isinstance(news_sentiment_output, str):
             news_sentiment_output = json.dumps(news_sentiment_output)
 
+        # Double escape braces if the input is potentially a JSON string
+        if isinstance(stock_data_output, str):
+            stock_data_output = stock_data_output.replace("{", "{{").replace("}", "}}")
+        if isinstance(financial_analysis_output, str):
+            financial_analysis_output = financial_analysis_output.replace("{", "{{").replace("}", "}}")
+        if isinstance(news_sentiment_output, str):
+            news_sentiment_output = news_sentiment_output.replace("{", "{{").replace("}", "}}")
+
         print("stock_data_output:", stock_data_output)
         print("financial_analysis_output:", financial_analysis_output)
         print("news_sentiment_output:", news_sentiment_output)
-
+        
         prompt = self.prompt_template.format(
             stock_data_output=stock_data_output,
             financial_analysis_output=financial_analysis_output,

@@ -27,10 +27,10 @@ def main():
                 )
                 st.success("Analysis complete!")
 
-                # Display the report based on agent type
-                if agent_type.lower() == "sector":
-                    st.subheader("Sector Analysis Report")
-                    st.write(final_report)  # Assuming final_report is a string or JSON
+                if agent_type.lower() == "stock":
+                    st.subheader("Stock Analysis Report")
+                    final_report = final_report.replace("{", "{{").replace("}", "}}") # Double escape
+                    st.write(final_report)
 
                 elif agent_type.lower() == "stock":
                     st.subheader("Stock Analysis Report")
