@@ -12,11 +12,7 @@ class StockReportingAgent:
 
         # Stock Analysis Report: [Stock Name] ([Ticker Symbol])
 
-        ## 1. Stock Chart
-
-        Provide a link to the stock chart or a brief description of the chart's data (e.g., price movement, trends).
-
-        ## 2. Company Details
+        ## 1. Company Details
 
         Provide key details about the company. Use the following format:
 
@@ -25,15 +21,18 @@ class StockReportingAgent:
         - **Industry:** (The specific industry within the sector)
         - **Exchange:** (The stock exchange the company is listed on, e.g., NYSE, NASDAQ)
 
-        ## 3. Financial Analysis
+        ## 2. Financial Analysis
 
         Provide a detailed financial analysis. Include:
 
+        - **Balance Sheet:** (Summary of the company's assets, liabilities, and equity)
+        - **Income Statement:** (Summary of the company's revenues, expenses, and profits)
+        - **Cash Flow:** (Summary of the company's cash inflows and outflows)
         - **Ratio Analysis:** (e.g., P/E, P/B, Debt/Equity, EPS)
         - **Profitability:** (e.g., Gross Margin, Operating Margin, Net Profit Margin)
         - **Valuation:** (Assessment of whether the stock is overvalued, undervalued, or fairly valued)
 
-        ## 4. News and Sentiment
+        ## 3. News and Sentiment
 
         Provide an analysis of the news sentiment. Include:
 
@@ -41,13 +40,13 @@ class StockReportingAgent:
         - **Sentiment Analysis:** (Overall sentiment from the news - Positive, Negative, Neutral)
         - **Potential Impact:** (How the news might impact the stock price)
 
-        ## 5. Tavily Report
+        ## 4. Tavily Report
 
         Summarize the key findings from the Tavily data collection. Include:
 
         - **Key Insights:** (Bullet points of the most important information from Tavily)
 
-        ## 6. Sources
+        ## 5. Sources
 
         List all the sources used to gather the data. Provide the full URL for each source. Use the following format:
 
@@ -55,7 +54,7 @@ class StockReportingAgent:
         - Source Name 2 (Full URL 2)
         - ...
 
-        ## 7. Overall Assessment
+        ## 6. Overall Assessment
 
         Provide an overall assessment of the stock with a clear recommendation. Use the following format:
 

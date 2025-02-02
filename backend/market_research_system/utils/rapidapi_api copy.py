@@ -1,84 +1,57 @@
-import yfinance as yf
-import base64
-from io import BytesIO
-import matplotlib.pyplot as plt
+import os
+import requests
 import os
 import requests
 
-class YFinanceAPI:
-    def get_stock_chart(self, stock_symbol, period="1y"):
-        """
-        Retrieves the historical stock chart data using YFinance.
-
-        Args:
-            stock_symbol: The stock symbol.
-            period: The time period for the chart (e.g., "1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max").
-
-        Returns:
-            Base64 encoded image data of the stock chart.
-        """
-        try:
-            ticker = yf.Ticker(stock_symbol)
-            hist = ticker.history(period=period)
-
-            # Create a plot
-            plt.figure(figsize=(10, 5))
-            plt.plot(hist['Close'])
-            plt.title(f'{stock_symbol} Stock Chart ({period})')
-            plt.xlabel('Date')
-            plt.ylabel('Price')
-
-            # Save the plot to a BytesIO object
-            image_stream = BytesIO()
-            plt.savefig(image_stream, format='png')
-            image_stream.seek(0)
-            plt.close()
-
-            # Encode the image to base64
-            base64_image = base64.b64encode(image_stream.read()).decode('utf-8')
-            return base64_image
-        except Exception as e:
-            print(f"Error getting stock chart for {stock_symbol}: {e}")
-            return "" # Return empty string in case of an error
+class RapidAPI:
+    def __init__(self):
+        self.api_key = os.environ.get("RAPIDAPI_API_KEY")
+        self.base_url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/"
+        self.headers = {
+            "X-RapidAPI-Key": self.api_key,
+            "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+        }
 
     def get_company_info(self, stock_symbol):
         """
-        Retrieves key company information using YFinance.
+        Retrieves company information using RapidAPI's Yahoo Finance endpoint.
 
         Args:
             stock_symbol: The stock symbol.
 
         Returns:
-            A dictionary containing company information.
+            A dictionary containing company information, or an empty dictionary if an error occurs.
         """
+        url = f"{self.base_url}get-profile"
+        querystring = {"symbol": stock_symbol, "region": "US"}
         try:
-            ticker = yf.Ticker(stock_symbol)
-            info = ticker.info
-            # You might want to filter or select specific information from 'info'
-            return info
-        except Exception as e:
-            print(f"Error getting company info for {stock_symbol}: {e}")
-            return {}  # Return empty dictionary in case of an error
+            response = requests.get(url, headers=self.headers, params=querystring)
+            response.raise_for_status()  # Raise an exception for bad status codes
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error getting company info for {stock_symbol} from RapidAPI: {e}")
+            return {}
 
     def get_financial_data(self, stock_symbol):
         """
-        Retrieves key financial data using YFinance.
+        Retrieves financial data using RapidAPI's Yahoo Finance endpoint.
 
         Args:
             stock_symbol: The stock symbol.
 
         Returns:
-            A dictionary containing financial data.
+            A dictionary containing financial data, or an empty dictionary if an error occurs.
         """
+        url = f"{self.base_url}get-financials"
+        querystring = {"symbol": stock_symbol, "region": "US"}
         try:
-            ticker = yf.Ticker(stock_symbol)
-            financials = ticker.financials
-            # You might want to filter or select specific data from 'financials'
-            return financials
-        except Exception as e:
-            print(f"Error getting financial data for {stock_symbol}: {e}")
-            return {}  # Return empty dictionary in case of an error
-    
+            response = requests.get(url, headers=self.headers, params=querystring)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error getting financial data for {stock_symbol} from RapidAPI: {e}")
+            return {}
+        
     def get_current_price(self, stock_symbol):
         """
         Retrieves the current price of a stock using RapidAPI's Yahoo Finance endpoint.

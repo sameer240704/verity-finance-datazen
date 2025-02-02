@@ -1,0 +1,42 @@
+```json
+{
+  "market_metrics": {
+    "revenue": "$391 billion",
+    "net_income": "$93.7 billion",
+     "P/E_ratio": "33.5x",
+    "P/B_ratio": "47x",
+    "D/E_ratio": "1.9x",
+     "EPS": "$6.05",
+     "gross_margin": "43%",
+      "operating_margin": "29%",
+    "net_margin": "24%"
+  },
+  "sources": [
+    {
+      "name": "Seeking Alpha",
+      "url": "https://seekingalpha.com/"
+    },
+    {
+      "name": "MarketBeat",
+      "url": "https://www.marketbeat.com/"
+    },
+    {
+      "name": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/"
+    },
+    {
+      "name": "Nasdaq",
+      "url": "https://www.nasdaq.com/"
+    }
+  ],
+    "top_5_stocks": [
+    {
+        "stock_name": "Apple Inc.",
+        "ticker": "AAPL",
+        "current_price": "193.79",
+        "30_day_performance": "0.02",
+        "justification": "Apple is an exceptional company with strong fundamentals, an extensive ecosystem, and leadership in innovation. However, its elevated valuation, coupled with concerns over stagnating iPhone sales and macroeconomic uncertainties, makes the stock less favorable for new purchases at current levels."
+    }
+   ]
+}
+```
