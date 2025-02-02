@@ -209,8 +209,8 @@ def market_analysis_agent():
 
 @app.route('/portfolio_generation', methods=["GET"])
 def portfolio_generation():
-    rapidapi.main()  
-    return jsonify({"message": "Portfolio generation initiated"})
+    portfolio_data = rapidapi.main()  
+    return jsonify({"message": "Portfolio generation successful", "portfolio_data": portfolio_data})
 
 # =================== STATIC APIS ===================
 @app.route('/auto-bank-data', methods=['get'])

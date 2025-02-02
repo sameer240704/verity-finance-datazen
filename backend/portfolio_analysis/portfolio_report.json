@@ -1,0 +1,647 @@
+{
+    "stocks": {
+        "AAPL": {
+            "company_info": {
+                "symbol": "AAPL:NASDAQ",
+                "type": "stock",
+                "income_statement": [
+                    {
+                        "date": "2024-9-28",
+                        "year": 2024,
+                        "month": 9,
+                        "day": 28,
+                        "currency": "USD",
+                        "revenue": 94930000000,
+                        "operating_expense": 14288000000,
+                        "net_income": 14736000000,
+                        "net_profit_margin": 15.52,
+                        "earnings_per_share": 0.96,
+                        "EBITDA": 32502000000,
+                        "effective_task_rate_percent": 50.23
+                    },
+                    {
+                        "date": "2024-6-29",
+                        "year": 2024,
+                        "month": 6,
+                        "day": 29,
+                        "currency": "USD",
+                        "revenue": 85777000000,
+                        "operating_expense": 14326000000,
+                        "net_income": 21448000000,
+                        "net_profit_margin": 25,
+                        "earnings_per_share": 1.4,
+                        "EBITDA": 28202000000,
+                        "effective_task_rate_percent": 15.87
+                    },
+                    {
+                        "date": "2024-3-30",
+                        "year": 2024,
+                        "month": 3,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 90753000000,
+                        "operating_expense": 14371000000,
+                        "net_income": 23636000000,
+                        "net_profit_margin": 26.04,
+                        "earnings_per_share": 1.53,
+                        "EBITDA": 30736000000,
+                        "effective_task_rate_percent": 15.76
+                    },
+                    {
+                        "date": "2024-12-30",
+                        "year": 2024,
+                        "month": 12,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 119575000000,
+                        "operating_expense": 14482000000,
+                        "net_income": 33916000000,
+                        "net_profit_margin": 28.36,
+                        "earnings_per_share": 2.18,
+                        "EBITDA": 43221000000,
+                        "effective_task_rate_percent": 15.89
+                    },
+                    {
+                        "date": "2023-9-30",
+                        "year": 2023,
+                        "month": 9,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 89498000000,
+                        "operating_expense": 13458000000,
+                        "net_income": 22956000000,
+                        "net_profit_margin": 25.65,
+                        "earnings_per_share": 1.46,
+                        "EBITDA": 29622000000,
+                        "effective_task_rate_percent": 14.97
+                    },
+                    {
+                        "date": "2023-7-1",
+                        "year": 2023,
+                        "month": 7,
+                        "day": 1,
+                        "currency": "USD",
+                        "revenue": 81797000000,
+                        "operating_expense": 13415000000,
+                        "net_income": 19881000000,
+                        "net_profit_margin": 24.31,
+                        "earnings_per_share": 1.26,
+                        "EBITDA": 26050000000,
+                        "effective_task_rate_percent": 12.55
+                    },
+                    {
+                        "date": "2023-4-1",
+                        "year": 2023,
+                        "month": 4,
+                        "day": 1,
+                        "currency": "USD",
+                        "revenue": 94836000000,
+                        "operating_expense": 13658000000,
+                        "net_income": 24160000000,
+                        "net_profit_margin": 25.48,
+                        "earnings_per_share": 1.52,
+                        "EBITDA": 31216000000,
+                        "effective_task_rate_percent": 14.88
+                    },
+                    {
+                        "date": "2023-12-31",
+                        "year": 2023,
+                        "month": 12,
+                        "day": 31,
+                        "currency": "USD",
+                        "revenue": 117154000000,
+                        "operating_expense": 14316000000,
+                        "net_income": 29998000000,
+                        "net_profit_margin": 25.61,
+                        "earnings_per_share": 1.88,
+                        "EBITDA": 38932000000,
+                        "effective_task_rate_percent": 15.79
+                    }
+                ],
+                "period": "QUARTERLY"
+            },
+            "stock_data": {
+                "stockName": "Apple",
+                "tickerSymbol": "AAPL",
+                "numberOfShares": 100,
+                "purchasePrice": 200,
+                "purchaseDate": "2022-03-17",
+                "currentPrice": 236.0,
+                "unrealizedGainsLosses": 3600.0,
+                "dividendYield": 0.42,
+                "weightageInPortfolio": 7.17
+            }
+        },
+        "NVDA": {
+            "company_info": {
+                "symbol": "NVDA:NASDAQ",
+                "type": "stock",
+                "income_statement": [
+                    {
+                        "date": "2025-10-27",
+                        "year": 2025,
+                        "month": 10,
+                        "day": 27,
+                        "currency": "USD",
+                        "revenue": 35082000000,
+                        "operating_expense": 4287000000,
+                        "net_income": 19309000000,
+                        "net_profit_margin": 55.04,
+                        "earnings_per_share": 0.78,
+                        "EBITDA": 22347000000,
+                        "effective_task_rate_percent": 13.47
+                    },
+                    {
+                        "date": "2025-7-28",
+                        "year": 2025,
+                        "month": 7,
+                        "day": 28,
+                        "currency": "USD",
+                        "revenue": 30040000000,
+                        "operating_expense": 3932000000,
+                        "net_income": 16599000000,
+                        "net_profit_margin": 55.26,
+                        "earnings_per_share": 0.67,
+                        "EBITDA": 19075000000,
+                        "effective_task_rate_percent": 13.61
+                    },
+                    {
+                        "date": "2025-4-28",
+                        "year": 2025,
+                        "month": 4,
+                        "day": 28,
+                        "currency": "USD",
+                        "revenue": 26044000000,
+                        "operating_expense": 3497000000,
+                        "net_income": 14881000000,
+                        "net_profit_margin": 57.14,
+                        "earnings_per_share": 0.6,
+                        "EBITDA": 17319000000,
+                        "effective_task_rate_percent": 13.88
+                    },
+                    {
+                        "date": "2024-1-28",
+                        "year": 2024,
+                        "month": 1,
+                        "day": 28,
+                        "currency": "USD",
+                        "revenue": 22103000000,
+                        "operating_expense": 3177000000,
+                        "net_income": 12285000000,
+                        "net_profit_margin": 55.58,
+                        "earnings_per_share": 0.49,
+                        "EBITDA": 14001000000,
+                        "effective_task_rate_percent": 12.91
+                    },
+                    {
+                        "date": "2024-10-29",
+                        "year": 2024,
+                        "month": 10,
+                        "day": 29,
+                        "currency": "USD",
+                        "revenue": 18120000000,
+                        "operating_expense": 2983000000,
+                        "net_income": 9243000000,
+                        "net_profit_margin": 51.01,
+                        "earnings_per_share": 0.37,
+                        "EBITDA": 10789000000,
+                        "effective_task_rate_percent": 12.16
+                    },
+                    {
+                        "date": "2024-7-30",
+                        "year": 2024,
+                        "month": 7,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 13507000000,
+                        "operating_expense": 2662000000,
+                        "net_income": 6188000000,
+                        "net_profit_margin": 45.81,
+                        "earnings_per_share": 0.25,
+                        "EBITDA": 7165000000,
+                        "effective_task_rate_percent": 11.36
+                    },
+                    {
+                        "date": "2024-4-30",
+                        "year": 2024,
+                        "month": 4,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 7192000000,
+                        "operating_expense": 2508000000,
+                        "net_income": 2043000000,
+                        "net_profit_margin": 28.41,
+                        "earnings_per_share": 0.08,
+                        "EBITDA": 2524000000,
+                        "effective_task_rate_percent": 7.51
+                    },
+                    {
+                        "date": "2023-1-29",
+                        "year": 2023,
+                        "month": 1,
+                        "day": 29,
+                        "currency": "USD",
+                        "revenue": 6051000000,
+                        "operating_expense": 2577000000,
+                        "net_income": 1414000000,
+                        "net_profit_margin": 23.37,
+                        "earnings_per_share": 0.06,
+                        "EBITDA": 1682000000,
+                        "effective_task_rate_percent": -9.78
+                    }
+                ],
+                "period": "QUARTERLY"
+            },
+            "stock_data": {
+                "stockName": "NVIDIA",
+                "tickerSymbol": "NVDA",
+                "numberOfShares": 41,
+                "purchasePrice": 200,
+                "purchaseDate": "2021-07-08",
+                "currentPrice": 120.07,
+                "unrealizedGainsLosses": -3277.13,
+                "dividendYield": 0.03,
+                "weightageInPortfolio": 1.5
+            }
+        },
+        "AMZN": {
+            "company_info": {
+                "symbol": "AMZN:NASDAQ",
+                "type": "stock",
+                "income_statement": [
+                    {
+                        "date": "2024-9-30",
+                        "year": 2024,
+                        "month": 9,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 158877000000,
+                        "operating_expense": 60489000000,
+                        "net_income": 15328000000,
+                        "net_profit_margin": 9.65,
+                        "earnings_per_share": 1.43,
+                        "EBITDA": 30853000000,
+                        "effective_task_rate_percent": 15
+                    },
+                    {
+                        "date": "2024-6-30",
+                        "year": 2024,
+                        "month": 6,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 147977000000,
+                        "operating_expense": 59520000000,
+                        "net_income": 13485000000,
+                        "net_profit_margin": 9.11,
+                        "earnings_per_share": 1.26,
+                        "EBITDA": 26710000000,
+                        "effective_task_rate_percent": 11.59
+                    },
+                    {
+                        "date": "2024-3-31",
+                        "year": 2024,
+                        "month": 3,
+                        "day": 31,
+                        "currency": "USD",
+                        "revenue": 143313000000,
+                        "operating_expense": 55373000000,
+                        "net_income": 10431000000,
+                        "net_profit_margin": 7.28,
+                        "earnings_per_share": 0.98,
+                        "EBITDA": 26991000000,
+                        "effective_task_rate_percent": 19.13
+                    },
+                    {
+                        "date": "2023-12-31",
+                        "year": 2023,
+                        "month": 12,
+                        "day": 31,
+                        "currency": "USD",
+                        "revenue": 169961000000,
+                        "operating_expense": 64619000000,
+                        "net_income": 10624000000,
+                        "net_profit_margin": 6.25,
+                        "earnings_per_share": 1.01,
+                        "EBITDA": 26609000000,
+                        "effective_task_rate_percent": 22.37
+                    },
+                    {
+                        "date": "2023-9-30",
+                        "year": 2023,
+                        "month": 9,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 143083000000,
+                        "operating_expense": 56873000000,
+                        "net_income": 9879000000,
+                        "net_profit_margin": 6.9,
+                        "earnings_per_share": 0.94,
+                        "EBITDA": 23319000000,
+                        "effective_task_rate_percent": 18.92
+                    },
+                    {
+                        "date": "2023-6-30",
+                        "year": 2023,
+                        "month": 6,
+                        "day": 30,
+                        "currency": "USD",
+                        "revenue": 134383000000,
+                        "operating_expense": 57329000000,
+                        "net_income": 6750000000,
+                        "net_profit_margin": 5.02,
+                        "earnings_per_share": 0.65,
+                        "EBITDA": 19270000000,
+                        "effective_task_rate_percent": 10.64
+                    },
+                    {
+                        "date": "2023-3-31",
+                        "year": 2023,
+                        "month": 3,
+                        "day": 31,
+                        "currency": "USD",
+                        "revenue": 127358000000,
+                        "operating_expense": 54793000000,
+                        "net_income": 3172000000,
+                        "net_profit_margin": 2.49,
+                        "earnings_per_share": 0.31,
+                        "EBITDA": 15897000000,
+                        "effective_task_rate_percent": 23.01
+                    },
+                    {
+                        "date": "2022-12-31",
+                        "year": 2022,
+                        "month": 12,
+                        "day": 31,
+                        "currency": "USD",
+                        "revenue": 149204000000,
+                        "operating_expense": 60077000000,
+                        "net_income": 278000000,
+                        "net_profit_margin": 0.19,
+                        "earnings_per_share": 0.02,
+                        "EBITDA": 16172000000,
+                        "effective_task_rate_percent": 129.29
+                    }
+                ],
+                "period": "QUARTERLY"
+            },
+            "stock_data": {
+                "stockName": "Amazon",
+                "tickerSymbol": "AMZN",
+                "numberOfShares": 198,
+                "purchasePrice": 300,
+                "purchaseDate": "2025-02-02",
+                "currentPrice": 237.68,
+                "unrealizedGainsLosses": -12339.36,
+                "dividendYield": 0.0,
+                "weightageInPortfolio": 14.29
+            }
+        }
+    },
+    "bonds": [
+        {
+            "bondType": "Government",
+            "maturityDate": "2030-12-31",
+            "couponRate": 6.5,
+            "principal": 50000,
+            "yieldToMaturity": 13,
+            "interestEarned": 3250,
+            "weightageInPortfolio": 15.19
+        }
+    ],
+    "articles": {
+        "Apple": [
+            {
+                "title": "Apple Inc (AAPL) Stock Price & News - Google Finance",
+                "url": "https://www.google.com/finance/quote/AAPL:NASDAQ",
+                "content": "Apple Inc (AAPL) Stock Price & News - Google Finance Stock market today: S&P 500, Nasdaq climb as Tesla shines\u2022 Yahoo Finance\u2022 7 minutes ago Digital Trends Apple\u2019s AI is causing the company big problems, data shows 6 hours ago Yahoo Finance Apple reports better-than-anticipated Q4 revenue, earnings hurt by EU tax payment 2 weeks ago Bitcoinist Tim Cook\u2019s Crypto Secret: Apple CEO Confirms 3 Years Of Personal Holdings 3 days ago A valuation method that multiplies the price of a company's stock by the total number of outstanding shares. Apple Inc. is an American multinational corporation and technology company headquartered and incorporated in Cupertino, California, in Silicon Valley. The company was founded to produce and market Wozniak's Apple I personal computer.",
+                "score": 0.76596165,
+                "raw_content": null
+            },
+            {
+                "title": "Apple Inc. (AAPL) Latest Stock News & Headlines - Yahoo Finance",
+                "url": "https://finance.yahoo.com/quote/AAPL/news/",
+                "content": "(AAPL) Latest Stock News & Headlines - Yahoo Finance ### Analyst: Apple (AAPL)\u2019s iPhone Sell-Throughs \u2018Unlikely to Accelerate\u2019 in December We recently published a list of 10 AI Stocks to Watch on Latest News and Analyst Ratings. (NASDAQ:AAPL) stands against other AI stocks to watch on latest news and analyst ratings. ### Nvidia, Meta, Apple, and Microsoft Could Help This Magnificent ETF Turn $250,000 Into $1 Million This ETF is crushing the return of the S&P 500 thanks to its large holdings in stocks like Nvidia and Meta Platforms. ### Nvidia Has 65% of Its Portfolio Invested in 1 Brilliant Artificial Intelligence (AI) Stock Nvidia (NASDAQ: NVDA) first disclosed a stake in fellow semiconductor company Arm Holdings (NASDAQ: ARM) in the fourth quarter of 2023.",
+                "score": 0.7173491,
+                "raw_content": null
+            },
+            {
+                "title": "Apple's guidance comes as a relief, sending the stock higher",
+                "url": "https://www.marketwatch.com/livecoverage/apple-earnings-stock-results-iphone-ai-guidance",
+                "content": "Apple reported fiscal first-quarter earnings Thursday. Analysts are focused on iPhone momentum following a sluggish start to the year for Apple's stock.",
+                "score": 0.6757865,
+                "raw_content": null
+            },
+            {
+                "title": "Apple Inc. Common Stock (AAPL) News - Nasdaq",
+                "url": "https://www.nasdaq.com/market-activity/stocks/aapl/news-headlines",
+                "content": "Apple (AAPL) News Headlines | Nasdaq Nasdaq+ *   Nasdaq-100 Nasdaq U.S. Data Markets -> *   Nasdaq-100 Index Options *   Nasdaq-100 Index Nasdaq MarketSite ESG at Nasdaq Nasdaq+ About Nasdaq+ -> Leverage the Nasdaq+ Scorecard to analyze stocks based on your investment priorities and our market data. Leverage the Nasdaq+ Scorecard to analyze stocks based on your investment priorities and our market data. Nasdaq MarketSIte Add symbols now or see the quotes that matter to you, anywhere on Nasdaq.com. Add instruments now or see the quotes that matter to you, anywhere on Nasdaq.com. Create your Watchlist to save your favorite quotes on Nasdaq.com. You'll now be able to see real-time price and activity for your symbols on the My Quotes of Nasdaq.com.",
+                "score": 0.64719695,
+                "raw_content": null
+            },
+            {
+                "title": "Analysts overhaul Apple stock price targets after record Q1 earnings",
+                "url": "https://finance.yahoo.com/news/analysts-overhaul-apple-stock-price-123552810.html",
+                "content": "Apple shares powered higher in early Friday trading after a record set of quarterly earnings and an upbeat outlook for iPhone sales from the world's biggest tech company triggered a host of price",
+                "score": 0.6301622,
+                "raw_content": null
+            }
+        ],
+        "NVIDIA": [
+            {
+                "title": "NVIDIA Corporation (NVDA) Latest Stock News & Headlines - Yahoo Finance",
+                "url": "https://finance.yahoo.com/quote/NVDA/news/",
+                "content": "NVIDIA Corporation (NVDA) Latest Stock News & Headlines - Yahoo Finance ### Nvidia Stock Price Levels to Watch as Earnings Report Looms Nvidia shares are in the spotlight ahead of the AI darling\u2019s quarterly results later this week and following a report that the company\u2019s next-generation Blackwell chips have encountered issues overheating in servers. ### These Stocks Are Moving the Most Today: Nvidia, Super Micro, Tesla, Uber, Palantir, Robinhood, and More Nvidia stock falls ahead of the AI chip maker\u2019s quarterly earnings later this week, while Super Micro Computer is expected Monday to submit a plan to allow it to continue to trade on the Nasdaq. ### Investors Jump Into Nvidia Stock-Options Bets Nvidia results have become a major Wall Street event, drawing comparisons with Federal Reserve meetings and key economic reports for their influence over the broader market.",
+                "score": 0.86713725,
+                "raw_content": null
+            },
+            {
+                "title": "Nvidia Stock Investors Just Got Great News From Wall Street That Could ...",
+                "url": "https://finance.yahoo.com/news/nvidia-stock-investors-just-got-090500830.html",
+                "content": "Nvidia Stock Investors Just Got Great News From Wall Street That Could Send Shares Soaring Nvidia Stock Investors Just Got Great News From Wall Street That Could Send Shares Soaring Nvidia (NASDAQ: NVDA) has been one of the hottest stocks on the market in recent years. Nvidia is currently worth $3.3 trillion, but certain Wall Street analysts see upside arising from its Blackwell GPUs and robotics computing solutions. The Motley Fool Stock Advisor analyst team just identified what they believe are the 10 best stocks for investors to buy now\u2026 and Nvidia wasn\u2019t one of them. Nvidia Stock Investors Just Got Great News From Wall Street That Could Send Shares Soaring was originally published by The Motley Fool",
+                "score": 0.8245895,
+                "raw_content": null
+            },
+            {
+                "title": "NVIDIA Corp (NVDA) Stock Price & News - Google Finance",
+                "url": "https://www.google.com/finance/quote/NVDA:NASDAQ",
+                "content": "NVIDIA Corp (NVDA) Stock Price & News - Google Finance Stock market today: S&P 500, Nasdaq climb as Tesla shines\u2022 Yahoo Finance\u2022 1 hour ago Yahoo Finance Why Nvidia stock is ripe for another surge: Investor 4 hours ago Investopedia Nvidia Stock Price Levels to Watch as Earnings Report Looms 1 hour ago Investor's Business Daily Dow Jones Falls As Nvidia Earnings Loom; Tesla Surges On Trump News 3 hours ago Barchart.com Stocks Set to Open Mixed as Investors Await U.S. Economic Data and Nvidia Earnings, Fed Speak on Tap 4 hours ago Investing.com \u200b\u200bDow Jones, Nasdaq, S&P 500 weekly preview: Attention turns to Nvidia earnings 3 hours ago Yahoo Finance 2 hours ago Nvidia stock sinks on reports of Blackwell AI server issues ahead of earnings",
+                "score": 0.818055,
+                "raw_content": null
+            },
+            {
+                "title": "NVIDIA Corporation (NVDA) Latest Stock News & Headlines - Yahoo Finance",
+                "url": "https://ca.finance.yahoo.com/quote/NVDA/news/",
+                "content": "ET - Hessam Nadji, Marcus & Millichap CEO\nThe Suite Life: A Look at the Most Lavish Rooms in Las Vegas\nNvidia earnings highlight shortened trading week: What to know this week\nNvidia earnings are set to be the next big test for the market rally. INFLATION IN CANADA FALLS TO 2.9% IN JANUARY\nOn a seasonally adjusted monthly basis, the CPI fell 0.1% last month, the first drop since May 2020\nNVIDIA Corporation (NVDA)\n In a massive deal in the credit space, Capital One (COF) will acquire Discover Financial Services (DFS) in a $35 billion all-stock deal. In the retail space, Walmart (WMT) announced plans to acquire TV maker Vizio (VZIO) in a $2.3 billion cash deal. S&P 5005,005.57-24.16(-0.48%)\nDOW38,627.99-145.11(-0.37%)\nCAD/USD0.7396-0.0018(-0.24%)\nCRUDE",
+                "score": 0.7913865,
+                "raw_content": null
+            },
+            {
+                "title": "Nvidia Stock Plunges 17% As NVDA Suffers Biggest Market Cap ... - Forbes",
+                "url": "https://www.forbes.com/sites/dereksaul/2025/01/27/biggest-market-loss-in-history-nvidia-stock-sheds-nearly-600-billion-as-deepseek-shakes-ai-darling/",
+                "content": "Nvidia Stock Plunges 17% As NVDA Suffers Biggest Market Cap Loss Ever\u2014Driven By DeepSeek Biggest Market Loss In History: Nvidia Stock Sheds Nearly $600 Billion As DeepSeek Shakes AI Darling Biggest Market Loss In History: Nvidia Stock Sheds Nearly $600 Billion As DeepSeek Shakes AI Darling Nvidia set a dubious Wall Street record Monday, as the stock at the forefront of the U.S.-led artificial intelligence revolution got a scare from DeepSeek, the Chinese AI company which developed a ChatGPT rival at a fraction of the reported cost of its American peers. In order to do so, please follow the posting rules in our site's\u00a0Terms of Service. Please read the full list of posting rules found in our site's\u00a0Terms of Service.",
+                "score": 0.75181264,
+                "raw_content": null
+            }
+        ],
+        "Amazon": [
+            {
+                "title": "Amazon.com, Inc. (AMZN) Latest Stock News & Headlines - Yahoo Finance",
+                "url": "https://ca.finance.yahoo.com/quote/AMZN/news/",
+                "content": "Amazon reportedly boosts ad-spending on X in major U-turn: WSJ. Investing.com -- Amazon.com Inc (NASDAQ:AMZN) is increasing its spending on social media platform X, marking a major U-turn from the e-commerce after scaling back on advertising on the Elon's Musk-owned platform more than a year ago amid concerns about growing hate speech on the platform, the Wall Street Journal reported Thursday",
+                "score": 0.78314424,
+                "raw_content": null
+            },
+            {
+                "title": "Amazon.com Inc (AMZN) Stock Price & News - Google Finance",
+                "url": "https://www.google.com/finance/quote/AMZN:NASDAQ",
+                "content": "Amazon.com Inc (AMZN) Stock Price & News - Google Finance NVIDIA Corp -1.27%Palantir Technologies Inc -6.94%Super Micro Computer Inc +24.41%Tesla Inc +3.73%Lucid Group Inc +5.47%MARA Holdings Inc -13.10% Yahoo Finance Bezos Wraps Up Sale Of $3.4B Worth Of Amazon Shares 22 hours ago Investor's Business Daily Nuclear Company Reports Earnings; 'Moving Ahead' With Amazon Despite Regulatory Decision 3 days ago Simply Wall Street Is Amazon.com, Inc.'s (NASDAQ:AMZN) Latest Stock Performance A Reflection Of Its Financial Health? Represents the company's profit divided by the outstanding shares of its common stock. A valuation method that multiplies the price of a company's stock by the total number of outstanding shares. VTI Vanguard Total Stock Market Index Fund ETF $291.45 0.39%",
+                "score": 0.7548612,
+                "raw_content": null
+            },
+            {
+                "title": "Amazon.com, Inc. (AMZN) Latest Stock News & Headlines - Yahoo Finance",
+                "url": "https://finance.yahoo.com/quote/AMZN/news/",
+                "content": "(AMZN) Latest Stock News & Headlines - Yahoo Finance ### Analyst on Amazon.com (AMZN): Everyone Should \u2018Brace\u2019 For Further Margin Declines We recently published a list of 10 AI Stocks to Watch on Latest News and Analyst Ratings. In this article, we are going to take a look at where Amazon.com Inc (NASDAQ:AMZN) stands against other AI stocks to watch on latest news and analyst ratings. ### If You'd Invested $10,000 in Teladoc Stock 5 Years Ago, Here's How Much You'd Have Today Spoiler: The news isn't pretty. ### 2 Best Dow Jones Stocks to Supercharge Your Returns in 2025 The stocks included in the highly selective Dow Jones Industrial Average represent some of the most elite businesses in the world.",
+                "score": 0.7120925,
+                "raw_content": null
+            },
+            {
+                "title": "Amazon's stock resumes its breakout. Losing some UPS ... - MarketWatch",
+                "url": "https://www.marketwatch.com/story/amazons-stock-resumes-its-breakout-losing-some-ups-deliveries-wont-stop-it-d9b055ec",
+                "content": "Amazon's stock AMZN surged 1.3% to close at $237.68 on Friday. It reached as high as $240.29 in intraday trading, which was above the Jan. 28 record close of $238.15.",
+                "score": 0.7060491,
+                "raw_content": null
+            },
+            {
+                "title": "Why Amazon (AMZN) Stock Is Down Today - Yahoo Finance",
+                "url": "https://finance.yahoo.com/news/why-amazon-amzn-stock-down-165742993.html",
+                "content": "Why Amazon (AMZN) Stock Is Down Today Stock Market Stock Market Why Amazon (AMZN) Stock Is Down Today Why Amazon (AMZN) Stock Is Down Today Shares of cloud computing and online retail behemoth Amazon (NASDAQ:AMZN) fell 3.5% in the morning session after the major indices declined, with the Nasdaq down 1.9%, while the S&P fell 1.12% as markets reined in some of the post-election optimism. The stock market overreacts to news, and big price drops can present good opportunities to buy high-quality stocks. The previous big move we wrote about was 14 days ago when the stock gained 7.6% on the news that the company reported impressive third-quarter earnings.",
+                "score": 0.70580584,
+                "raw_content": null
+            }
+        ],
+        "Government": [
+            {
+                "title": "Bonds: The flashing warning sign that is worrying investors - BBC News",
+                "url": "https://www.bbc.co.uk/news/business-67262339",
+                "content": "Government bond yields are used as a guide for setting the rates on everyday loans and mortgages, which have shot up over the last few years. Average US mortgage rates hit a two-decade high of 8%",
+                "score": 0.6877354,
+                "raw_content": null
+            },
+            {
+                "title": "Bonds - MarketWatch",
+                "url": "https://www.marketwatch.com/investing/bonds",
+                "content": "Germany 10 Year Government Bond: 2.523%-0.06: TMBMKIT-10Y: Italy 10 Year Government Bond: 3.597%-0.056: TMBMKES-10Y: ... More Bond News. Fed rate hikes are back in the conversation. Here's why",
+                "score": 0.66203266,
+                "raw_content": null
+            },
+            {
+                "title": "Government Debt Glut Could Rock Markets in 2025, BIS Says - U.S. News",
+                "url": "https://money.usnews.com/investing/news/articles/2024-12-10/government-debt-glut-could-rock-markets-in-2025-bis-says",
+                "content": "Bond fund PIMCO said on Monday it plans to diversify its government bond exposure by buying outside the United States, where its outlook on long-term government debt is bearish due to a",
+                "score": 0.65676886,
+                "raw_content": null
+            },
+            {
+                "title": "Bonds Have Banner Day as Inflation Report Revives Fed-Cut Bets",
+                "url": "https://finance.yahoo.com/news/treasuries-surge-easing-inflation-boosts-134943084.html",
+                "content": "(Bloomberg) -- US government bonds had their best day in months after benign inflation data revived the case for additional Federal Reserve interest-rate cuts. \u201cThe report gives support to those in the market and at the Fed that the next move by the Fed is still to ease rates,\u201d said Jack McIntyre, portfolio manager at Brandywine Global Investment Management. Along with resilient US economic data, its re-acceleration had suggested that the Fed \u2014 which cut rates three times last year by a combined 100 basis points to arrest an increase in unemployment \u2014 may have acted prematurely. In the US market, the amount of Fed easing priced in by year end increased by 10 basis points to about 35 basis points, with a quarter-point cut fully priced in by July versus September previously.",
+                "score": 0.58123237,
+                "raw_content": null
+            },
+            {
+                "title": "Bond rebound uncertain as Trump plans overshadow Fed rate cuts",
+                "url": "https://www.reuters.com/markets/rates-bonds/bond-rebound-uncertain-trump-plans-overshadow-fed-rate-cuts-2024-11-08/",
+                "content": "Prospects of a near-term rebound in the $28-trillion U.S. government bond market are faltering, as Donald Trump's return to the White House is expected to usher in fiscally expansive policies",
+                "score": 0.5746579,
+                "raw_content": null
+            }
+        ]
+    },
+    "recommended_stocks": [
+        {
+            "stock": {
+                "tickerSymbol": "VIEW"
+            },
+            "articles": [
+                {
+                    "title": "The 10 Best Stocks To Buy Now - Forbes Advisor",
+                    "url": "https://www.forbes.com/advisor/investing/best-stocks-to-buy-now/",
+                    "content": "The 10 Best Stocks To Buy Now\nBoeing (BA)\n41.6\n1.5\n7.6%\n41.6\n1.5\n7.6%\nBoeing is one of the largest U.S. defense contractors and is one of the two main global suppliers of large commercial aircraft.\n Kraft Heinz (KHC)\n11.7\n1.5\n1.8%\n11.7\n1.5\n1.8%\nKraft Heinz is one of the world\u2019s largest consumer packaged food and beverage companies and is the parent company of popular brands such as Kraft, Heinz, Oscar Mayer and Maxwell House.\n \u201cWe are confident in a positive readout for EMBARK based on the trial design and view the FDA\u2019s commitment to a promptly review of the application and active engagement in the regulatory process as a positive,\u201d Ahmad says\nBank of America has a \u201cbuy\u201d rating and $186 price target for SRPT stock.\n Occidental Petroleum (OXY)\n12.2\n1.9\n16.8%\n12.2\n1.9\n16.8%\nOccidental Petroleum is one of the largest U.S. oil and gas exploration and production companies, and it also operates a large chemicals business.\n CSX (CSX)\n15.2\n4.2\n11.4%\n15.2\n4.2\n11.4%\nCSX is one of the leading U.S. railroad companies, providing rail-based transportation services such as traditional rail service and transport of intermodal containers and trailers.\n",
+                    "score": 0.9159971,
+                    "raw_content": null
+                },
+                {
+                    "title": "Best Stocks to Buy Now - Kiplinger",
+                    "url": "https://www.kiplinger.com/investing/stocks/best-stocks-to-buy-now",
+                    "content": "While oil prices got an initial lift after the brutal attack by Hamas on Israel, they've more recently slipped as the market appears to be less concerned with geopolitical risk in the Middle East and \"more worried that slowing economic growth around the world will sap the demand for oil,\" writes Jim Patterson, managing editor for The Kiplinger Letter, in Kiplinger's energy outlook.\n While a broad economic slowdown and higher interest rates pose near-term risks to REXR, the firm's \"deep roots and long history\" within the region provide the team with a great sense of market demand, the analysts say, adding that the scarcity of available space allows Rexford to push above average rental rates. Advanced Micro Devices\nDon't ignore the tenets of diversification and shun tech or the growthier side of the market when adjusting your portfolio to include the best stocks to buy now, says Tony DeSpirito, managing director and portfolio manager at BlackRock. The 12 Best Stocks to Buy Now\nOur list of the best stocks to buy now reflect the lesson of the past few years: Be ready for anything.\n The shares are up more than 88% for the year-to-date, but trade at 39 times expected earnings for the year ahead \u2013 in line with the typical price-earnings multiple over the past five years.\n",
+                    "score": 0.8755427,
+                    "raw_content": null
+                },
+                {
+                    "title": "The 10 Best Companies to Invest in Now - Morningstar",
+                    "url": "https://www.morningstar.com/stocks/10-best-companies-invest-now",
+                    "content": "More of the Best Stocks to Buy\n10 Best Growth Stocks to Buy for the Long Term\n10 Best Value Stocks to Buy for the Long Term\nThe 10 Best Dividend Stocks\nThe author or authors do not own shares in any securities mentioned in this article.\n Find More of the Best Stocks to Invest in\nYou can review all of the companies on our Best Companies to Own list and dig into our methodology, which includes definitions for the key Morningstar metrics included in this article. While cigarettes will likely remain the driving force of profits in the industry for the next decade, British American Tobacco has been the most aggressive of the Big Tobacco makers with its push into new-generation products, with exposure to several emerging categories, including vaping, heated tobacco, and oral, says Morningstar\u2019s Gorham.\n Corteva stock trades 32% below our fair value estimate of $67.\nBritish American Tobacco\nThe second Big Tobacco name on our list of the best companies to buy now, British American Tobacco stock is trading 31% below our fair value estimate of $47. Share This Article\nSecurities Mentioned\nMore on this Topic\nSponsor Center\nTransparency is how we protect the integrity of our work and keep\nempowering investors to achieve their goals and dreams.",
+                    "score": 0.8706085,
+                    "raw_content": null
+                },
+                {
+                    "title": "3 Best Stocks to Buy Now, 1/30/2025, According to Top Analysts",
+                    "url": "https://markets.businessinsider.com/news/stocks/3-best-stocks-to-buy-now-1-30-2025-according-to-top-analysts-1034287864?op=1",
+                    "content": "Which stocks are best to buy now? According to Top Wall Street Analysts, the three stocks listed below are Strong Buys. Each stock received a new Buy rating recently and has a significant upside",
+                    "score": 0.8361405,
+                    "raw_content": null
+                },
+                {
+                    "title": "These Are The Five Best Stocks To Buy And Watch Now",
+                    "url": "https://www.investors.com/research/best-stocks-to-buy-now/",
+                    "content": "12/05/2023\nApple broke out and closed back above a $3 trillion...\nToday's Spotlight\nNew AI Stocks Infographic\nIBD Digital Webinar Sale\nJoin MarketDiem for $20/Year\nMore News\nNvidia shares have raced ahead in the last year on the chipmaker's strength in AI applications. This Is The Ultimate Donald Trump Stock: Is DWAC A Buy?\nRelated news\nDow Jones Futures Rise With Big AI Event On Tap; Apple Breaks Out To $3 Trillion Valuation\n12/05/2023\nApple broke out and closed back above a $3 trillion valuation. D.R. Horton has operations in 118 markets in 33 states across the U.S. It operates in 45 of the top 50 markets in the U.S..\nProducts include single-family detached homes and attached homes, such as town homes, duplexes and condominiums.\n BREAKING: Futures Rise, But AI News On Tap\nThese Are The 5 Best Stocks To Buy And Watch Now\nBuying a stock is easy, but buying the right stock without a time-tested strategy is incredibly hard. Inflation remains a key issue while the Russia-Ukraine conflict is a wild card that has proved its ability to shake the market while the current issues in Israel add even more uncertainty.\n",
+                    "score": 0.7771143,
+                    "raw_content": null
+                }
+            ]
+        },
+        {
+            "stock": {
+                "tickerSymbol": "(OXY)"
+            },
+            "articles": [
+                {
+                    "title": "The 10 Best Stocks To Buy Now - Forbes Advisor",
+                    "url": "https://www.forbes.com/advisor/investing/best-stocks-to-buy-now/",
+                    "content": "The 10 Best Stocks To Buy Now\nBoeing (BA)\n41.6\n1.5\n7.6%\n41.6\n1.5\n7.6%\nBoeing is one of the largest U.S. defense contractors and is one of the two main global suppliers of large commercial aircraft.\n Kraft Heinz (KHC)\n11.7\n1.5\n1.8%\n11.7\n1.5\n1.8%\nKraft Heinz is one of the world\u2019s largest consumer packaged food and beverage companies and is the parent company of popular brands such as Kraft, Heinz, Oscar Mayer and Maxwell House.\n \u201cWe are confident in a positive readout for EMBARK based on the trial design and view the FDA\u2019s commitment to a promptly review of the application and active engagement in the regulatory process as a positive,\u201d Ahmad says\nBank of America has a \u201cbuy\u201d rating and $186 price target for SRPT stock.\n Occidental Petroleum (OXY)\n12.2\n1.9\n16.8%\n12.2\n1.9\n16.8%\nOccidental Petroleum is one of the largest U.S. oil and gas exploration and production companies, and it also operates a large chemicals business.\n CSX (CSX)\n15.2\n4.2\n11.4%\n15.2\n4.2\n11.4%\nCSX is one of the leading U.S. railroad companies, providing rail-based transportation services such as traditional rail service and transport of intermodal containers and trailers.\n",
+                    "score": 0.9159971,
+                    "raw_content": null
+                },
+                {
+                    "title": "Best Stocks to Buy Now - Kiplinger",
+                    "url": "https://www.kiplinger.com/investing/stocks/best-stocks-to-buy-now",
+                    "content": "While oil prices got an initial lift after the brutal attack by Hamas on Israel, they've more recently slipped as the market appears to be less concerned with geopolitical risk in the Middle East and \"more worried that slowing economic growth around the world will sap the demand for oil,\" writes Jim Patterson, managing editor for The Kiplinger Letter, in Kiplinger's energy outlook.\n While a broad economic slowdown and higher interest rates pose near-term risks to REXR, the firm's \"deep roots and long history\" within the region provide the team with a great sense of market demand, the analysts say, adding that the scarcity of available space allows Rexford to push above average rental rates. Advanced Micro Devices\nDon't ignore the tenets of diversification and shun tech or the growthier side of the market when adjusting your portfolio to include the best stocks to buy now, says Tony DeSpirito, managing director and portfolio manager at BlackRock. The 12 Best Stocks to Buy Now\nOur list of the best stocks to buy now reflect the lesson of the past few years: Be ready for anything.\n The shares are up more than 88% for the year-to-date, but trade at 39 times expected earnings for the year ahead \u2013 in line with the typical price-earnings multiple over the past five years.\n",
+                    "score": 0.8755427,
+                    "raw_content": null
+                },
+                {
+                    "title": "The 10 Best Companies to Invest in Now - Morningstar",
+                    "url": "https://www.morningstar.com/stocks/10-best-companies-invest-now",
+                    "content": "More of the Best Stocks to Buy\n10 Best Growth Stocks to Buy for the Long Term\n10 Best Value Stocks to Buy for the Long Term\nThe 10 Best Dividend Stocks\nThe author or authors do not own shares in any securities mentioned in this article.\n Find More of the Best Stocks to Invest in\nYou can review all of the companies on our Best Companies to Own list and dig into our methodology, which includes definitions for the key Morningstar metrics included in this article. While cigarettes will likely remain the driving force of profits in the industry for the next decade, British American Tobacco has been the most aggressive of the Big Tobacco makers with its push into new-generation products, with exposure to several emerging categories, including vaping, heated tobacco, and oral, says Morningstar\u2019s Gorham.\n Corteva stock trades 32% below our fair value estimate of $67.\nBritish American Tobacco\nThe second Big Tobacco name on our list of the best companies to buy now, British American Tobacco stock is trading 31% below our fair value estimate of $47. Share This Article\nSecurities Mentioned\nMore on this Topic\nSponsor Center\nTransparency is how we protect the integrity of our work and keep\nempowering investors to achieve their goals and dreams.",
+                    "score": 0.8706085,
+                    "raw_content": null
+                },
+                {
+                    "title": "3 Best Stocks to Buy Now, 1/30/2025, According to Top Analysts",
+                    "url": "https://markets.businessinsider.com/news/stocks/3-best-stocks-to-buy-now-1-30-2025-according-to-top-analysts-1034287864?op=1",
+                    "content": "Which stocks are best to buy now? According to Top Wall Street Analysts, the three stocks listed below are Strong Buys. Each stock received a new Buy rating recently and has a significant upside",
+                    "score": 0.8361405,
+                    "raw_content": null
+                },
+                {
+                    "title": "These Are The Five Best Stocks To Buy And Watch Now",
+                    "url": "https://www.investors.com/research/best-stocks-to-buy-now/",
+                    "content": "12/05/2023\nApple broke out and closed back above a $3 trillion...\nToday's Spotlight\nNew AI Stocks Infographic\nIBD Digital Webinar Sale\nJoin MarketDiem for $20/Year\nMore News\nNvidia shares have raced ahead in the last year on the chipmaker's strength in AI applications. This Is The Ultimate Donald Trump Stock: Is DWAC A Buy?\nRelated news\nDow Jones Futures Rise With Big AI Event On Tap; Apple Breaks Out To $3 Trillion Valuation\n12/05/2023\nApple broke out and closed back above a $3 trillion valuation. D.R. Horton has operations in 118 markets in 33 states across the U.S. It operates in 45 of the top 50 markets in the U.S..\nProducts include single-family detached homes and attached homes, such as town homes, duplexes and condominiums.\n BREAKING: Futures Rise, But AI News On Tap\nThese Are The 5 Best Stocks To Buy And Watch Now\nBuying a stock is easy, but buying the right stock without a time-tested strategy is incredibly hard. Inflation remains a key issue while the Russia-Ukraine conflict is a wild card that has proved its ability to shake the market while the current issues in Israel add even more uncertainty.\n",
+                    "score": 0.7771143,
+                    "raw_content": null
+                }
+            ]
+        }
+    ]
+}
