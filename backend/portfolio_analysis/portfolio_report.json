@@ -395,6 +395,20 @@
                 "dividendYield": 0.0,
                 "weightageInPortfolio": 14.29
             }
+        },
+        "TCS.NS": {
+            "company_info": {},
+            "stock_data": {
+                "stockName": "TCS",
+                "tickerSymbol": "TCS.NS",
+                "numberOfShares": 50,
+                "purchasePrice": 3200,
+                "purchaseDate": "",
+                "currentPrice": 4073.15,
+                "unrealizedGainsLosses": 43657.5,
+                "dividendYield": 2.8,
+                "weightageInPortfolio": 61.86
+            }
         }
     },
     "bonds": [
@@ -410,6 +424,13 @@
     ],
     "articles": {
         "Apple": [
+            {
+                "title": "Apple Inc. (AAPL) latest stock news and headlines - Yahoo Finance",
+                "url": "https://sg.finance.yahoo.com/quote/AAPL/news/",
+                "content": "Apple (AAPL) is advancing 4% today after a research firm reported that the company's iPhones were the best-selling smartphone in China last quarter. Earlier this month, another research firm stated that AAPL had dropped to third place in terms of smartphone market share in the Asian country.",
+                "score": 0.79041743,
+                "raw_content": null
+            },
             {
                 "title": "Apple Inc (AAPL) Stock Price & News - Google Finance",
                 "url": "https://www.google.com/finance/quote/AAPL:NASDAQ",
@@ -432,17 +453,10 @@
                 "raw_content": null
             },
             {
-                "title": "Apple Inc. Common Stock (AAPL) News - Nasdaq",
-                "url": "https://www.nasdaq.com/market-activity/stocks/aapl/news-headlines",
-                "content": "Apple (AAPL) News Headlines | Nasdaq Nasdaq+ *   Nasdaq-100 Nasdaq U.S. Data Markets -> *   Nasdaq-100 Index Options *   Nasdaq-100 Index Nasdaq MarketSite ESG at Nasdaq Nasdaq+ About Nasdaq+ -> Leverage the Nasdaq+ Scorecard to analyze stocks based on your investment priorities and our market data. Leverage the Nasdaq+ Scorecard to analyze stocks based on your investment priorities and our market data. Nasdaq MarketSIte Add symbols now or see the quotes that matter to you, anywhere on Nasdaq.com. Add instruments now or see the quotes that matter to you, anywhere on Nasdaq.com. Create your Watchlist to save your favorite quotes on Nasdaq.com. You'll now be able to see real-time price and activity for your symbols on the My Quotes of Nasdaq.com.",
-                "score": 0.64719695,
-                "raw_content": null
-            },
-            {
-                "title": "Analysts overhaul Apple stock price targets after record Q1 earnings",
-                "url": "https://finance.yahoo.com/news/analysts-overhaul-apple-stock-price-123552810.html",
-                "content": "Apple shares powered higher in early Friday trading after a record set of quarterly earnings and an upbeat outlook for iPhone sales from the world's biggest tech company triggered a host of price",
-                "score": 0.6301622,
+                "title": "AAPL Stock Price | Apple Inc. Stock Quote (U.S.: Nasdaq) - MarketWatch",
+                "url": "https://www.marketwatch.com/investing/stock/aapl",
+                "content": "Overview\nAAPL Overview\nKey Data\nPerformance\nAnalyst Ratings\nRecent News\n\u2018Hunger Games\u2019 prequel holds off \u2018Wish,\u2019 \u2018Napoleon\u2019 to conquer Thanksgiving box office\nBarron's\nSwiss Central Bank Slashed AMC Stake, Sells Apple, Nvidia, and Tesla Stock\nApple Inc. stock falls Friday, underperforms market\nTechnology\nApple\u2019s China Demand Remains Firm Heading Into the Holidays. No Headlines Available\nNo Headlines Available\nNo Headlines Available\nBetter Tech Stock: Alphabet vs. Apple\n3 Mighty Mixed Reality Stocks Blending Digital and Physical Worlds\nBlack Friday Sales Surge, Despite Economic Uncertainties \u2014 Here Are The Stocks That Stand To Benefit The Most\nApple's iPhone 15 Boosts Global Smartphone Sales, Ending 27-month Decline: Report\nAAPL, AMZN, or NVDA: Which \u201cStrong Buy\u201d Mega-Cap Tech Stock Could Deliver the Best Returns?\n Congress returns to face big to-do list, including aid for Israel and Ukraine\nCongress returns to face big to-do list, including aid for Israel and Ukraine\nto be replaced\nApple Inc.\n$\n189.90\nPartner Center\nYour Watchlists\nHave Watchlists? Apple Inc. stock rises Wednesday, still underperforms market\nTechnology\nHere Are AI\u2019s Biggest Winners After the OpenAI Chaos\nTechnology\nVMware Stockholders Will Get a Windfall in Broadcom Merger\nESG Investing\nESG Funds Are Often a Bet on AI. Search Results\nSymbols\nPrivate Companies\nRecently Viewed Tickers\nNo Recent Tickers\nVisit a quote page and your recently viewed tickers will be displayed here.\n",
+                "score": 0.64128816,
                 "raw_content": null
             }
         ],
@@ -462,13 +476,6 @@
                 "raw_content": null
             },
             {
-                "title": "NVIDIA Corp (NVDA) Stock Price & News - Google Finance",
-                "url": "https://www.google.com/finance/quote/NVDA:NASDAQ",
-                "content": "NVIDIA Corp (NVDA) Stock Price & News - Google Finance Stock market today: S&P 500, Nasdaq climb as Tesla shines\u2022 Yahoo Finance\u2022 1 hour ago Yahoo Finance Why Nvidia stock is ripe for another surge: Investor 4 hours ago Investopedia Nvidia Stock Price Levels to Watch as Earnings Report Looms 1 hour ago Investor's Business Daily Dow Jones Falls As Nvidia Earnings Loom; Tesla Surges On Trump News 3 hours ago Barchart.com Stocks Set to Open Mixed as Investors Await U.S. Economic Data and Nvidia Earnings, Fed Speak on Tap 4 hours ago Investing.com \u200b\u200bDow Jones, Nasdaq, S&P 500 weekly preview: Attention turns to Nvidia earnings 3 hours ago Yahoo Finance 2 hours ago Nvidia stock sinks on reports of Blackwell AI server issues ahead of earnings",
-                "score": 0.818055,
-                "raw_content": null
-            },
-            {
                 "title": "NVIDIA Corporation (NVDA) Latest Stock News & Headlines - Yahoo Finance",
                 "url": "https://ca.finance.yahoo.com/quote/NVDA/news/",
                 "content": "ET - Hessam Nadji, Marcus & Millichap CEO\nThe Suite Life: A Look at the Most Lavish Rooms in Las Vegas\nNvidia earnings highlight shortened trading week: What to know this week\nNvidia earnings are set to be the next big test for the market rally. INFLATION IN CANADA FALLS TO 2.9% IN JANUARY\nOn a seasonally adjusted monthly basis, the CPI fell 0.1% last month, the first drop since May 2020\nNVIDIA Corporation (NVDA)\n In a massive deal in the credit space, Capital One (COF) will acquire Discover Financial Services (DFS) in a $35 billion all-stock deal. In the retail space, Walmart (WMT) announced plans to acquire TV maker Vizio (VZIO) in a $2.3 billion cash deal. S&P 5005,005.57-24.16(-0.48%)\nDOW38,627.99-145.11(-0.37%)\nCAD/USD0.7396-0.0018(-0.24%)\nCRUDE",
@@ -480,6 +487,13 @@
                 "url": "https://www.forbes.com/sites/dereksaul/2025/01/27/biggest-market-loss-in-history-nvidia-stock-sheds-nearly-600-billion-as-deepseek-shakes-ai-darling/",
                 "content": "Nvidia Stock Plunges 17% As NVDA Suffers Biggest Market Cap Loss Ever\u2014Driven By DeepSeek Biggest Market Loss In History: Nvidia Stock Sheds Nearly $600 Billion As DeepSeek Shakes AI Darling Biggest Market Loss In History: Nvidia Stock Sheds Nearly $600 Billion As DeepSeek Shakes AI Darling Nvidia set a dubious Wall Street record Monday, as the stock at the forefront of the U.S.-led artificial intelligence revolution got a scare from DeepSeek, the Chinese AI company which developed a ChatGPT rival at a fraction of the reported cost of its American peers. In order to do so, please follow the posting rules in our site's\u00a0Terms of Service. Please read the full list of posting rules found in our site's\u00a0Terms of Service.",
                 "score": 0.75181264,
+                "raw_content": null
+            },
+            {
+                "title": "NVIDIA Corporation (NVDA) Stock Price, News, Quote & History - Yahoo ...",
+                "url": "https://finance.yahoo.com/quote/NVDA/",
+                "content": "Dividend\nNVDA announced a cash dividend of 0.04 with an ex-date of Dec. 5, 2023\nCommodity Channel Index\nSubscribe to Yahoo Finance Plus to view Fair Value for NVDA\nExclusive-Nvidia delays launch of new China-focused AI chip -sources\nNvidia has told customers in China it is delaying the launch of a new artificial intelligence chip it designed to comply with U.S. export rules until the first quarter of next year, two sources familiar with the matter said.\n The delayed chip is the H20, the most powerful of three China-focused chips Nvidia has developed to comply with fresh U.S. export restrictions, the sources said, and could complicate its efforts to preserve market share in China against local rivals like Huawei.\n NOVOS Core is a powerful formulation, designed to tackle all 12 root causes of aging....\nDow Jones Futures Rise: Nvidia Rival Leads 4 Stocks In Buy Zones; Tesla Move Signals Elon Musk Fallout\n +0.70(+0.04%)\nNVIDIA Corporation (NVDA)\n Nasdaq Futures16,033.50-15.75(-0.10%)\nRussell 2000 Futures1,797.20-1.70(-0.09%)\n",
+                "score": 0.7409441,
                 "raw_content": null
             }
         ],
@@ -513,33 +527,56 @@
                 "raw_content": null
             },
             {
-                "title": "Why Amazon (AMZN) Stock Is Down Today - Yahoo Finance",
-                "url": "https://finance.yahoo.com/news/why-amazon-amzn-stock-down-165742993.html",
-                "content": "Why Amazon (AMZN) Stock Is Down Today Stock Market Stock Market Why Amazon (AMZN) Stock Is Down Today Why Amazon (AMZN) Stock Is Down Today Shares of cloud computing and online retail behemoth Amazon (NASDAQ:AMZN) fell 3.5% in the morning session after the major indices declined, with the Nasdaq down 1.9%, while the S&P fell 1.12% as markets reined in some of the post-election optimism. The stock market overreacts to news, and big price drops can present good opportunities to buy high-quality stocks. The previous big move we wrote about was 14 days ago when the stock gained 7.6% on the news that the company reported impressive third-quarter earnings.",
-                "score": 0.70580584,
+                "title": "Amazon's stock resumes its breakout. Losing some UPS ... - Morningstar",
+                "url": "https://www.morningstar.com/news/marketwatch/20250201181/amazons-stock-resumes-its-breakout-losing-some-ups-deliveries-wont-stop-it",
+                "content": "Amazon's stock (AMZN) surged 1.3% to close at $237.68 on Friday. It reached as high as $240.29 in intraday trading, which was above the Jan. 28 record close of $238.15.",
+                "score": 0.7038554,
+                "raw_content": null
+            }
+        ],
+        "TCS": [
+            {
+                "title": "Tata Consultancy Services Ltd (TCS) Stock Price & News - Google",
+                "url": "https://www.google.com/finance/quote/TCS:NSE",
+                "content": "Tata Consultancy Services Ltd (TCS) Stock Price & News - Google Finance Livemint 17 hours ago Top Gainers and Losers today on 18 November, 2024: Hindalco Industries, Hero Motocorp, Tata Consultancy Services, Bharat Petroleum Corporation among most active stocks; Check full list here | Stock Market News Livemint 1 day ago M-cap of top 10 firms: Eight companies lose \u20b91.65 lakh crore led by HDFC Bank, only Infosys and TCS see some gains A valuation method that multiplies the price of a company's stock by the total number of outstanding shares. In 2024, parent company Tata Sons owned 71.74% of TCS, and close to 80% of Tata Sons' dividend income came from TCS. TATAPOWER Tata Power Company Ltd \u20b9413.30 2.13%",
+                "score": 0.829285,
+                "raw_content": null
+            },
+            {
+                "title": "TCS Share Price, TCS Stock Price, Tata Consultancy Services Ltd. Stock ...",
+                "url": "https://www.moneycontrol.com/india/stockpricequote/computers-software/tataconsultancyservices/TCS",
+                "content": "Insider Transaction Summary\nDamodar Padhi\nDamodar Padhi\nDamodar Padhi\nDamodar Padhi\nTata Sons Private Limited\nTata Investment Corporation Limited\n*Disclosures under SEBI Prohibition of Insider Trading Regulations, 2015\nTata Sons Pvt Ltd & Tata Investment Corporation Ltd Disposal\nTata Sons Pvt Ltd & Tata Investment Corporation Ltd Acquisition\nTata Investment Corporation Ltd Disposal\nTata Sons Pvt Ltd Disposal\nTata Investment Corporation Ltd Disposal\nTata Sons Pvt Ltd Acquisition\n*Disclosures under SEBI SAST (Substantial Acquisition of Shares and Takeovers) Regulations, 2011\nCorporate Action\nTata Consultancy Services - Announcement under Regulation 30 (LODR)-Press Release / Media Release\nTata Consultancy Services - Announcement under Regulation 30 (LODR)-Press Release / Media Release\nTata Consultancy Services - Announcement under Regulation 30 (LODR)-Press Release / Media Release\nFinancials\nDetailed Financials\nDetailed Financials\nShareholding\nPEERS\nAbout the Company\nRegistered Office\n9th Floor,\n,Nirmal Building,\n,Nariman Point,\nMumbai\nMaharashtra\n400021\n022-67789595\n022-66303672\ninvestor.relations@tcs.com\nhttps://www.tcs.com\nRegistrars\nC 101, 1st Floor, 247 Park,,L.B.S.Marg, Vikhroli (West),\nMumbai 400083\nMaharashtra\n022-66568484\n022-66568494\ncsg-unit@tcplindia.co.in\nhttps://www.tcplindia.co.in\nManagement\nChairman\nManaging Director & CEO\nExe.Director & COO\nNon Exe. + See More\nSee More\nBroker Research\nEmkay Global Financial Services\nICICI Securities\nMotilal Oswal\nSharekhan\nSharekhan\nKRChoksey\nDeals\nSOCIETE GENERALE\nMARSHALL WACE INVESTMENT STRATEGIES MARKET NEUTRAL TOPS FUND\nMARSHALL WACE INVESTMENT STRATEGIES TOPS FUND\nBNP PARIBAS ARBITRAGE\nSOCIETE GENERALE\nDEKA INVESTMENT GMBH RE DEKA-GLOBALCHAMPIONS\nDEKA INVESTMENT GMBH RE DEKA-GLOBALCHAMPIONS\nAIA VCC - AIA ASIAN EQUITY FUND\n*Transaction of a minimum quantity of 500,000 shares or a minimum value of Rs 5 crore.\n Price and Volume\nNews\nOxford University ends partnership with TCS citing u2018technical problemsu2019 in online admission tests\nTCS aims to train entire staff with Gen AI skills\nJan 16 2024 12:30 PM\nTCS to diversify to other markets amid US weakness\nJan 15 2024 06:40 AM\nNifty IT shining: Pick these 2 tech stocks for healthy returns\nJan 13 2024 07:16 PM\nDaily Voice | This fund manager believes IT could be a good pick with strong expectations of recovery\nJan 13 2024 09:35 AM\nForum\nCommunity Sentiments\nWhat's your call on\ntoday?\n In any case it is always good to follow clik q.option.22.34.886838.me to comments here atleast gives q.option.22.34.886838.me a good view of the market trends q.option.22.34.886838.me\nxiwok6\nBanknifty forum on clik d.option.22.34.886838.me to is most talkeed d.option.22.34.886838.me about but most people here are only to confuse other members d.option.22.34.886838.me\nView more\nPosted by : xiwok6\nRepost this message\nBanknifty forum on clik d.option.22.34.886838.me to is most talkeed d.option.22.34.886838.me about but most people here are only to confuse other members d.option.22.34.886838.me\nradh1v\nBuckwass and dead share never cross 4K..no spark since last couple of years\nView more\nPosted by : radh1v\nRepost this message\nBuckwass and dead share never cross 4K..no spark since last couple of years\n Non Ind.Director\nInd. Non-Executive Director\nIncluded In\nYes\nYes\nYes\nNo\nYes\nYes\nDetails\n532540\nTCS\nEQ\nINE467B01029\n",
+                "score": 0.82220376,
+                "raw_content": null
+            },
+            {
+                "title": "Tata Consultancy Services News - The Economic Times",
+                "url": "https://economictimes.indiatimes.com/tata-consultancy-services-ltd/stocksupdate/companyid-8345.cms",
+                "content": "Tata Consultancy Services News - Get the Latest Tata Consultancy Services News, Announcements, Photos & Videos on The Economic Times ... Notable dates include January 13 for Shardul Securities' stock split and January 17 for multiple actions like TCS's dividend and various stock splits. Investors must note key dates to be eligible for these",
+                "score": 0.8051581,
+                "raw_content": null
+            },
+            {
+                "title": "TCS Share Price Today, TCS Stock Price Live NSE/BSE, Share Price Insights",
+                "url": "https://economictimes.indiatimes.com/tata-consultancy-services-ltd/stocks/companyid-8345.cms",
+                "content": "TCS Shareholding Pattern\nQOQ Change\nTotal Shareholdings\nMF Ownership\nAxis ELSS Tax Saver Direct-G\n2,391.69\nAmount Invested (in Cr.)\n6.97%\n% of AUM\n-3.46\n% Change (MoM basis)\nAxis Bluechip Direct-G\n1,846.58\nAmount Invested (in Cr.)\n5.57%\n% of AUM\n-0.96\n% Change (MoM basis)\nICICI Pru Technology Direct-G\n1,689.41\nAmount Invested (in Cr.)\n14.23%\n% of AUM\n-8.13\n% Change (MoM basis)\nMF Ownership as on 31 December 2023\nTCS F&O Quote\nFutures\nOptions\nPrice\n3,989.90121.45\n(3.14%)\nOpen Interest\n1,28,40,1004,14,050\n(3.22%)\n Tata Consultancy Services Ltd. stock last traded price is 3,966.30\nInsightsTCS\nDo you find these insights useful?\nhate it\nmeh\nlove it\nKey Metrics\nBeta\nBeta\nKey Metrics\nBeta\nBeta\nTCS Share Price Returns\nET Stock ScreenersTop Score Companies\nCheck whether TCS belongs to analysts' top-rated companies list?\nTCS News & Analysis\nStocks in news: PB Fintech, Maruti, L&T, Sun Pharma, TCS\nDalal Street investors become richer by Rs 6 lakh cr as markets rally\n7 of top-10 most-valued firms erode Rs 1.16 lakh crore in m-cap; HDFC Bank biggest laggard\nCompliances-Reg. 39 (3) - Details of Loss of Certificate / Duplicate Certificate\nTCS Share Analysis\nUnlock Stock Score, Analyst' Ratings & Recommendations\nTCS Share Recommendations\nRecent Recos\nCurrent\nMean Recos by 37 Analysts\nThat's all for TCS recommendations. Analyst Trends\nTCS Share Price Forecast\nPRICE\nREVENUE\nEARNINGS\nGet multiple analysts\u2019 prediction on TCS\nGet multiple analysts\u2019 prediction on TCS\nGet multiple analysts\u2019 prediction on TCS\nPeer Comparison\nTCS Stock Performance\nRatio Performance\nChoose from Peers\nChoose from Stocks\nChoose from Peers\nChoose from Stocks\nRatio Performance\nChoose from Peers\nChoose from Stocks\nPeers InsightsTCS\nDo you find these insights useful?\nhate it\nmeh\nlove it\n O P Bhatt\nPradeep Kumar Khosla\nSamir Seksaria\nPradeep Manohar Gaitonde\nIndustry\nIT Consulting & Software - Large Cap\nKey Indices Listed on\nNifty 50, S&P BSE Sensex, Nifty IT, + 41 more\nAddress\n9th Floor,Nirmal Building,Mumbai, Maharashtra - 400021\nContact\ninvestor.relations@tcs.com\nhttps://www.tcs.com\nMore Details\nBrands\nFAQs about TCS share\n Show More\nExecutives\nAuditors\nN Chandrasekaran\nK Krithivasan\nN G Subramaniam\nAarthi Subramanian\nDon Callahan\nHanne Sorensen\nKeki M Mistry\n",
+                "score": 0.796562,
+                "raw_content": null
+            },
+            {
+                "title": "Tata Consultancy Services Limited (TCS.NS) Latest Stock News ...",
+                "url": "https://finance.yahoo.com/quote/TCS.NS/news/",
+                "content": "Get the latest Tata Consultancy Services Limited (TCS.NS) stock news and headlines to help you in your trading and investing decisions.",
+                "score": 0.767638,
                 "raw_content": null
             }
         ],
         "Government": [
             {
-                "title": "Bonds: The flashing warning sign that is worrying investors - BBC News",
-                "url": "https://www.bbc.co.uk/news/business-67262339",
-                "content": "Government bond yields are used as a guide for setting the rates on everyday loans and mortgages, which have shot up over the last few years. Average US mortgage rates hit a two-decade high of 8%",
-                "score": 0.6877354,
-                "raw_content": null
-            },
-            {
-                "title": "Bonds - MarketWatch",
-                "url": "https://www.marketwatch.com/investing/bonds",
-                "content": "Germany 10 Year Government Bond: 2.523%-0.06: TMBMKIT-10Y: Italy 10 Year Government Bond: 3.597%-0.056: TMBMKES-10Y: ... More Bond News. Fed rate hikes are back in the conversation. Here's why",
-                "score": 0.66203266,
-                "raw_content": null
-            },
-            {
-                "title": "Government Debt Glut Could Rock Markets in 2025, BIS Says - U.S. News",
-                "url": "https://money.usnews.com/investing/news/articles/2024-12-10/government-debt-glut-could-rock-markets-in-2025-bis-says",
-                "content": "Bond fund PIMCO said on Monday it plans to diversify its government bond exposure by buying outside the United States, where its outlook on long-term government debt is bearish due to a",
-                "score": 0.65676886,
+                "title": "government bonds: Latest News & Videos, Photos about government bonds ...",
+                "url": "https://economictimes.indiatimes.com/topic/government-bonds",
+                "content": "Japan's five-year government bond yield soared to a 15-year high, driven by a weakening yen and speculation of a potential interest rate hike by the Bank of Japan. The yen's decline to a five-month low against the US dollar, fueled by expectations of increased government bond issuance, further exacerbated the situation. 13 Nov, 2024, 11:51 AM IST",
+                "score": 0.7520312,
                 "raw_content": null
             },
             {
@@ -550,10 +587,24 @@
                 "raw_content": null
             },
             {
-                "title": "Bond rebound uncertain as Trump plans overshadow Fed rate cuts",
-                "url": "https://www.reuters.com/markets/rates-bonds/bond-rebound-uncertain-trump-plans-overshadow-fed-rate-cuts-2024-11-08/",
-                "content": "Prospects of a near-term rebound in the $28-trillion U.S. government bond market are faltering, as Donald Trump's return to the White House is expected to usher in fiscally expansive policies",
-                "score": 0.5746579,
+                "title": "Bond market turmoil: what it means for pensions, savings and ...",
+                "url": "https://www.which.co.uk/news/article/bond-market-turmoil-what-it-means-for-pensions-savings-and-investments-az64P3T1OCY8",
+                "content": "Bond market turmoil earlier this month drove the UK 10-year gilt yield up to 4.9%, the highest figure recorded since 2008. The gilt yield has since dipped slightly to 4.6% as the government has sought to reassure a jittery market, but Chancellor Rachel Reeves has faced pressure to announce tax and spending changes in response to the higher cost of government borrowing.",
+                "score": 0.41492313,
+                "raw_content": null
+            },
+            {
+                "title": "US Treasury bonds - Financial Times",
+                "url": "https://www.ft.com/us-treasury-bonds",
+                "content": "Get the latest news, analysis and opinion on US Treasury bonds ... US Treasury bonds Add to myFT. Monday, 27 January, 2025. Special Report FTfm: Fixed Income. Global investors unfazed by PBoC's",
+                "score": 0.2737617,
+                "raw_content": null
+            },
+            {
+                "title": "US Treasury Bonds: prices, changes, trading volume & daily charts ...",
+                "url": "https://finance.yahoo.com/markets/bonds/",
+                "content": "US Treasury Bonds: prices, changes, trading volume & daily charts - Yahoo Finance News World Health Health Health Health news Finance News Stock Market Options: Highest Open Interest Financial Services Research Reports Personal Finance Travel Cards Mortgages ETF Report Fantasy News Fantasy football Fantasy baseball Fantasy basketball Daily fantasy News News News News News News More news New on Yahoo Privacy Yahoo Finance Yahoo Finance News Finance News World Health Health Finance News Personal finance Fantasy Yahoo Sports AM New on Yahoo News Stock Market Options: Highest Open Interest Financial Services Research Reports Personal Finance Travel Cards Mortgages ETF Report",
+                "score": 0.21430515,
                 "raw_content": null
             }
         ]
@@ -561,7 +612,7 @@
     "recommended_stocks": [
         {
             "stock": {
-                "tickerSymbol": "VIEW"
+                "tickerSymbol": "LESS"
             },
             "articles": [
                 {
@@ -575,21 +626,21 @@
                     "title": "Best Stocks to Buy Now - Kiplinger",
                     "url": "https://www.kiplinger.com/investing/stocks/best-stocks-to-buy-now",
                     "content": "While oil prices got an initial lift after the brutal attack by Hamas on Israel, they've more recently slipped as the market appears to be less concerned with geopolitical risk in the Middle East and \"more worried that slowing economic growth around the world will sap the demand for oil,\" writes Jim Patterson, managing editor for The Kiplinger Letter, in Kiplinger's energy outlook.\n While a broad economic slowdown and higher interest rates pose near-term risks to REXR, the firm's \"deep roots and long history\" within the region provide the team with a great sense of market demand, the analysts say, adding that the scarcity of available space allows Rexford to push above average rental rates. Advanced Micro Devices\nDon't ignore the tenets of diversification and shun tech or the growthier side of the market when adjusting your portfolio to include the best stocks to buy now, says Tony DeSpirito, managing director and portfolio manager at BlackRock. The 12 Best Stocks to Buy Now\nOur list of the best stocks to buy now reflect the lesson of the past few years: Be ready for anything.\n The shares are up more than 88% for the year-to-date, but trade at 39 times expected earnings for the year ahead \u2013 in line with the typical price-earnings multiple over the past five years.\n",
-                    "score": 0.8755427,
+                    "score": 0.8752871,
                     "raw_content": null
                 },
                 {
-                    "title": "The 10 Best Companies to Invest in Now - Morningstar",
+                    "title": "The 10 Best Companies to Invest in Now | Morningstar",
                     "url": "https://www.morningstar.com/stocks/10-best-companies-invest-now",
                     "content": "More of the Best Stocks to Buy\n10 Best Growth Stocks to Buy for the Long Term\n10 Best Value Stocks to Buy for the Long Term\nThe 10 Best Dividend Stocks\nThe author or authors do not own shares in any securities mentioned in this article.\n Find More of the Best Stocks to Invest in\nYou can review all of the companies on our Best Companies to Own list and dig into our methodology, which includes definitions for the key Morningstar metrics included in this article. While cigarettes will likely remain the driving force of profits in the industry for the next decade, British American Tobacco has been the most aggressive of the Big Tobacco makers with its push into new-generation products, with exposure to several emerging categories, including vaping, heated tobacco, and oral, says Morningstar\u2019s Gorham.\n Corteva stock trades 32% below our fair value estimate of $67.\nBritish American Tobacco\nThe second Big Tobacco name on our list of the best companies to buy now, British American Tobacco stock is trading 31% below our fair value estimate of $47. Share This Article\nSecurities Mentioned\nMore on this Topic\nSponsor Center\nTransparency is how we protect the integrity of our work and keep\nempowering investors to achieve their goals and dreams.",
-                    "score": 0.8706085,
+                    "score": 0.8703443,
                     "raw_content": null
                 },
                 {
-                    "title": "3 Best Stocks to Buy Now, 1/30/2025, According to Top Analysts",
-                    "url": "https://markets.businessinsider.com/news/stocks/3-best-stocks-to-buy-now-1-30-2025-according-to-top-analysts-1034287864?op=1",
-                    "content": "Which stocks are best to buy now? According to Top Wall Street Analysts, the three stocks listed below are Strong Buys. Each stock received a new Buy rating recently and has a significant upside",
-                    "score": 0.8361405,
+                    "title": "10 Best Stocks to Buy Right Now - Money Crashers",
+                    "url": "https://www.moneycrashers.com/best-stocks-buy-invest-now/",
+                    "content": "At the beginning of each quarter, Money Crashers compiles a list of the Best Stocks To Buy Now. These stock picks are based on company stability and market trends. For each stock included on the list, we include the current dividend yield, P/E ratio, and current market cap. This page will change and update as the market fluctuates.",
+                    "score": 0.80405265,
                     "raw_content": null
                 },
                 {
@@ -603,7 +654,7 @@
         },
         {
             "stock": {
-                "tickerSymbol": "(OXY)"
+                "tickerSymbol": "OR"
             },
             "articles": [
                 {
@@ -617,21 +668,21 @@
                     "title": "Best Stocks to Buy Now - Kiplinger",
                     "url": "https://www.kiplinger.com/investing/stocks/best-stocks-to-buy-now",
                     "content": "While oil prices got an initial lift after the brutal attack by Hamas on Israel, they've more recently slipped as the market appears to be less concerned with geopolitical risk in the Middle East and \"more worried that slowing economic growth around the world will sap the demand for oil,\" writes Jim Patterson, managing editor for The Kiplinger Letter, in Kiplinger's energy outlook.\n While a broad economic slowdown and higher interest rates pose near-term risks to REXR, the firm's \"deep roots and long history\" within the region provide the team with a great sense of market demand, the analysts say, adding that the scarcity of available space allows Rexford to push above average rental rates. Advanced Micro Devices\nDon't ignore the tenets of diversification and shun tech or the growthier side of the market when adjusting your portfolio to include the best stocks to buy now, says Tony DeSpirito, managing director and portfolio manager at BlackRock. The 12 Best Stocks to Buy Now\nOur list of the best stocks to buy now reflect the lesson of the past few years: Be ready for anything.\n The shares are up more than 88% for the year-to-date, but trade at 39 times expected earnings for the year ahead \u2013 in line with the typical price-earnings multiple over the past five years.\n",
-                    "score": 0.8755427,
+                    "score": 0.8752871,
                     "raw_content": null
                 },
                 {
-                    "title": "The 10 Best Companies to Invest in Now - Morningstar",
+                    "title": "The 10 Best Companies to Invest in Now | Morningstar",
                     "url": "https://www.morningstar.com/stocks/10-best-companies-invest-now",
                     "content": "More of the Best Stocks to Buy\n10 Best Growth Stocks to Buy for the Long Term\n10 Best Value Stocks to Buy for the Long Term\nThe 10 Best Dividend Stocks\nThe author or authors do not own shares in any securities mentioned in this article.\n Find More of the Best Stocks to Invest in\nYou can review all of the companies on our Best Companies to Own list and dig into our methodology, which includes definitions for the key Morningstar metrics included in this article. While cigarettes will likely remain the driving force of profits in the industry for the next decade, British American Tobacco has been the most aggressive of the Big Tobacco makers with its push into new-generation products, with exposure to several emerging categories, including vaping, heated tobacco, and oral, says Morningstar\u2019s Gorham.\n Corteva stock trades 32% below our fair value estimate of $67.\nBritish American Tobacco\nThe second Big Tobacco name on our list of the best companies to buy now, British American Tobacco stock is trading 31% below our fair value estimate of $47. Share This Article\nSecurities Mentioned\nMore on this Topic\nSponsor Center\nTransparency is how we protect the integrity of our work and keep\nempowering investors to achieve their goals and dreams.",
-                    "score": 0.8706085,
+                    "score": 0.8703443,
                     "raw_content": null
                 },
                 {
-                    "title": "3 Best Stocks to Buy Now, 1/30/2025, According to Top Analysts",
-                    "url": "https://markets.businessinsider.com/news/stocks/3-best-stocks-to-buy-now-1-30-2025-according-to-top-analysts-1034287864?op=1",
-                    "content": "Which stocks are best to buy now? According to Top Wall Street Analysts, the three stocks listed below are Strong Buys. Each stock received a new Buy rating recently and has a significant upside",
-                    "score": 0.8361405,
+                    "title": "10 Best Stocks to Buy Right Now - Money Crashers",
+                    "url": "https://www.moneycrashers.com/best-stocks-buy-invest-now/",
+                    "content": "At the beginning of each quarter, Money Crashers compiles a list of the Best Stocks To Buy Now. These stock picks are based on company stability and market trends. For each stock included on the list, we include the current dividend yield, P/E ratio, and current market cap. This page will change and update as the market fluctuates.",
+                    "score": 0.80405265,
                     "raw_content": null
                 },
                 {
