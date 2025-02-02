@@ -34,7 +34,7 @@ const demoTemplates = [
     name: "Apple Stock Analyzer",
     sector: "Technology",
     scope: "stock",
-    stockName: "Apple Inc.",
+    stockName: "APPL",
     aim: "Track Apple stock performance and analyze impact of product launches",
   },
   {
@@ -263,7 +263,7 @@ const AgentsPage = () => {
 
       const response = await axios.request(config);
       console.log("Response Data:", response.data);
-      
+
       localStorage.setItem("report", JSON.stringify(response.data));
       setAgents((prev) =>
         prev.map((a) => (a.id === agentId ? { ...a, hasReport: true } : a))

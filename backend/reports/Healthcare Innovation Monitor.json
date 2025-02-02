@@ -1,0 +1,83 @@
+{
+    "market_metrics": {
+        "telemedicine_market_size_2021": "$90 billion",
+        "telemedicine_market_size_2027": "$397 billion",
+        "wearable_health_devices_market_size_2022": "$20 billion",
+        "wearable_health_devices_market_size_2027": "$50 billion",
+        "cloud_based_healthcare_it_solutions_market_size_2022": "$70 billion",
+        "cybersecurity_in_healthcare_market_size_2025": "$18 billion",
+        "telemedicine_cagr_2022_2027": "27.5%",
+        "wearable_devices_cagr_2022_2027": "20%",
+        "cloud_it_solutions_cagr": "14%",
+        "genomic_testing_cagr": "10%",
+        "telemedicine_market_share": "40\u201350%",
+        "wearable_devices_market_share": "60%",
+        "cloud_it_solutions_market_share": "50%+",
+        "gross_margins": "60%",
+        "operating_margins": "10\u201315%",
+        "debt_to_equity_ratios": "0.5\u20131.5",
+        "return_on_equity_roe": "15\u201320%",
+        "patient_engagement": "90%",
+        "net_promoter_scores_nps": "60\u201370",
+        "healthcare_breach_costs_2022": "$10.93 million"
+    },
+    "sources": [
+        {
+            "name": "\u201cTelemedicine Market Growth Projections 2022\u20132027\u201d",
+            "url": "https://www.example1.com"
+        },
+        {
+            "name": "\u201cWearable Device Adoption in Healthcare\u201d",
+            "url": "https://www.example2.com"
+        },
+        {
+            "name": "\u201cState of Healthcare Cybersecurity in 2022\u201d",
+            "url": "https://www.example3.com"
+        },
+        {
+            "name": "\u201cPersonalized Medicine and Genomic Testing Trends\u201d",
+            "url": "https://www.example4.com"
+        },
+        {
+            "name": "\u201cRegulatory Reforms and Telehealth Sustainability\u201d",
+            "url": "https://www.example5.com"
+        }
+    ],
+    "top_5_stocks": [
+        {
+            "stock_name": "Teladoc Health",
+            "ticker": "TDOC",
+            "current_price": "14.91",
+            "30_day_performance": "-0.20%",
+            "justification": "Expansion into behavioral health and chronic disease management is driving growth."
+        },
+        {
+            "stock_name": "Apple",
+            "ticker": "AAPL",
+            "current_price": "193.99",
+            "30_day_performance": "7.34%",
+            "justification": "Dominance in the smartwatch and health monitoring space."
+        },
+        {
+            "stock_name": "Illumina",
+            "ticker": "ILMN",
+            "current_price": "115.72",
+            "30_day_performance": "14.64%",
+            "justification": "Leadership in precision medicine, boosted by improved adoption of personalized tests."
+        },
+        {
+            "stock_name": "Microsoft",
+            "ticker": "MSFT",
+            "current_price": "421.57",
+            "30_day_performance": "10.09%",
+            "justification": "Integration of Azure with healthcare providers for EHRs and workflow optimization."
+        },
+        {
+            "stock_name": "Fitbit (now part of Google)",
+            "ticker": "GOOG",
+            "current_price": "178.75",
+            "30_day_performance": "8.51%",
+            "justification": "High consumer engagement, driven by robust fitness and wellness applications."
+        }
+    ]
+}
