@@ -4,6 +4,7 @@ from gemini_model import GeminiModel
 import requests
 from tavily import TavilyClient
 from dotenv import load_dotenv
+import re
 
 load_dotenv()
 
@@ -58,8 +59,18 @@ def fetch_financial_data(symbol):
 
 # Function to read data from JSON files
 def read_json_file(file_path):
-    with open(file_path, 'r') as file:
+    abs_path = os.path.join(os.path.dirname(__file__), file_path)
+    if not os.path.exists(abs_path):
+        raise FileNotFoundError(f"File not found: {abs_path}")
+    with open(abs_path, 'r') as file:
         return json.load(file)
+    
+def read_txt_file(file_path):
+    abs_path = os.path.join(os.path.dirname(__file__), file_path)
+    if not os.path.exists(abs_path):
+        raise FileNotFoundError(f"File not found: {abs_path}")
+    with open(abs_path, 'r') as file:
+        return file.read()
 
 # Function to generate a structured report for the entire portfolio
 def generate_portfolio_report(stocks, bonds, tavily_api):
@@ -121,7 +132,6 @@ def generate_textual_report(portfolio_data, gemini_model):
         if bond['bondType'] in portfolio_data["articles"]:
             prompt += f"    Recent Article: {json.dumps(portfolio_data['articles'][bond['bondType']])}\n"
 
-    print(prompt)
     # Get response from Gemini
     response = gemini_model.get_response(prompt)
 
@@ -130,11 +140,44 @@ def generate_textual_report(portfolio_data, gemini_model):
     with open(os.path.join(report_dir, 'portfolio_report.txt'), 'w') as txt_file:
         txt_file.write(response)
 
+
+# ====== Data to return to user =======
+
+def extract_text_report_data(text):
+    summary_match = re.search(r'I\. Executive Summary\s*(.*?)\s*II\.', text, re.DOTALL)
+    recommendations_match = re.search(r'Recommendations\s*(.*?)\s*Conclusion', text, re.DOTALL)
+    conclusion_match = re.search(r'Conclusion\s*(.*)', text, re.DOTALL)
+    
+    summary = summary_match.group(1).strip() if summary_match else "Summary not found"
+    recommendations = recommendations_match.group(1).strip() if recommendations_match else "Recommendations not found"
+    conclusion = conclusion_match.group(1).strip() if conclusion_match else "Conclusion not found"
+
+    return {
+        "summary": summary,
+        "recommendations": recommendations,
+        "conclusion": conclusion
+    }
+
+def generate_json_report_data(json_data):
+    """
+    Extracts the stocks and bonds sections from the JSON data.
+
+    Args:
+        json_data (dict): The loaded JSON data.
+
+    Returns:
+        dict: A dictionary containing only the stocks and bonds data.
+    """
+    return {
+      "stocks": json_data.get("stocks", {}),
+      "bonds": json_data.get("bonds", [])
+    }
+
 # Main function
 def main():
     # Read stocks and bonds data (correct file paths)
-    stocks = read_json_file('backend/data/stocks.json')
-    bonds = read_json_file('backend/data/bonds.json')
+    stocks = read_json_file('../data/stocks.json')
+    bonds = read_json_file('../data/bonds.json')
 
     # Initialize Tavily API
     tavily_api = TavilyAPI()
@@ -148,5 +191,14 @@ def main():
     # Generate textual report using Gemini
     generate_textual_report(portfolio_report_data, gemini_model)
 
-if __name__ == "__main__":
-    main()
+    text_report = read_txt_file('./portfolio_report.txt')
+    json_report = read_json_file('./portfolio_report.json')
+    text_data = extract_text_report_data(text_report)
+    portfolio_report_data = generate_json_report_data(json_report)
+
+    final_data = {
+        "text_data": text_data,
+        "json_data": portfolio_report_data
+    }
+
+    print(json.dumps(final_data, indent=4))

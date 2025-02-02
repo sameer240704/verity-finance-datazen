@@ -56,7 +56,7 @@ const Sidebar = () => {
     {
       path: "/portfolio/money-calc",
       icon: Calculator,
-      label: "Money Calculator",
+      label: "Asset Growth Calculator",
       tourClass: "tour-money-calc",
     },
     {
