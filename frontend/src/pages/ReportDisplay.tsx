@@ -177,18 +177,6 @@ const ReportDisplay = () => {
         </div>
       </div>
 
-      <h1>Report Analysis</h1>
-      <p>
-        <strong>Original Report:</strong> {extractedMetrics[0]}
-      </p>
-
-      <h2>
-        <strong>Market Metrics:</strong>
-      </h2>
-      {/* <ul>{metricData}</ul> */}
-
-      <p>{reportData}</p>
-
       {/* Abstract */}
       <div className="mb-8">
         <h2 className="text-lg font-semibold mb-4">Abstract</h2>
