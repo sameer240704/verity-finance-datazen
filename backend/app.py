@@ -4,11 +4,10 @@ from flask_cors import CORS
 from openai_model import OpenAIModel
 import portfolio_analysis
 import gemini_fin_path
+import sys
 import os
 from tavily import TavilyClient
 import stocks_data
-import sys
-import os
 
 # Get the absolute path of the 'market research system' directory
 market_research_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'market_research_system'))
@@ -149,7 +148,6 @@ def get_stocks_data():
         return jsonify({'stocks': stocks_df, 'bonds': bonds_data}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
 # BONDS DATA
 
 @app.route('/bonds', methods=['POST'])
@@ -179,31 +177,42 @@ def bonds_json_data():
 @app.route('/market-analysis-agent', methods=['POST'])
 def market_analysis_agent():
     try:
+        # Get data from the request
         data = request.json
         agent_type = data.get('scope')
         agent_name = data.get('name')
-        stock_name = data.get('stockName')
         brief_aim = data.get('aim')
-        sector = data.get('sector')
 
-        print("Agent Type:", data)
+        # Validate required fields
+        if not all([agent_type, agent_name, brief_aim]):
+            return jsonify({"error": "Missing required fields"}), 400
         
+        # Prepare orchestrator
         orchestrator = OrchestratorAgent()
 
+        # Determine which report to generate based on agent type
         if agent_type == "stock":
-            final_report = orchestrator.create_and_run_agents(
-                agent_type, agent_name, stock_name, brief_aim
-            )
+            stock_name = data.get('stockName')
+            if not stock_name:
+                return jsonify({"error": "Missing stock name for stock analysis"}), 400
+            final_report = orchestrator.create_and_run_agents(agent_type, agent_name, stock_name, brief_aim)
+        
         elif agent_type == "sector":
-            final_report = orchestrator.create_and_run_agents(
-                agent_type, agent_name, sector, brief_aim
-            )
+            sector = data.get('sector')
+            if not sector:
+                return jsonify({"error": "Missing sector for sector analysis"}), 400
+            extracted_data, final_report = orchestrator.create_and_run_agents(agent_type, agent_name, sector, brief_aim)
+            print("Extracted Data:", extracted_data)
+            print("Final Report:", final_report)
+        
+        else:
+            return jsonify({"error": "Invalid agent type"}), 400
 
-        return jsonify(final_report)
+        return jsonify(final_report, extracted_data), 200
+
     except Exception as e:
-        print(e)
+        print(f"Error: {str(e)}")  # Improved error logging
         return jsonify({"error": "An error occurred while processing your request."}), 500
-    
 
 # =================== PORTFOLIO GENERATION ===========================
 
