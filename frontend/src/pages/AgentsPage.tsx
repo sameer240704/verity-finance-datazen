@@ -176,7 +176,10 @@ const AgentsPage = () => {
   const [generatingReportFor, setGeneratingReportFor] = useState<string | null>(
     null
   );
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({
+    agent_name: "",
+    data: "",
+  });
 
   // Load agents from localStorage on component mount
   useEffect(() => {
@@ -249,7 +252,7 @@ const AgentsPage = () => {
       return;
     }
 
-    console.log("Agent Data:", typeof agent);
+    console.log("Agent Data:", agent);
 
     try {
       const config = {
@@ -262,7 +265,11 @@ const AgentsPage = () => {
       };
 
       const response = await axios.request(config);
-      console.log("Response Data:", response.data);
+      setData((prev) => ({
+        ...prev,
+        agent_name: agent.name,
+        data: response.data,
+      }));
 
       localStorage.setItem("report", JSON.stringify(response.data));
       setAgents((prev) =>
@@ -275,14 +282,16 @@ const AgentsPage = () => {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("report", JSON.stringify(data));
+  }, [data]);
+
   const navigate = useNavigate();
 
   const handleOpenReport = (e: React.MouseEvent, agent: Agent) => {
     e.stopPropagation();
     navigate(`${agent.scope}/${agent.name.toLowerCase().replace(/\s/g, "-")}`);
   };
-
-  console.log("Agents Data:", data);
 
   const handleUpdateFrequencyChange = (
     agentId: string,

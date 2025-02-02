@@ -1,0 +1,75 @@
+{
+    "market_metrics": {
+        "global_real_estate_market": "slowed activity in 2024",
+        "private_equity_market_injection": "$70 billion",
+        "generative_ai_market_cagr": "37.3%",
+        "layer_two_blockchain_growth": "50% year-on-year",
+        "gold_performance": "1.68%",
+        "crude_oil_performance": "-2.08%",
+        "russell_2000_index_increase": "2.96%",
+        "fraud_provisions": "7%"
+    },
+    "sources": [
+        {
+            "name": "Reuters",
+            "url": "https://www.reuters.com"
+        },
+        {
+            "name": "Bloomberg",
+            "url": "https://www.bloomberg.com"
+        },
+        {
+            "name": "Financial Times",
+            "url": "https://www.ft.com"
+        },
+        {
+            "name": "ECB Data",
+            "url": "https://www.ecb.europa.eu"
+        },
+        {
+            "name": "CoinDesk",
+            "url": "https://www.coindesk.com"
+        },
+        {
+            "name": "Financial Express",
+            "url": "https://www.financialexpress.com"
+        }
+    ],
+    "top_5_stocks": [
+        {
+            "stock_name": "Nvidia",
+            "ticker": "NVDA",
+            "current_price": "N/A",
+            "30_day_performance": "N/A",
+            "justification": "Nvidia's GPUs are a backbone for generative AI technologies reshaping the finance sector."
+        },
+        {
+            "stock_name": "Bitcoin/Ethereum ETFs",
+            "ticker": "N/A",
+            "current_price": "N/A",
+            "30_day_performance": "N/A",
+            "justification": "Increasing adoption of \"layer two\" solutions and a bullish sentiment within digital assets."
+        },
+        {
+            "stock_name": "Symphony AI",
+            "ticker": "N/A",
+            "current_price": "N/A",
+            "30_day_performance": "N/A",
+            "justification": "Growing demands for bank-compliance tools enhance its growth prospects."
+        },
+        {
+            "stock_name": "Blackstone",
+            "ticker": "BX",
+            "current_price": "N/A",
+            "30_day_performance": "N/A",
+            "justification": "Norway\u2019s potential $70 billion allocation highlights burgeoning interest in alternative asset management."
+        },
+        {
+            "stock_name": "Live Nation Entertainment",
+            "ticker": "LYV",
+            "current_price": "N/A",
+            "30_day_performance": "N/A",
+            "justification": "Increased consumer discretionary spending in live events signals robust recovery in the sector."
+        }
+    ]
+}
