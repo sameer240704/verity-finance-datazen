@@ -1,0 +1,76 @@
+{
+    "market_metrics": {
+        "global_renewable_energy_market_2020": "$881.7 billion",
+        "global_renewable_energy_market_2030_projected": "$2.1 trillion",
+        "us_solar_power_industry_2022": "$25.6 billion",
+        "us_wind_energy_market_2022": "$19 billion",
+        "global_renewable_energy_cagr": "8.4% (2021\u20132030)",
+        "us_wind_energy_annual_growth_since_2009": "10%",
+        "us_solar_energy_cagr_since_2010": "over 20%",
+        "wind_power_global_market_share": "35%",
+        "solar_power_global_market_share": "25%",
+        "renewable_energy_firms_roic": "6\u20139%",
+        "renewable_projects_debt_to_equity_ratios": "2:1 or greater",
+        "solar_pv_projects_gross_margins": "30\u201350%",
+        "seia_2030_energy_storage_goal": "100+ GW"
+    },
+    "sources": [
+        {
+            "name": "Solar Energy Industries Association (SEIA)",
+            "url": "https://www.seia.org"
+        },
+        {
+            "name": "U.S. Department of Energy",
+            "url": "https://www.energy.gov"
+        },
+        {
+            "name": "Bloomberg New Energy Finance (BNEF)",
+            "url": "https://about.bnef.com"
+        },
+        {
+            "name": "Panasonic Press Releases",
+            "url": "https://news.panasonic.com"
+        },
+        {
+            "name": "Bureau of Ocean Energy Management (BOEM)",
+            "url": "https://www.boem.gov"
+        }
+    ],
+    "top_5_stocks": [
+        {
+            "stock_name": "NextEra Energy",
+            "ticker": "NEE",
+            "current_price": "68.00",
+            "30_day_performance": "-2.21%",
+            "justification": "Long-term contracts and ambitious renewable energy investments position NextEra as a sector leader."
+        },
+        {
+            "stock_name": "Tesla",
+            "ticker": "TSLA",
+            "current_price": "177.92",
+            "30_day_performance": "-1.49%",
+            "justification": "Dominance in battery innovation and distributed storage systems."
+        },
+        {
+            "stock_name": "Siemens Gamesa",
+            "ticker": "SGRE",
+            "current_price": "17.90",
+            "30_day_performance": "-3.89%",
+            "justification": "Increasing global demand for cutting-edge wind turbine technologies."
+        },
+        {
+            "stock_name": "Enphase Energy",
+            "ticker": "ENPH",
+            "current_price": "107.45",
+            "30_day_performance": "-12.91%",
+            "justification": "Leadership in microinverters and solar storage for distributed energy solutions."
+        },
+        {
+            "stock_name": "Orsted",
+            "ticker": "ORSTED",
+            "current_price": "481.65",
+            "30_day_performance": "-12.18%",
+            "justification": "Expansion of floating offshore wind infrastructure in Europe and the U.S."
+        }
+    ]
+}

@@ -11,17 +11,6 @@
         "weightageInPortfolio": 7.17
     },
     {
-        "stockName": "TCS",
-        "tickerSymbol": "TCS.NS",
-        "numberOfShares": 50,
-        "purchasePrice": 100,
-        "purchaseDate": "2022-07-02",
-        "currentPrice": 4073.15,
-        "unrealizedGainsLosses": 198657.5,
-        "dividendYield": 2.8,
-        "weightageInPortfolio": 61.86
-    },
-    {
         "stockName": "NVIDIA",
         "tickerSymbol": "NVDA",
         "numberOfShares": 41,

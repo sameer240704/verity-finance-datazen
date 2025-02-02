@@ -91,15 +91,36 @@ class DataExtractionAgent:
         print(response)
         print("-" * 30)
 
-        # Save the Gemini output to a text file
+        # Extract JSON from the response (assuming it's within ```json ... ```)
+        json_match = re.search(r"```json\s*([\s\S]*?)\s*```", response)
+        if json_match:
+            try:
+                extracted_data = json.loads(json_match.group(1))
+
+                # Save the extracted JSON data to a .json file
+                reports_dir = "reports"
+                os.makedirs(reports_dir, exist_ok=True)
+                output_filepath = os.path.join(reports_dir, f"{agent_name}.json")  # Changed extension to .json
+                with open(output_filepath, "w") as f:
+                    json.dump(extracted_data, f, indent=4)
+                print(f"Extracted JSON data saved to {output_filepath}")
+
+                return extracted_data  # Return the parsed JSON data
+
+            except json.JSONDecodeError:
+                print("Error: Invalid JSON format in Gemini's output.")
+        else:
+            print("Error: No JSON block found in Gemini's output.")
+
+        # Save the raw Gemini output to a text file (for debugging)
         reports_dir = "reports"
         os.makedirs(reports_dir, exist_ok=True)
-        output_filepath = os.path.join(reports_dir, f"{agent_name}_json.txt")
+        output_filepath = os.path.join(reports_dir, f"{agent_name}_raw.txt")
         with open(output_filepath, "w") as f:
             f.write(response)
-        print(f"Gemini output saved to {output_filepath}")
+        print(f"Raw Gemini output saved to {output_filepath}")
 
-        return response
+        return None  # Return None if JSON extraction fails
 
 
 # import re
