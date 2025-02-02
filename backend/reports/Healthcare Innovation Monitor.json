@@ -1,0 +1,93 @@
+{
+    "market_metrics": {
+        "medical_device_sterilization_market_size_2023": "$9.25 billion",
+        "medical_device_sterilization_market_size_2030_projected": "$14.15 billion",
+        "medical_device_sterilization_growth_rate_2023_2030": "6.2%",
+        "medical_device_sterilization_ethylene_oxide_market_share": "50%",
+        "medical_device_sterilization_gross_margin": "50-60%",
+        "medical_device_sterilization_net_profit_margin": "15-20%",
+        "medical_device_sterilization_regulatory_impact": "15-20%",
+        "genomic_testing_market_size_2022": "$23.5 billion",
+        "genomic_testing_market_size_2030_projected": "$37 billion",
+        "genomic_testing_growth_rate_2023_2030": "8.5%",
+        "genomic_testing_oncology_market_share": "45%",
+        "genomic_testing_rd_spend": "25-30%",
+        "healthcare_it_market_size_global": "$350 billion",
+        "healthcare_it_ai_cybersecurity_market_size_2023": "$35 billion",
+        "healthcare_it_cloud_adoption_cagr": "20.5%",
+        "healthcare_it_ai_cybersecurity_cagr": "25.6%",
+        "healthcare_it_cloud_market_share": "65-70%",
+        "healthcare_it_ebitda_margin": "30-40%",
+        "healthcare_it_ai_cybersecurity_adoption_increase": "20%",
+        "telehealth_specialty_care_market_size_2022": "$87 billion",
+        "telehealth_specialty_care_market_size_2032_projected": "$455 billion",
+        "telehealth_specialty_care_growth_rate_2023_2032": "19.5%",
+        "telehealth_specialty_care_roi": "20-25%",
+        "telehealth_specialty_care_debt_to_equity_ratio": "1.5 to 2",
+        "calorie_labeling_market_size_indirectly_tied_to_2021": "$18 billion",
+        "calorie_labeling_market_cagr": "6%",
+        "calorie_labeling_impact_on_calorie_intake": "5-10%",
+        "covid_19_booster_market_cagr": "3%",
+        "covid_19_booster_uptake_high_income": "60-70%",
+        "covid_19_booster_uptake_low_income": "under 20%"
+    },
+    "sources": [
+        {
+            "name": "World Health Organization",
+            "url": "https://www.who.int"
+        },
+        {
+            "name": "The Lancet",
+            "url": "https://www.thelancet.com"
+        },
+        {
+            "name": "U.S. Food & Drug Administration",
+            "url": "https://www.fda.gov"
+        },
+        {
+            "name": "Deloitte Healthcare Trends Report",
+            "url": "https://www2.deloitte.com"
+        },
+        {
+            "name": "Gartner Healthcare IT Survey",
+            "url": "https://www.gartner.com"
+        }
+    ],
+    "top_5_stocks": [
+        {
+            "stock_name": "Thermo Fisher Scientific",
+            "ticker": "TMO",
+            "current_price": "569.31",
+            "30_day_performance": "4.60%",
+            "justification": "Strong positioning in genomic testing and precision oncology tools, including partnerships and acquisitions driving innovation."
+        },
+        {
+            "stock_name": "Teladoc Health",
+            "ticker": "TDOC",
+            "current_price": "14.90",
+            "30_day_performance": "-11.49%",
+            "justification": "Dominance in telehealth, with solid adoption in mental health and chronic disease management."
+        },
+        {
+            "stock_name": "Microsoft",
+            "ticker": "MSFT",
+            "current_price": "427.55",
+            "30_day_performance": "0.42%",
+            "justification": "Leadership in healthcare cloud integrations through Azure, bolstered by deployments in large hospital systems."
+        },
+        {
+            "stock_name": "Illumina",
+            "ticker": "ILMN",
+            "current_price": "111.29",
+            "30_day_performance": "-2.54%",
+            "justification": "Key developments in genomic sequencing and cancer diagnostics, capitalizing on advancements like Aventa FusionPlus."
+        },
+        {
+            "stock_name": "Palo Alto Networks",
+            "ticker": "PANW",
+            "current_price": "316.48",
+            "30_day_performance": "-6.71%",
+            "justification": "AI-driven cybersecurity expanding rapidly in healthcare to counter increasing threats to sensitive data."
+        }
+    ]
+}

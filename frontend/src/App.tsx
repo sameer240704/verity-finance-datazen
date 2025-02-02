@@ -19,6 +19,7 @@ import MoneyCalc from "./components/MoneyCalc";
 import StockAnalyzer from "./pages/StockAnalyzer";
 import MarketAnalysisAgents from "./pages/AgentsPage";
 import ReportDisplay from "./pages/ReportDisplay";
+import HealthcareReportParser from "./components/HealthcareReportParser";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -156,7 +157,7 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <DashboardLayout>
-                        <ReportDisplay />
+                        <HealthcareReportParser />
                       </DashboardLayout>
                     </ProtectedRoute>
                   }

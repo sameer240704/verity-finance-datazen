@@ -64,6 +64,8 @@ class OrchestratorAgent:
             extracted_data = self.data_extraction_agent.run(report_filepath, agent_name)
             print("Extracted JSON:", extracted_data)
 
+            return extracted_data, final_report
+
         elif agent_type.lower() == "stock":
             stock_data_collection_agent = StockDataCollectionAgent(
                 self.gemini_model, sector_stock_name, brief_aim, data_validation_agent
