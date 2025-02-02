@@ -4,21 +4,21 @@ import { TrendingUp, Shield, Brain, BarChart as ChartBar } from "lucide-react";
 const features = [
   {
     icon: <TrendingUp className="h-6 w-6 text-white" />,
-    title: "Real-Time Indian Market Insights",
+    title: "Investment Strategy Building",
     description:
-      "Get instant updates on NIFTY, SENSEX, and personalized insights powered by AI.",
+      "Personalized investment strategies based on risk tolerance.",
   },
   {
     icon: <Shield className="h-6 w-6 text-white" />,
     title: "Smart Portfolio Management",
     description:
-      "Receive tailored investment suggestions for Indian markets based on your goals.",
+      "Personal suggestions for handling and optimizing your portfolio",
   },
   {
     icon: <Brain className="h-6 w-6 text-white" />,
-    title: "Learn & Grow",
+    title: "AI-powered assistance",
     description:
-      "Access educational resources about Indian markets and improve your financial literacy.",
+      "AI Agent Market Analysis for stocks of sectors and advice assistant.",
   },
   {
     icon: <ChartBar className="h-6 w-6 text-white" />,
