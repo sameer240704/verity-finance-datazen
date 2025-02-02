@@ -3,19 +3,41 @@ from prophet import Prophet
 import matplotlib.pyplot as plt
 import pandas as pd
 import json
-import argparse
+import os
+import base64
 
 def fetch_stock_data(symbol, start_date, end_date):
-    """Fetches historical stock data from Yahoo Finance."""
+    """
+    Fetches historical stock data from Yahoo Finance.
+    
+    Attempts to get more granular data (daily) if available, otherwise falls back to weekly.
+    """
     stock = yf.Ticker(symbol)
-    df = stock.history(start=start_date, end=end_date)
+
+    # Try to get daily data first
+    df = stock.history(start=start_date, end=end_date, interval="1d")
+    
+    if df.empty:
+        print(f"No daily data found for {symbol}, trying weekly interval...")
+        # If daily data is not available, try weekly data
+        df = stock.history(start=start_date, end=end_date, interval="1wk")
+
+        if df.empty:
+            print(f"No weekly data found for {symbol}, trying monthly interval...")
+            # If weekly data is not available, try monthly data
+            df = stock.history(start=start_date, end=end_date, interval="1mo")
+
+    if df.empty:
+        print(f"No data found for {symbol} between {start_date} and {end_date}.")
+        return None
+
     df.reset_index(inplace=True)
     df = df[['Date', 'Close']]
     df.columns = ['ds', 'y']  # Prophet requires columns 'ds' and 'y'
-    df['ds'] = df['ds'].dt.tz_localize(None)
+    df['ds'] = df['ds'].dt.tz_localize(None)  # Remove timezone information
     return df
 
-def predict_future_prices(df, years, seasonality_mode='additive', changepoint_prior_scale=0.05, holidays_prior_scale=10, seasonality_prior_scale=10):
+def predict_future_prices(df, years, seasonality_mode='additive', changepoint_prior_scale=0.05, holidays_prior_scale=10, seasonality_prior_scale=10, growth='linear'):
     """
     Trains a Prophet model and makes predictions.
 
@@ -26,31 +48,44 @@ def predict_future_prices(df, years, seasonality_mode='additive', changepoint_pr
         changepoint_prior_scale (float): Adjust the flexibility of the trend.
         holidays_prior_scale (float): Adjust the strength of holidays effects.
         seasonality_prior_scale (float): Adjust the strength of seasonality effects.
+        growth (str): 'linear' or 'logistic' - type of growth curve.
     
     Returns:
         Prophet: Trained Prophet model.
         pd.DataFrame: Forecast DataFrame.
     """
+
+    # For logistic growth, we need to specify a carrying capacity
+    if growth == 'logistic':
+        # Example: Set carrying capacity to a value higher than the maximum historical price
+        # You might need to adjust this based on your understanding of the stock
+        df['cap'] = df['y'].max() * 2 
+
     model = Prophet(
+        growth=growth,
         seasonality_mode=seasonality_mode,
         changepoint_prior_scale=changepoint_prior_scale,
         holidays_prior_scale=holidays_prior_scale,
         seasonality_prior_scale=seasonality_prior_scale,
-        daily_seasonality=True, 
+        daily_seasonality=True,
         weekly_seasonality=True,
         yearly_seasonality=True
     )
-    
+
     # Add specific holidays (example for US)
-    # You can customize this for different countries/regions
     model.add_country_holidays(country_name='US')
 
     model.fit(df)
     future = model.make_future_dataframe(periods=years * 365)
+
+    # Add carrying capacity to future dataframe for logistic growth
+    if growth == 'logistic':
+        future['cap'] = df['cap'].iloc[0]  # Use the same cap as in the historical data
+
     forecast = model.predict(future)
     return model, forecast
 
-def plot_predictions(model, forecast, symbol, historical_color='#0072B2', forecast_color='#D55E00', uncertainty_color='#009E73'):
+def plot_predictions(model, forecast, symbol, output_dir, historical_color='#0072B2', forecast_color='#D55E00', uncertainty_color='#009E73'):
     """
     Plots the Prophet model's predictions with enhanced aesthetics.
 
@@ -58,6 +93,7 @@ def plot_predictions(model, forecast, symbol, historical_color='#0072B2', foreca
         model (Prophet): Trained Prophet model.
         forecast (pd.DataFrame): Forecast DataFrame.
         symbol (str): Stock symbol.
+        output_dir(str): The directory to save the images
         historical_color (str): Color for historical data.
         forecast_color (str): Color for forecasted data.
         uncertainty_color (str): Color for uncertainty intervals.
@@ -85,27 +121,32 @@ def plot_predictions(model, forecast, symbol, historical_color='#0072B2', foreca
     plt.xticks(rotation=45)
     plt.tight_layout()
 
-    plt.savefig(f"{symbol}_prediction.png")
+    image_path = os.path.join(output_dir, f"{symbol}_prediction.png")
+    plt.savefig(image_path)
     plt.close(fig)
+    return image_path
 
-def main():
+def main(years):
     """
     Fetches stock data, trains Prophet models, makes predictions, and generates plots for multiple stocks.
     """
-    parser = argparse.ArgumentParser(description="Predict stock prices using Prophet.")
-    parser.add_argument("years", type=int, help="Number of years to predict")
-    args = parser.parse_args()
-    years_to_predict = args.years
-
     try:
-        with open("..\data\stocks.json", "r") as f:
-            stocks_data = json.load(f)
+        abs_path = os.path.join(os.path.dirname(__file__), "../data/stocks.json")
+        if not os.path.exists(abs_path):
+            raise FileNotFoundError(f"File not found: {abs_path}")
+        with open(abs_path, 'r') as file:
+            stocks_data = json.load(file)
     except FileNotFoundError:
         print("Error: stocks.json file not found.")
-        return
+        return []
 
+    # Fetch as much historical data as possible
     end_date = pd.Timestamp.now().strftime('%Y-%m-%d')
-    start_date = (pd.Timestamp.now() - pd.DateOffset(years=10)).strftime('%Y-%m-%d')
+    start_date = '1950-01-01' # YFinance can handle this far back
+    
+    image_data_list = []
+    
+    output_dir = os.path.dirname(__file__)
 
     for stock in stocks_data:
         symbol = stock["tickerSymbol"]
@@ -113,23 +154,32 @@ def main():
 
         try:
             df = fetch_stock_data(symbol, start_date, end_date)
+            if df is None:
+                print(f"Skipping {symbol} due to insufficient data.")
+                continue
 
-            # --- Model Tuning Parameters (Experiment with these!) ---
-            seasonality_mode = 'multiplicative'  # Try 'additive' as well
-            changepoint_prior_scale = 0.1  # Increase for more flexible trend
-            holidays_prior_scale = 10      # Increase to make holidays have a stronger effect
-            seasonality_prior_scale = 10   # Increase to make seasonality have a stronger effect
+            # --- Model Tuning Parameters ---
+            # Experiment with these to potentially improve accuracy
+            seasonality_mode = 'multiplicative'  # Try 'additive' too
+            changepoint_prior_scale = 0.15 # Increased flexibility for trend changes, was 0.1
+            holidays_prior_scale = 15  # Increased impact of holidays, was 10      
+            seasonality_prior_scale = 15 # Increased impact of seasonality, was 10
+            growth = 'linear'  # Try 'logistic' if you expect saturation
 
             model, forecast = predict_future_prices(
-                df, years_to_predict, 
+                df, years, 
                 seasonality_mode=seasonality_mode,
                 changepoint_prior_scale=changepoint_prior_scale,
                 holidays_prior_scale=holidays_prior_scale,
-                seasonality_prior_scale=seasonality_prior_scale
+                seasonality_prior_scale=seasonality_prior_scale,
+                growth=growth
             )
 
             # --- Enhanced Plotting ---
-            plot_predictions(model, forecast, symbol)
+            image_path = plot_predictions(model, forecast, symbol, output_dir)
+            with open(image_path, 'rb') as image_file:
+                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+            image_data_list.append(image_data)
             print(f"Prediction plot saved for {symbol}")
 
             # Display the latest price
@@ -138,6 +188,4 @@ def main():
         
         except Exception as e:
             print(f"Error processing {symbol}: {e}")
-
-if __name__ == "__main__":
-    main()
+    return image_data_list

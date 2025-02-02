@@ -22,6 +22,11 @@ sys.path.append(portfolio_analysis_path)
 
 from portfolio_analysis import rapidapi
 
+predictive_analysis_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'predictive_analysis'))
+sys.path.append(predictive_analysis_path)
+
+from predictive_analysis import prophet_stock
+
 app = Flask(__name__)
 CORS(app)
 
@@ -220,6 +225,15 @@ def market_analysis_agent():
 def portfolio_generation():
     portfolio_data = rapidapi.main()  
     return jsonify({"message": "Portfolio generation successful", "portfolio_data": portfolio_data})
+
+
+# ================== Prophet Images =====================
+
+@app.route("/prophet_stock", methods=['POST'])
+def prophet_stock_route():
+    years = request.get_json().get("years", 10)  
+    prophet_images = prophet_stock.main(years)
+    return jsonify({"prophet_images": prophet_images})
 
 # =================== STATIC APIS ===================
 @app.route('/auto-bank-data', methods=['get'])
