@@ -162,6 +162,16 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="/portfolio/agents/sector/tech-trend-analyzer"
+                  element={
+                    <ProtectedRoute>
+                      <DashboardLayout>
+                        <ReportDisplay />
+                      </DashboardLayout>
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </div>
           </Router>

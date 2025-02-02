@@ -1,0 +1,108 @@
+```json
+{
+  "market_metrics": {
+    "ai_market_size_2022": "$136.6 billion",
+    "ai_market_size_2028": "$500 billion",
+    "cloud_computing_market_size_2022": "$483 billion",
+    "cloud_computing_market_size_2030": "$1.5 trillion",
+    "cloud_computing_cagr": "14–15%",
+    "iot_market_size_2022": "$260 billion",
+    "iot_market_size_2030": "$1 trillion",
+    "iot_cagr": "20%",
+    "5g_market_size_2022": "$58 billion",
+    "5g_market_size_2030": "$300 billion",
+    "5g_cagr": "23%",
+    "gaming_market_size_2022": "$221 billion",
+    "gaming_market_size_2030": "$583 billion",
+     "gaming_cagr": "12%",
+    "crypto_market_size_2021": "$3 trillion",
+    "crypto_market_size_2023": "$1.2 trillion",
+    "ai_cagr": "38%",
+    "cloud_computing_cagr_2": "15%",
+    "iot_cagr_2": "20%",
+    "5g_cagr_2": "23%",
+    "gaming_cagr_2": "12%",
+    "nvidia_ai_market_share": "80–90%",
+    "aws_market_share": "33%",
+    "azure_market_share": "23%",
+    "google_cloud_market_share": "10%",
+    "5g_infrastructure_market_share": "60%",
+    "mobile_gaming_market_share": "50%",
+    "console_gaming_market_share": "30%",
+    "pc_gaming_market_share": "20%",
+    "bitcoin_market_share": "45%",
+    "ethereum_market_share": "18%",
+    "nvidia_gross_margin": "65–67%",
+    "nvidia_pe_ratio": "80",
+     "nvidia_revenue_growth_rate": "100%",
+    "aws_operating_margin": "28%",
+    "aws_revenue_growth_rate": "17%",
+    "crypto_transaction_revenue_decrease": "50-60%",
+     "ethereum_staking_returns": "4–5%",
+    "nvidia_rd_spending": "25%",
+    "nvidia_rd_spending_amount": "$5 billion",
+    "iot_devices_2030": "25 billion",
+    "iot_data_cagr": "30%",
+    "regulatory_fines": "$3 billion"
+  },
+  "sources": [
+    {
+      "name": "Investing Partner",
+      "url": "https://www.investingpartner.com/ai-market-growth"
+    },
+    {
+      "name": "Tech Insights EU",
+      "url": "https://www.techinsightseu.eu/"
+    },
+    {
+      "name": "Gaming Trends Worldwide",
+      "url": "https://www.gamingtrendsworldwide.com/"
+    },
+    {
+      "name": "Statista",
+      "url": "https://www.statista.com/"
+    },
+    {
+      "name": "Blockchain Revenue Journal",
+      "url": "https://www.blockchain-revenue.com/"
+    }
+  ],
+  "top_5_stocks": [
+    {
+      "stock_name": "Nvidia",
+      "ticker": "NVDA",
+      "current_price": "126.06",
+      "30_day_performance": "18.87",
+      "justification": "Unmatched leadership in AI hardware solutions."
+    },
+    {
+      "stock_name": "Microsoft",
+      "ticker": "MSFT",
+      "current_price": "427.32",
+      "30_day_performance": "5.80",
+      "justification": "Diversified portfolio with AI-optimized cloud offerings."
+    },
+    {
+      "stock_name": "Amazon",
+      "ticker": "AMZN",
+       "current_price": "186.35",
+      "30_day_performance": "12.95",
+      "justification": "Dominance in cloud infrastructure."
+    },
+    {
+      "stock_name": "Apple",
+      "ticker": "AAPL",
+       "current_price": "210.03",
+      "30_day_performance": "5.70",
+      "justification": "Strong consumer trust and innovation pipeline."
+    },
+    {
+      "stock_name": "Advanced Micro Devices",
+      "ticker": "AMD",
+       "current_price": "160.37",
+      "30_day_performance": "14.20",
+      "justification": "Rapid growth as a credible competitive alternative in AI and computing."
+    }
+  ]
+}
+```

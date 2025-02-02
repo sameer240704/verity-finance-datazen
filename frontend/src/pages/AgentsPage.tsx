@@ -176,10 +176,7 @@ const AgentsPage = () => {
   const [generatingReportFor, setGeneratingReportFor] = useState<string | null>(
     null
   );
-  const [data, setData] = useState({
-    agent_name: "",
-    data: "",
-  });
+  const [data, setData] = useState(null);
 
   // Load agents from localStorage on component mount
   useEffect(() => {
@@ -254,6 +251,10 @@ const AgentsPage = () => {
 
     console.log("Agent Data:", agent);
 
+    if (agent.name === "Tech Trend Analyzer") {
+      navigate("/portfolio/agents/sector/tech-trend-analyzer");
+    }
+
     try {
       const config = {
         method: "post",
@@ -265,13 +266,8 @@ const AgentsPage = () => {
       };
 
       const response = await axios.request(config);
-      setData((prev) => ({
-        ...prev,
-        agent_name: agent.name,
-        data: response.data,
-      }));
 
-      localStorage.setItem("report", JSON.stringify(response.data));
+      localStorage.setItem("report", response.data);
       setAgents((prev) =>
         prev.map((a) => (a.id === agentId ? { ...a, hasReport: true } : a))
       );
@@ -281,10 +277,6 @@ const AgentsPage = () => {
       setGeneratingReportFor(null);
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("report", JSON.stringify(data));
-  }, [data]);
 
   const navigate = useNavigate();
 
@@ -508,7 +500,7 @@ const AgentsPage = () => {
 
                     {/* Report Actions */}
                     <div className="mt-4 flex gap-2">
-                      {agent.hasReport ? (
+                      {agent.hasReport || agent.name==='Tech Trend Analyzer' ? (
                         <button
                           onClick={(e) => handleOpenReport(e, agent)}
                           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 transition-colors"
