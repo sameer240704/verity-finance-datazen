@@ -1,81 +1,95 @@
 ```json
 {
   "market_metrics": {
-    "medical_device_sterilization_market_size_2023": "$8 billion",
-    "healthcare_it_market_size_2022": "$140 billion",
-    "healthcare_it_market_size_2023_projected": "$160 billion",
-    "genomic_testing_market_size_2022": "$12 billion",
-    "medical_device_sterilization_market_cagr_2028": "5%",
-    "healthcare_it_market_cagr_2023_2030": "12%",
-    "genomic_testing_market_cagr_2030": "15%",
+    "ethylene_oxide_sterilization_market_size": "$4.25 billion",
+    "healthcare_cybersecurity_market_size": "$15 billion",
+    "telehealth_market_size_2022": "$91 billion",
+    "telehealth_market_size_2027": "$185 billion",
+    "genomic_testing_market_size": "$10.3 billion",
+    "ethylene_oxide_sterilization_cagr": "6%-7%",
+    "healthcare_cybersecurity_cagr": "17%",
+    "telehealth_digital_health_cagr": "14%-15%",
+    "nutritional_labeling_growth_rate": "5%-6%",
     "ethylene_oxide_market_share": "50%",
-    "ai_in_healthcare_market_share": "60%",
-    "cloud_integration_in_healthcare_it_market_share": "70%",
-    "healthcare_it_gross_profit_margins": "55-65%",
-    "ai_in_healthcare_roi": "25-30%",
-    "genomic_testing_companies_operating_margins": "15-20%",
-    "calorie_labeling_cardiovascular_deaths_prevented_25_years": "8,000",
-     "calorie_labeling_cardiovascular_deaths_prevented_annual": "320",
-     "covid_19_booster_efficacy": "70-85%",
-    "social_factors_stroke_treatment_reduced_access": "30-40%"
+    "cybersecurity_market_share": "60%",
+    "telehealth_market_share": "40%",
+     "healthcare_cybersecurity_gross_margins": "70%-80%",
+    "healthcare_cybersecurity_net_margins": "15%-20%",
+     "telehealth_providers_gross_margins": "40%-50%",
+    "telehealth_providers_net_margins": "5%-10%",
+    "genomic_testing_gross_margins": "30%-60%",
+    "regulatory_compliance_costs": "2%-5%",
+    "telehealth_roi": "10%-15%",
+    "healthcare_cyberattacks_cost": "$9 billion",
+    "covid_19_booster_adoption_developed": "60%-65%",
+    "covid_19_booster_adoption_lower_income": "under 30%",
+    "covid_19_booster_efficacy": "over 50%",
+    "cardiovascular_obesity_risk_reduction": "1%-3%",
+     "healthcare_cost_savings_england": "$195 million",
+     "cloud_based_platforms_it_infrastructure": "25%-30%",
+     "automation_administrative_cost_reduction": "10%-15%"
   },
   "sources": [
     {
-      "name": "Environmental Protection Agency",
-      "url": "https://www.epa.gov"
+      "name": "UnitedHealth Cybersecurity Incident",
+      "url": "https://www.unitedhealthnews.com"
     },
     {
-      "name": "CDC COVID-19 Booster Guidelines",
-      "url": "https://www.cdc.gov"
+      "name": "HIMSS Analytics – Cloud & Automation in Healthcare",
+      "url": "https://www.himssanalytics.org"
     },
     {
-      "name": "Public Health England Impact Assessment on Calorie Labeling",
-      "url": "https://www.gov.uk/government/organisations/public-health-england"
+      "name": "Aventa Genomics and FusionPlus Test",
+      "url": "https://www.aventagenomics.com/fusionplus"
     },
     {
-      "name": "AWS Healthcare IT Solutions Overview",
-      "url": "https://aws.amazon.com/healthcare/"
+      "name": "Public Health England - Calorie Labeling Policy",
+      "url": "https://www.gov.uk/government/organizations/public-health-england"
     },
     {
-      "name": "Global Genomics Market Report",
-      "url": "https://www.marketresearch.com"
+      "name": "Healthcare Cybersecurity Market Analysis 2022",
+      "url": "https://www.cybersecuritymarket.com/2022-report"
+    },
+    {
+      "name": "Global Telehealth Market Report",
+      "url": "https://www.telehealthglobal.com/report-2022"
     }
   ],
   "top_5_stocks": [
     {
-      "stock_name": "Illumina",
-      "ticker": "ILMN",
-      "current_price": "141.80",
-      "30_day_performance": "-6.59%",
-      "justification": "Leadership in cancer diagnostics and innovation in precision medicine reinforces its position as a market leader."
-    },
-    {
-      "stock_name": "Amazon",
-      "ticker": "AMZN",
-       "current_price": "181.70",
-      "30_day_performance": "2.33%",
-      "justification": "Significant market share in cloud services for healthcare, driven by scalability and reliability."
-    },
-    {
-      "stock_name": "Intuitive Surgical",
-      "ticker": "ISRG",
-        "current_price": "390.26",
-      "30_day_performance": "3.11%",
-      "justification": "Dominance in minimally invasive surgery coupled with increasing adoption of robotic solutions worldwide."
-    },
-    {
-      "stock_name": "Alphabet (Google Health)",
-      "ticker": "GOOGL",
-       "current_price": "179.71",
-      "30_day_performance": "2.70%",
-      "justification": "Early investments in AI-driven diagnostics and predictive analytics solidify its competitive edge."
-    },
-    {
       "stock_name": "Teladoc Health",
       "ticker": "TDOC",
-       "current_price": "14.41",
-      "30_day_performance": "-10.95%",
-      "justification": "Demand for virtual healthcare services continues to thrive, particularly in rural and underserved regions."
+      "current_price": "12.60",
+      "30_day_performance": "-2.02",
+       "justification": "Sustained telehealth demand and improved customer retention post-pandemic."
+    },
+    {
+      "stock_name": "IBM",
+      "ticker": "IBM",
+      "current_price": "173.50",
+      "30_day_performance": "0.26",
+      "justification": "Expanded presence in healthcare cybersecurity solutions with AI-driven tools."
+    },
+    {
+      "stock_name": "Amwell",
+      "ticker": "AMWL",
+      "current_price":"1.42",
+      "30_day_performance": "-2.07",
+      "justification": "Launch of integrated care delivery platforms bolstered its market position."
+    },
+    {
+      "stock_name": "CrowdStrike",
+      "ticker": "CRWD",
+       "current_price": "348.74",
+       "30_day_performance": "8.17",
+      "justification": "Growing demand for advanced cybersecurity in healthcare, especially post high-profile breaches."
+    },
+    {
+      "stock_name": "Illumina",
+      "ticker": "ILMN",
+       "current_price": "132.48",
+       "30_day_performance": "0.83",
+      "justification": "Industry leader in genomic sequencing and partner in personalized cancer treatment tools."
     }
   ]
 }
