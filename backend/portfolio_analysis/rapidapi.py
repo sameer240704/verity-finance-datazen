@@ -93,8 +93,9 @@ def generate_portfolio_report(stocks, bonds, tavily_api):
         else:
             print(f"Warning: 'bondType' key not found in bond: {bond}")
 
-    # Save the structured report
-    with open('portfolio_report.json', 'w') as json_file:
+    # Save the structured report in the current directory
+    report_dir = os.path.dirname(__file__)
+    with open(os.path.join(report_dir, 'portfolio_report.json'), 'w') as json_file:
         json.dump(portfolio_report, json_file, indent=4)
 
     return portfolio_report
@@ -102,7 +103,7 @@ def generate_portfolio_report(stocks, bonds, tavily_api):
 # Function to generate textual report using Gemini
 def generate_textual_report(portfolio_data, gemini_model):
     # Construct the prompt for Gemini
-    prompt = "Generate a comprehensive portfolio report based on the following data:\n\n"
+    prompt = "Generate a comprehensive portfolio report and market analysis based on the following data:\n\n"
 
     # Add stock information to the prompt
     prompt += "Stocks:\n"
@@ -120,11 +121,13 @@ def generate_textual_report(portfolio_data, gemini_model):
         if bond['bondType'] in portfolio_data["articles"]:
             prompt += f"    Recent Article: {json.dumps(portfolio_data['articles'][bond['bondType']])}\n"
 
+    print(prompt)
     # Get response from Gemini
     response = gemini_model.get_response(prompt)
 
-    # Save the textual report
-    with open('portfolio_report.txt', 'w') as txt_file:
+    # Save the textual report in the current directory
+    report_dir = os.path.dirname(__file__)
+    with open(os.path.join(report_dir, 'portfolio_report.txt'), 'w') as txt_file:
         txt_file.write(response)
 
 # Main function
