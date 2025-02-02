@@ -22,41 +22,47 @@ interface MetricCardProps {
   trend?: "positive" | "negative";
 }
 
-// Components
 const MetricCard = ({
   title,
   value,
   icon,
   description,
   trend,
-}: MetricCardProps) => (
-  <div className="bg-white rounded-lg shadow-md p-4">
-    <div className="flex justify-between items-center mb-2">
-      <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-      <div className="text-gray-600">{icon}</div>
-    </div>
-    <div className="text-2xl font-bold">
-      {value.toFixed(2)}
-      {title.includes("Growth") || title.includes("Margin") ? "%" : "x"}
-    </div>
-    <p className="text-xs text-gray-500 mt-1">{description}</p>
-    {trend && (
-      <div
-        className={`text-xs mt-2 ${
-          trend === "positive" ? "text-green-600" : "text-red-600"
-        }`}
-      >
-        {trend === "positive" ? "↑" : "↓"} vs Industry Average
+}: MetricCardProps) => {
+  const isPercentage = title.includes("Growth") || title.includes("Margin");
+  const displayValue = isPercentage ? value * 100 : value;
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="text-sm font-medium text-gray-500">{title}</h3>
+        <div className="text-gray-600">{icon}</div>
       </div>
-    )}
-  </div>
-);
+      <div className="text-2xl font-bold">
+        {displayValue}
+        {isPercentage ? "%" : "x"}
+      </div>
+      <p className="text-xs text-gray-500 mt-1">{description}</p>
+      {trend && (
+        <div
+          className={`text-xs mt-2 ${
+            trend === "positive" ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {trend === "positive" ? "↑" : "↓"} vs Industry Average
+        </div>
+      )}
+    </div>
+  );
+};
 
 const FinancialMetricsDashboard = ({
   metrics,
 }: {
   metrics: FinancialMetrics;
 }) => {
+  console.log(metrics);
+
   return (
     <div className="p-6 bg-gray-50">
       <div className="mb-6">
@@ -90,7 +96,7 @@ const FinancialMetricsDashboard = ({
           value={metrics.revenueGrowth}
           icon={<TrendingUp size={20} />}
           description="Year over Year Growth"
-          trend={metrics.revenueGrowth > 10 ? "positive" : "negative"}
+          trend={metrics.revenueGrowth > 0.1 ? "positive" : "negative"}
         />
 
         <MetricCard
@@ -98,7 +104,7 @@ const FinancialMetricsDashboard = ({
           value={metrics.earningsGrowth}
           icon={<LineChartIcon size={20} />}
           description="Year over Year Growth"
-          trend={metrics.earningsGrowth > 15 ? "positive" : "negative"}
+          trend={metrics.earningsGrowth > 0.15 ? "positive" : "negative"}
         />
 
         <MetricCard
@@ -106,7 +112,7 @@ const FinancialMetricsDashboard = ({
           value={metrics.profitMargin}
           icon={<Percent size={20} />}
           description="Net Profit Margin"
-          trend={metrics.profitMargin > 20 ? "positive" : "negative"}
+          trend={metrics.profitMargin > 0.2 ? "positive" : "negative"}
         />
       </div>
     </div>
