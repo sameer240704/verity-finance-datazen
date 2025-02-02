@@ -11,7 +11,7 @@ import sys
 import os
 
 # Get the absolute path of the 'market research system' directory
-market_research_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'market research system'))
+market_research_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'market_research_system'))
 
 # Add the directory to Python's system path
 sys.path.append(market_research_path)
@@ -185,9 +185,14 @@ def market_analysis_agent():
         
         orchestrator = OrchestratorAgent()
 
-        final_report = orchestrator.create_and_run_agents(
-            agent_type, agent_name, stock_name, brief_aim, sector
-        )
+        if agent_type == "stock":
+            final_report = orchestrator.create_and_run_agents(
+                agent_type, agent_name, stock_name, brief_aim
+            )
+        elif agent_type == "sector":
+            final_report = orchestrator.create_and_run_agents(
+                agent_type, agent_name, sector, brief_aim
+            )
 
         return jsonify(final_report)
     except Exception as e:

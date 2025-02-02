@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Plus, Bot, Trash2, X, FileText, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigate, Route, useNavigate, useParams } from "react-router-dom";
-import MarketAnalysisDashboard from "./MarketAnalysisDashboard";
+import ReportDisplay from "./ReportDisplay";
 import axios from "axios";
 
 interface Agent {
@@ -176,6 +176,7 @@ const AgentsPage = () => {
   const [generatingReportFor, setGeneratingReportFor] = useState<string | null>(
     null
   );
+  const [data, setData] = useState(null);
 
   // Load agents from localStorage on component mount
   useEffect(() => {
@@ -237,49 +238,51 @@ const AgentsPage = () => {
     alert("Navigating to agent details page... (Implementation pending)");
   };
 
-  
-const handleCreateReport = async (e: React.MouseEvent, agentId: string) => {
-  e.stopPropagation();
-  setGeneratingReportFor(agentId);
+  const handleCreateReport = async (e: React.MouseEvent, agentId: string) => {
+    e.stopPropagation();
+    setGeneratingReportFor(agentId);
 
-  const agent = agents.find((agent) => agent.id === agentId);
-  if (!agent) {
-    console.error("Agent not found!");
-    setGeneratingReportFor(null);
-    return;
-  }
+    const agent = agents.find((agent) => agent.id === agentId);
+    if (!agent) {
+      console.error("Agent not found!");
+      setGeneratingReportFor(null);
+      return;
+    }
 
-  console.log("Agent Data:", agent);
+    console.log("Agent Data:", typeof agent);
 
-  try {
-    const config = {
-      method: "post",
-      url: "http://127.0.0.1:5000/market-analysis-agent",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: agent,
-    };
+    try {
+      const config = {
+        method: "post",
+        url: "http://127.0.0.1:5000/market-analysis-agent",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: agent,
+      };
 
-    const response = await axios.request(config);
-    console.log("Response Data:", response.data);
-  } catch (error) {
-    console.error("Error creating report:", error);
-  } finally {
-    setGeneratingReportFor(null);
-  }
-};
+      const response = await axios.request(config);
+      console.log("Response Data:", response.data);
+      
+      localStorage.setItem("report", JSON.stringify(response.data));
+      setAgents((prev) =>
+        prev.map((a) => (a.id === agentId ? { ...a, hasReport: true } : a))
+      );
+    } catch (error) {
+      console.error("Error creating report:", error);
+    } finally {
+      setGeneratingReportFor(null);
+    }
+  };
 
   const navigate = useNavigate();
 
   const handleOpenReport = (e: React.MouseEvent, agent: Agent) => {
     e.stopPropagation();
     navigate(`${agent.scope}/${agent.name.toLowerCase().replace(/\s/g, "-")}`);
-    <Route
-      path="/portfolio/agents/:scope/:name"
-      element={<MarketAnalysisDashboard data={data} />}
-    />;
   };
+
+  console.log("Agents Data:", data);
 
   const handleUpdateFrequencyChange = (
     agentId: string,
