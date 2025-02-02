@@ -55,6 +55,7 @@
     ],
     "top_5_stocks": [
         {
+
             "stock_name": "Thermo Fisher Scientific",
             "ticker": "TMO",
             "current_price": "569.31",
@@ -74,20 +75,30 @@
             "current_price": "427.55",
             "30_day_performance": "0.42%",
             "justification": "Leadership in healthcare cloud integrations through Azure, bolstered by deployments in large hospital systems."
+
         },
         {
             "stock_name": "Illumina",
             "ticker": "ILMN",
-            "current_price": "111.29",
-            "30_day_performance": "-2.54%",
-            "justification": "Key developments in genomic sequencing and cancer diagnostics, capitalizing on advancements like Aventa FusionPlus."
+
+            "current_price": "115.72",
+            "30_day_performance": "14.64%",
+            "justification": "Leadership in precision medicine, boosted by improved adoption of personalized tests."
         },
         {
-            "stock_name": "Palo Alto Networks",
-            "ticker": "PANW",
-            "current_price": "316.48",
-            "30_day_performance": "-6.71%",
-            "justification": "AI-driven cybersecurity expanding rapidly in healthcare to counter increasing threats to sensitive data."
+            "stock_name": "Microsoft",
+            "ticker": "MSFT",
+            "current_price": "421.57",
+            "30_day_performance": "10.09%",
+            "justification": "Integration of Azure with healthcare providers for EHRs and workflow optimization."
+        },
+        {
+            "stock_name": "Fitbit (now part of Google)",
+            "ticker": "GOOG",
+            "current_price": "178.75",
+            "30_day_performance": "8.51%",
+            "justification": "High consumer engagement, driven by robust fitness and wellness applications."
+
         }
     ]
 }

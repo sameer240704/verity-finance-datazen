@@ -10,6 +10,7 @@ import ast
 import json
 from typing import Dict
 from utils.data_processing import clean_response_string 
+import pandas as pd
 
 class StockDataCollectionAgent:
     def __init__(self, gemini_model, stock_name, brief_aim, data_validation_agent):
@@ -42,13 +43,24 @@ class StockDataCollectionAgent:
         tavily_results = self.tavily_api.search(tavily_query)
 
         stock_chart_data = self.yfinance_api.get_stock_chart(self.stock_name)
-        company_details = self.yfinance_api.get_company_info(self.stock_name)
-        if company_details == {}:
-          company_details = self.rapidapi_api.get_company_info(self.stock_name)
-        financial_data = self.yfinance_api.get_financial_data(self.stock_name)
-        if financial_data == {}:
-          financial_data = self.rapidapi_api.get_financial_data(self.stock_name)
+        if stock_chart_data is None:
+            print(f"Warning: Could not retrieve stock chart data for {self.stock_name}")
+            stock_chart_data = ""  # or some default value
 
+        company_details = self.yfinance_api.get_company_info(self.stock_name)
+        if company_details is None or (isinstance(company_details, pd.DataFrame) and company_details.empty):
+            company_details = self.rapidapi_api.get_company_info(self.stock_name)
+            if company_details is None or (isinstance(company_details, pd.DataFrame) and company_details.empty):
+                print(f"Warning: Could not retrieve company details for {self.stock_name}")
+                company_details = {}  # or some default value
+
+        financial_data = self.yfinance_api.get_financial_data(self.stock_name)
+        if financial_data is None or (isinstance(financial_data, pd.DataFrame) and financial_data.empty):
+            financial_data = self.rapidapi_api.get_financial_data(self.stock_name)
+            if financial_data is None or (isinstance(financial_data, pd.DataFrame) and financial_data.empty):
+                print(f"Warning: Could not retrieve financial data for {self.stock_name}")
+                financial_data = {}  # or some default value
+                
         # Combine and process data using Gemini
         combined_data = {
             "prompt": prompt,

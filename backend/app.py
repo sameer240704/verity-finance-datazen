@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 from onboard import *
 from flask_cors import CORS
-import re
 from openai_model import OpenAIModel
+import portfolio_analysis
 import gemini_fin_path
 import sys
 import os
@@ -16,6 +16,11 @@ market_research_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '
 sys.path.append(market_research_path)
 
 from orchestrator import OrchestratorAgent 
+
+portfolio_analysis_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'portfolio_analysis'))
+sys.path.append(portfolio_analysis_path)
+
+from portfolio_analysis import rapidapi
 
 app = Flask(__name__)
 CORS(app)
@@ -209,6 +214,12 @@ def market_analysis_agent():
         print(f"Error: {str(e)}")  # Improved error logging
         return jsonify({"error": "An error occurred while processing your request."}), 500
 
+# =================== PORTFOLIO GENERATION ===========================
+
+@app.route('/portfolio_generation', methods=["GET"])
+def portfolio_generation():
+    portfolio_data = rapidapi.main()  
+    return jsonify({"message": "Portfolio generation successful", "portfolio_data": portfolio_data})
 
 # =================== STATIC APIS ===================
 @app.route('/auto-bank-data', methods=['get'])

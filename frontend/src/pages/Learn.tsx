@@ -1,252 +1,371 @@
-import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { TrendingUp, AlertTriangle, DollarSign, BarChart2 } from "lucide-react";
+import React, { useState } from "react";
+import axios from "axios";
+import DemoReport from "../components/DemoReport";
+import { FileText } from "lucide-react";
 
-// Types
+interface IncomeStatement {
+  EBITDA: number;
+  currency: string;
+  date: string;
+  day: number;
+  earnings_per_share: number;
+  effective_task_rate_percent: number;
+  month: number;
+  net_income: number;
+  net_profit_margin: number;
+  operating_expense: number;
+  revenue: number;
+  year: number;
+}
+
+interface CompanyInfo {
+  income_statement: IncomeStatement[];
+  period: string;
+  symbol: string;
+  type: string;
+}
+
 interface StockData {
-  symbol: string;
-  price: number;
-  peRatio: number;
-  revenueGrowth: number;
-  keyMetrics: string;
-  rationale: string;
+  currentPrice: number;
+  dividendYield: number;
+  numberOfShares: number;
+  purchaseDate: string;
+  purchasePrice: number;
+  stockName: string;
+  tickerSymbol: string;
+  unrealizedGainsLosses: number;
+  weightageInPortfolio: number;
 }
 
-interface RealtimeStock {
-  symbol: string;
-  price: number;
-  change: number;
-  marketCap: string;
+interface BondData {
+  bondType: string;
+  couponRate: number;
+  interestEarned: number;
+  maturityDate: string;
+  principal: number;
+  weightageInPortfolio: number;
+  yieldToMaturity: number;
 }
 
-interface FinancialMetrics {
-  peRatio: number;
-  psRatio: number;
-  revenueGrowth: number;
-  earningsGrowth: number;
-  profitMargin: number;
+interface Stock {
+  company_info: CompanyInfo;
+  stock_data: StockData;
 }
 
-interface MetricCardProps {
-  title: string;
-  value: number;
-  icon: React.ReactNode;
-  description: string;
-  trend?: "positive" | "negative";
+interface ReportData {
+  json_data?: {
+    bonds: BondData[];
+    stocks: { [ticker: string]: Stock };
+  };
+  text_data?: {
+    summary: string;
+    recommendations: string;
+    conclusion: string;
+  };
 }
 
-// Sample Data
-const stockRecommendations: StockData[] = [
-  {
-    symbol: "AAPL",
-    price: 180.5,
-    peRatio: 28,
-    revenueGrowth: 8,
-    keyMetrics: "Services revenue: $20 billion (+12% YoY)",
-    rationale: "Strong growth in services segment",
-  },
-  {
-    symbol: "MSFT",
-    price: 330.25,
-    peRatio: 32,
-    revenueGrowth: 15,
-    keyMetrics: "Cloud revenue: $25 billion (+22% YoY)",
-    rationale: "Dominance in cloud computing",
-  },
-];
+const FinancialDashboard: React.FC = () => {
+  const [isGeneratingReport, setIsGeneratingReport] = useState<boolean>(false);
+  const [report, setReport] = useState<ReportData | null>(null);
 
-const realtimeStocks: RealtimeStock[] = [
-  {
-    symbol: "AAPL",
-    price: 180.5,
-    change: 1.5,
-    marketCap: "$2.8 trillion",
-  },
-  {
-    symbol: "MSFT",
-    price: 330.25,
-    change: 2.0,
-    marketCap: "$2.5 trillion",
-  },
-];
+  const generateReport = async () => {
+    setIsGeneratingReport(true);
 
-const growthData = [
-  { month: "Jan", revenue: 1200 },
-  { month: "Feb", revenue: 1400 },
-  { month: "Mar", revenue: 1300 },
-  { month: "Apr", revenue: 1500 },
-  { month: "May", revenue: 1700 },
-];
+    try {
+      const response = await axios.get<ReportData>(
+        "http://127.0.0.1:5000/portfolio_generation"
+      );
+      setReport(response?.data?.portfolio_data);
+    } catch (error) {
+      console.error("Error fetching report:", error);
+    } finally {
+      setIsGeneratingReport(false);
+    }
+  };
 
-const sampleMetrics: FinancialMetrics = {
-  peRatio: 25.4,
-  psRatio: 3.2,
-  revenueGrowth: 15.7,
-  earningsGrowth: 22.3,
-  profitMargin: 18.5,
-};
+  const formatText = (text: string | undefined): React.ReactNode => {
+    if (!text) return null;
+    const parts = text.split(/(\*\*.*?\*\*|\*)/g).filter(Boolean);
+    return parts.map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return (
+          <span key={index} className="font-bold">
+            {part.slice(2, -2)}
+          </span>
+        );
+      } else if (part === "*") {
+        return <br key={index} />;
+      } else {
+        return part;
+      }
+    });
+  };
 
-const CustomCard = ({ title, icon: Icon, children }) => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden">
-    <div className="px-6 py-4 border-b border-gray-200">
-      <div className="flex items-center">
-        {Icon && <Icon className="mr-2 text-purple-600" size={20} />}
-        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-      </div>
-    </div>
-    <div className="p-6">{children}</div>
-  </div>
-);
-
-const CustomTable = ({ headers, children }) => (
-  <div className="overflow-x-auto">
-    <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-gray-50">
-        <tr>
-          {headers.map((header, index) => (
-            <th
-              key={index}
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              {header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      {children}
-    </table>
-  </div>
-);
-
-const FinancialDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Header Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Smart Reports Dashboard
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Key insights and recommendations for your portfolio
-          </p>
-        </div>
-        {/* Executive Summary */}
-        <CustomCard title="Executive Summary" icon={TrendingUp}>
-          <div className="px-4 pb-4 text-gray-600 leading-relaxed">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-            maiores explicabo ut quas ipsum nemo accusamus aut, veritatis natus,
-            iure maxime. Atque veniam itaque delectus fuga omnis commodi
-            reprehenderit! Id? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Dolores amet similique possimus obcaecati
-            laboriosam nemo dignissimos consequatur cum id tenetur illum tempora
-            sequi ipsum sapiente, dolorem harum ea esse. Incidunt!
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Smart Reports Dashboard
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">
+              Key insights and recommendations for your portfolio
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-purple-50 rounded-lg">
-              <h3 className="font-semibold mb-2">Sector Growth</h3>
-              <p className="text-2xl font-bold text-purple-600">12% YoY</p>
-              <p className="text-sm text-gray-600">Q3 2023</p>
-            </div>
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <h3 className="font-semibold mb-2">Cloud Services</h3>
-              <p className="text-2xl font-bold text-blue-600">$250B</p>
-              <p className="text-sm text-gray-600">+25% from Q2</p>
-            </div>
-            <div className="p-4 bg-green-50 rounded-lg">
-              <h3 className="font-semibold mb-2">AI Revenue</h3>
-              <p className="text-2xl font-bold text-green-600">$50B</p>
-              <p className="text-sm text-gray-600">30% Growth</p>
-            </div>
-          </div>
-        </CustomCard>
 
-        {/* Growth Chart */}
-        <CustomCard title="Revenue Growth Trend" icon={BarChart2}>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={growthData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="revenue" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </CustomCard>
-
-        {/* Stock Recommendations */}
-        <CustomCard title="Stock Recommendations" icon={DollarSign}>
-          <CustomTable
-            headers={[
-              "Stock",
-              "Price",
-              "P/E Ratio",
-              "Growth (YoY)",
-              "Key Metrics",
-              "Rationale",
-            ]}
+          {/* Generate Report Button */}
+          <button
+            onClick={generateReport}
+            disabled={isGeneratingReport}
+            className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 disabled:bg-gray-400"
           >
-            <tbody className="bg-white divide-y divide-gray-200">
-              {stockRecommendations.map((stock) => (
-                <tr key={stock.symbol}>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                    {stock.symbol}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    ${stock.price}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {stock.peRatio}x
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {stock.revenueGrowth}%
-                  </td>
-                  <td className="px-6 py-4">{stock.keyMetrics}</td>
-                  <td className="px-6 py-4">{stock.rationale}</td>
-                </tr>
-              ))}
-            </tbody>
-          </CustomTable>
-        </CustomCard>
+            <FileText className="w-4 h-4" />
+            {isGeneratingReport ? "Generating Report..." : "Generate Report"}
+          </button>
+        </div>
 
-        {/* Real-time Stock Prices */}
-        <CustomCard title="Real-time Stock Prices" icon={AlertTriangle}>
-          <CustomTable headers={["Stock", "Price", "Change (%)", "Market Cap"]}>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {realtimeStocks.map((stock) => (
-                <tr key={stock.symbol}>
-                  <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
-                    {stock.symbol}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    ${stock.price}
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap ${
-                      stock.change >= 0 ? "text-green-600" : "text-red-600"
-                    }`}
+        {!report ? (
+          <DemoReport />
+        ) : (
+          <div className="bg-white p-6 shadow rounded-lg space-y-4">
+            {/* Text Report */}
+            {report?.text_data && (
+              <section className="space-y-6">
+                <div className="text-gray-900">
+                  <h2 className="text-3xl font-bold mb-2">
+                    Portfolio Analysis
+                  </h2>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="border p-4 rounded-md mb-4 bg-gray-50">
+                    <h3 className="text-2xl font-semibold text-gray-700">
+                      <span className="font-bold text-gray-900 text-xl">
+                        Portfolio Summary:
+                      </span>
+                    </h3>
+                    <p className="text-gray-600">
+                      {formatText(report?.text_data?.summary)}
+                    </p>
+                  </div>
+                  <div className="border p-4 rounded-md mb-4 bg-gray-50">
+                    <h3 className="text-2xl font-semibold text-gray-700">
+                      <span className="font-bold text-gray-900 text-xl">
+                        Recommended Stocks:
+                      </span>
+                    </h3>
+                    <p className="text-gray-600">
+                      {formatText(report?.text_data?.recommendations)}
+                    </p>
+                  </div>
+                  <div className="border p-4 rounded-md mb-4 bg-gray-50">
+                    <h3 className="text-2xl font-semibold text-gray-700">
+                      <span className="font-bold text-gray-900 text-xl">
+                        Conclusion:
+                      </span>
+                    </h3>
+                    <p className="text-gray-600">
+                      {formatText(report?.text_data?.conclusion)}
+                    </p>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* JSON Data Report */}
+            {report?.json_data?.stocks && (
+              <section>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  Stocks
+                </h2>
+                {Object.entries(report.json_data.stocks).map(
+                  ([ticker, stock]) => (
+                    <div
+                      key={ticker}
+                      className="border p-6 rounded-md mb-6 bg-gray-50"
+                    >
+                      <h3 className="text-2xl font-semibold text-gray-700 mb-4">
+                        {stock?.stock_data?.stockName} ({ticker})
+                      </h3>
+                      <div className="flex flex-wrap gap-4 mb-4">
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Current Price:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            ${stock?.stock_data?.currentPrice}
+                          </span>
+                        </div>
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Dividend Yield:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            {stock?.stock_data?.dividendYield}%
+                          </span>
+                        </div>
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Number of Shares:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            {stock?.stock_data?.numberOfShares}
+                          </span>
+                        </div>
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Purchase Date:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            {stock?.stock_data?.purchaseDate}
+                          </span>
+                        </div>
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Purchase Price:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            ${stock?.stock_data?.purchasePrice}
+                          </span>
+                        </div>
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Unrealized Gains/Losses:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            ${stock?.stock_data?.unrealizedGainsLosses}
+                          </span>
+                        </div>
+                        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                          <span className="font-medium text-gray-700">
+                            Weightage in Portfolio:
+                          </span>{" "}
+                          <span className="text-gray-600">
+                            {stock?.stock_data?.weightageInPortfolio}%
+                          </span>
+                        </div>
+                      </div>
+                      <h4 className="text-xl font-semibold text-gray-700 mt-2 mb-4">
+                        Income Statements
+                      </h4>
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-gray-200">
+                          <thead>
+                            <tr>
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Date
+                              </th>
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Revenue
+                              </th>
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Net Income
+                              </th>
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Net Profit Margin
+                              </th>
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Earnings Per Share
+                              </th>
+                              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                EBITDA
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white divide-y divide-gray-200">
+                            {stock?.company_info?.income_statement?.map(
+                              (statement, index) => (
+                                <tr key={index}>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    {statement.date}
+                                  </td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    ${statement.revenue}
+                                  </td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    ${statement.net_income}
+                                  </td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    {statement.net_profit_margin}%
+                                  </td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    {statement.earnings_per_share}
+                                  </td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    ${statement.EBITDA}
+                                  </td>
+                                </tr>
+                              )
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )
+                )}
+              </section>
+            )}
+            {report?.json_data?.bonds && (
+              <section>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Bonds</h2>
+                {report.json_data.bonds.map((bond, index) => (
+                  <div
+                    key={index}
+                    className="border p-4 rounded-md mb-4 bg-gray-50"
                   >
-                    {stock.change >= 0 ? "+" : ""}
-                    {stock.change}%
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {stock.marketCap}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </CustomTable>
-        </CustomCard>
+                    <h3 className="text-2xl font-semibold text-gray-700 mb-4">
+                      {bond.bondType}
+                    </h3>
+                    <div className="mb-2">
+                      <span className="font-medium text-gray-700">
+                        Coupon Rate:
+                      </span>{" "}
+                      <span className="text-gray-600">{bond.couponRate}%</span>
+                    </div>
+                    <div className="mb-2">
+                      <span className="font-medium text-gray-700">
+                        Interest Earned:
+                      </span>{" "}
+                      <span className="text-gray-600">
+                        ${bond.interestEarned}
+                      </span>
+                    </div>
+                    <div className="mb-2">
+                      <span className="font-medium text-gray-700">
+                        Maturity Date:
+                      </span>{" "}
+                      <span className="text-gray-600">{bond.maturityDate}</span>
+                    </div>
+                    <div className="mb-2">
+                      <span className="font-medium text-gray-700">
+                        Principal:
+                      </span>{" "}
+                      <span className="text-gray-600">${bond.principal}</span>
+                    </div>
+                    <div className="mb-2">
+                      <span className="font-medium text-gray-700">
+                        Weightage in Portfolio:
+                      </span>{" "}
+                      <span className="text-gray-600">
+                        {bond.weightageInPortfolio}%
+                      </span>
+                    </div>
+                    <div className="mb-2">
+                      <span className="font-medium text-gray-700">
+                        Yield to Maturity:
+                      </span>{" "}
+                      <span className="text-gray-600">
+                        {bond.yieldToMaturity}%
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </section>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

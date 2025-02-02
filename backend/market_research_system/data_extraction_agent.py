@@ -10,8 +10,8 @@ class DataExtractionAgent:
         self.gemini_model = GeminiModel()
         self.yfinance_api = YFinanceAPI()
         self.rapidapi_api = RapidAPI()
-        self.initial_prompt_template = """
-        You are a Data Extraction Agent. Your task is to extract specific information from a text report and structure it into a JSON format.
+        self.sector_prompt_template = """
+        You are a Data Extraction Agent. Your task is to extract specific information from a sector analysis report and structure it into a JSON format.
 
         The report follows a consistent structure with sections for Market Metrics, Sources, and Top 5 Performing Stocks.
 
@@ -68,13 +68,81 @@ class DataExtractionAgent:
         {report_text}
         """
 
-    def run(self, report_filepath, agent_name="ExtractedData"):
+        self.stock_prompt_template = """
+        You are a Data Extraction Agent. Your task is to extract specific information from a stock analysis report and structure it into a JSON format.
+
+        The report follows a consistent structure with sections for Company Details, Financial Analysis, News and Sentiment, Tavily Report, Sources, and Overall Assessment.
+
+        Your output MUST be valid JSON in the following format:
+
+        ```json
+        {{
+          "company_details": {{
+            "company_name": "...",
+            "sector": "...",
+            "industry": "...",
+            "exchange": "..."
+          }},
+          "financial_analysis": {{
+            "ratio_analysis": "...",
+            "profitability": "...",
+            "valuation": "..."
+          }},
+          "news_and_sentiment": {{
+            "recent_news": "...",
+            "sentiment_analysis": "...",
+            "potential_impact": "..."
+          }},
+          "tavily_report": {{
+            "key_insights": "..."
+          }},
+          "sources": [
+            {{
+              "name": "source_1_name",
+              "url": "source_1_url"
+            }},
+            {{
+              "name": "source_2_name",
+              "url": "source_2_url"
+            }},
+            ...
+          ],
+          "overall_assessment": {{
+            "recommendation": "...",
+            "justification": "..."
+          }
+        }}
+        ```
+
+        **Instructions:**
+
+        1. **Company Details:** Extract the company name, sector, industry, and exchange from the "Company Details" section.
+
+        2. **Financial Analysis:** Extract the ratio analysis, profitability, and valuation information from the "Financial Analysis" section.
+
+        3. **News and Sentiment:** Extract the recent news, sentiment analysis, and potential impact from the "News and Sentiment" section.
+
+        4. **Tavily Report:** Extract the key insights from the "Tavily Report" section.
+
+        5. **Sources:** Extract the source names and URLs from the "Sources" section. Use regular expressions to find the URLs.
+
+        6. **Overall Assessment:** Extract the recommendation and justification from the "Overall Assessment" section.
+
+        **Input Report:**
+
+        {report_text}
         """
-        Extracts data from the given report file and saves it as a JSON file.
+
+
+    def run(self, report_filepath, agent_name="ExtractedData", agent_type="sector"):
+        """
+        Extracts data from the given report file, saves the raw Gemini output as a .txt file,
+        and then attempts to extract data using regex as a fallback if Gemini's output is not valid JSON.
 
         Args:
             report_filepath: The path to the text report file.
-            agent_name: The name of the agent (used for the output filename).
+            agent_name: The name of the agent (used for the output filenames).
+            agent_type: The type of agent ("sector" or "stock").
         """
         try:
             with open(report_filepath, "r") as f:
@@ -83,342 +151,284 @@ class DataExtractionAgent:
             print(f"Error: Report file not found at {report_filepath}")
             return
 
-        prompt = self.initial_prompt_template.format(report_text=report_text)
+        if agent_type == "sector":
+            prompt = self.sector_prompt_template.format(report_text=report_text)
+        elif agent_type == "stock":
+            prompt = self.stock_prompt_template.format(report_text=report_text)
+        else:
+            print("Error: Invalid agent type specified.")
+            return
+
         response = self.gemini_model.get_response(prompt)
 
         print("-" * 30)
-        print("Initial Data Extraction Agent Output:")
+        print(f"Data Extraction Agent Output ({agent_type.upper()}):")
         print(response)
         print("-" * 30)
 
-        # Extract JSON from the response (assuming it's within ```json ... ```)
-        json_match = re.search(r"```json\s*([\s\S]*?)\s*```", response)
-        if json_match:
-            try:
-                extracted_data = json.loads(json_match.group(1))
-
-                # Save the extracted JSON data to a .json file
-                reports_dir = "reports"
-                os.makedirs(reports_dir, exist_ok=True)
-                output_filepath = os.path.join(reports_dir, f"{agent_name}.json")  # Changed extension to .json
-                with open(output_filepath, "w") as f:
-                    json.dump(extracted_data, f, indent=4)
-                print(f"Extracted JSON data saved to {output_filepath}")
-
-                return extracted_data  # Return the parsed JSON data
-
-            except json.JSONDecodeError:
-                print("Error: Invalid JSON format in Gemini's output.")
-        else:
-            print("Error: No JSON block found in Gemini's output.")
-
-        # Save the raw Gemini output to a text file (for debugging)
+        # Save the raw Gemini output to a text file
         reports_dir = "reports"
         os.makedirs(reports_dir, exist_ok=True)
-        output_filepath = os.path.join(reports_dir, f"{agent_name}_raw.txt")
-        with open(output_filepath, "w") as f:
+        raw_output_filepath = os.path.join(reports_dir, f"{agent_name}_raw.txt")
+        with open(raw_output_filepath, "w") as f:
             f.write(response)
-        print(f"Raw Gemini output saved to {output_filepath}")
+        print(f"Raw Gemini output saved to {raw_output_filepath}")
 
-        return None  # Return None if JSON extraction fails
+        # Attempt to parse the response as JSON
+        try:
+            # Remove ```json and ``` using regex
+            response = re.sub(r"```json|```", "", response)
+            data_json = json.loads(response)
+            print(f"Successfully parsed Gemini response as JSON ({agent_type.upper()}).")
+        except json.JSONDecodeError:
+            print(f"Error: Gemini response is not valid JSON ({agent_type.upper()}). Using regex as fallback.")
+            if agent_type == "sector":
+                data_json = self.extract_data_to_json_with_regex_sector(report_text)
+            elif agent_type == "stock":
+                data_json = self.extract_data_to_json_with_regex_stock(report_text)
+            else:
+                print("Error: Invalid agent type specified.")
+                return
 
+        return data_json
 
-# import re
-# import json
-# import os
-# from models.gemini_model import GeminiModel
-# from utils.yfinance_api import YFinanceAPI
-# from utils.rapidapi_api import RapidAPI
+    def extract_data_to_json_with_regex_sector(self, report_text):
+        """
+        Extracts data from the sector report text using regex and creates a JSON object. This is a fallback method.
+        """
+        data_json = {
+            "market_metrics": {},
+            "sources": [],
+            "top_5_stocks": []
+        }
 
-# class DataExtractionAgent:
-#     def __init__(self):
-#         self.gemini_model = GeminiModel()
-#         self.yfinance_api = YFinanceAPI()
-#         self.rapidapi_api = RapidAPI()
-#         self.initial_prompt_template = """
-#         You are a Data Extraction Agent. Your task is to extract specific information from a text report and structure it into a JSON format.
+        # Market Metrics
+        market_metrics_section = re.search(r"# Market Metrics(.*?)(?=#|$)", report_text, re.DOTALL)
+        if market_metrics_section:
+            market_metrics_text = market_metrics_section.group(1)
+            for line in market_metrics_text.split("\n"):
+                if ":" in line:
+                    key, value = line.split(":", 1)
+                    data_json["market_metrics"][key.strip()] = value.strip()
 
-#         The report follows a consistent structure with sections for Market Metrics, Sources, and Top 5 Performing Stocks.
+        # Sources
+        sources_section = re.search(r"# Sources(.*?)(?=#|$)", report_text, re.DOTALL)
+        if sources_section:
+            sources_text = sources_section.group(1)
+            data_json["sources"] = self.extract_sources(sources_text)
 
-#         Your output MUST be valid JSON in the following format:
+        # Top 5 Performing Stocks
+        top_stocks_section = re.search(r"# Top 5 Performing Stocks(.*?)(?=#|$)", report_text, re.DOTALL)
+        if top_stocks_section:
+            top_stocks_text = top_stocks_section.group(1)
+            data_json["top_5_stocks"] = self.extract_top_stocks(top_stocks_text)
 
-#         ```json
-#         {{
-#           "market_metrics": {{
-#             "metric_1_name": "metric_1_value",
-#             "metric_2_name": "metric_2_value",
-#             ...
-#           }},
-#           "sources": [
-#             {{
-#               "name": "source_1_name",
-#               "url": "source_1_url"
-#             }},
-#             {{
-#               "name": "source_2_name",
-#               "url": "source_2_url"
-#             }},
-#             ...
-#           ],
-#           "top_5_stocks": [
-#             {{
-#               "stock_name": "stock_1_name",
-#               "ticker": "stock_1_ticker",
-#               "current_price": "stock_1_current_price",
-#               "30_day_performance": "stock_1_30_day_performance",
-#               "justification": "stock_1_justification"
-#             }},
-#             {{
-#               "stock_name": "stock_2_name",
-#               "ticker": "stock_2_ticker",
-#               "current_price": "stock_2_current_price",
-#               "30_day_performance": "stock_2_30_day_performance",
-#               "justification": "stock_2_justification"
-#             }},
-#             ...
-#           ]
-#         }}
-#         ```
+        return data_json
 
-#         **Instructions:**
+    def extract_data_to_json_with_regex_stock(self, report_text):
+        data_json = {}
 
-#         1. **Market Metrics:** Extract all numerical data from the "Market Metrics" section. The keys should be descriptive metric names (e.g., "market_size", "growth_rate"), and the values should be the corresponding numerical values as strings (e.g., "1.5 Trillion USD", "7.5%").
+        # Company Details
+        company_details_match = re.search(r"## Company Details(.*?)(?=(##|$))", report_text, re.DOTALL)
+        if company_details_match:
+            data_json["company_details"] = self.extract_company_details(company_details_match.group(1))
 
-#         2. **Sources:** Extract the source names and URLs from the "Sources" section. Use regular expressions to find the URLs.
+        # Financial Analysis
+        financial_analysis_match = re.search(r"## Financial Analysis(.*?)(?=(##|$))", report_text, re.DOTALL)
+        if financial_analysis_match:
+            data_json["financial_analysis"] = self.extract_financial_analysis(financial_analysis_match.group(1))
 
-#         3. **Top 5 Performing Stocks:** Extract the stock name, ticker, and justification from the "Top 5 Performing Stocks" section. For each stock, use yfinance or RapidAPI to get the current price and 30-day performance (percentage change).
+        # News and Sentiment
+        news_sentiment_match = re.search(r"## News and Sentiment(.*?)(?=(##|$))", report_text, re.DOTALL)
+        if news_sentiment_match:
+            data_json["news_and_sentiment"] = self.extract_news_and_sentiment(news_sentiment_match.group(1))
 
-#         **Input Report:**
+        # Tavily Report
+        tavily_report_match = re.search(r"## Tavily Report(.*?)(?=(##|$))", report_text, re.DOTALL)
+        if tavily_report_match:
+            data_json["tavily_report"] = self.extract_tavily_report(tavily_report_match.group(1))
 
-#         {report_text}
-#         """
-#         self.refinement_prompt_template = """
-#         You are a JSON Refinement Agent. Your task is to take an existing JSON output from a Data Extraction Agent, and refine it to ensure it is perfectly formatted and contains all required data types.
+        # Sources
+        sources_match = re.search(r"## Sources(.*?)(?=(##|$))", report_text, re.DOTALL)
+        if sources_match:
+            data_json["sources"] = self.extract_sources(sources_match.group(1))
 
-#         **Input JSON:**
+        # Overall Assessment
+        overall_assessment_match = re.search(r"## Overall Assessment(.*?)(?=(##|$))", report_text, re.DOTALL)
+        if overall_assessment_match:
+            data_json["overall_assessment"] = self.extract_overall_assessment(overall_assessment_match.group(1))
 
-#         ```json
-#         {input_json}
-#         ```
+        return data_json
 
-#         **Instructions:**
+    def extract_company_details(self, text):
+        """
+        Extracts company details using regex.
+        """
+        details = {}
+        # Improved regex patterns to capture company details
+        company_name_match = re.search(r"- \*\*Company Name:\*\* (.*)", text)
+        sector_match = re.search(r"- \*\*Sector:\*\* (.*)", text)
+        industry_match = re.search(r"- \*\*Industry:\*\* (.*)", text)
+        exchange_match = re.search(r"- \*\*Exchange:\*\* (.*)", text)
 
-#         1. **Validate the JSON:** Ensure the input is a valid JSON object.
-#         2. **Correct any formatting errors:** Fix any issues with the structure, such as missing commas, incorrect quotes, or invalid key-value pairs.
-#         3. **Verify data types:** Make sure all values have the correct data types as specified in the original prompt.
-#         4. **Add missing data:** If any required data is missing, use your knowledge or reasoning to fill in the gaps as best as possible.
-#         5. **Output:** Generate a new, perfectly formatted JSON object that strictly adheres to the following format:
+        if company_name_match:
+            details["company_name"] = company_name_match.group(1).strip()
+        if sector_match:
+            details["sector"] = sector_match.group(1).strip()
+        if industry_match:
+            details["industry"] = industry_match.group(1).strip()
+        if exchange_match:
+            details["exchange"] = exchange_match.group(1).strip()
 
-#         ```json
-#         {{
-#           "market_metrics": {{
-#             "metric_1_name": "metric_1_value",
-#             "metric_2_name": "metric_2_value",
-#             ...
-#           }},
-#           "sources": [
-#             {{
-#               "name": "source_1_name",
-#               "url": "source_1_url"
-#             }},
-#             {{
-#               "name": "source_2_name",
-#               "url": "source_2_url"
-#             }},
-#             ...
-#           ],
-#           "top_5_stocks": [
-#             {{
-#               "stock_name": "stock_1_name",
-#               "ticker": "stock_1_ticker",
-#               "current_price": "stock_1_current_price",
-#               "30_day_performance": "stock_1_30_day_performance",
-#               "justification": "stock_1_justification"
-#             }},
-#             {{
-#               "stock_name": "stock_2_name",
-#               "ticker": "stock_2_ticker",
-#               "current_price": "stock_2_current_price",
-#               "30_day_performance": "stock_2_30_day_performance",
-#               "justification": "stock_2_justification"
-#             }},
-#             ...
-#           ]
-#         }}
-#         ```
+        return details
 
-#         **Strictly adhere to the JSON format and data types. Do not include any text outside of the JSON object.**
-#         """
+    def extract_financial_analysis(self, text):
+        """
+        Extracts financial analysis details using regex.
+        """
+        analysis = {}
+        # Regex patterns to capture financial analysis details
+        ratio_analysis_match = re.search(r"- \*\*Ratio Analysis:\*\* (.*?)(?=-|$)", text, re.DOTALL)
+        profitability_match = re.search(r"- \*\*Profitability:\*\* (.*?)(?=-|$)", text, re.DOTALL)
+        valuation_match = re.search(r"- \*\*Valuation:\*\* (.*?)(?=-|$)", text, re.DOTALL)
 
-#     def run(self, report_filepath, agent_name="ExtractedData"):
-#         """
-#         Extracts data from the given report file, refines it using Gemini, and saves it as a JSON file.
+        if ratio_analysis_match:
+            analysis["ratio_analysis"] = ratio_analysis_match.group(1).strip()
+        if profitability_match:
+            analysis["profitability"] = profitability_match.group(1).strip()
+        if valuation_match:
+            analysis["valuation"] = valuation_match.group(1).strip()
 
-#         Args:
-#             report_filepath: The path to the text report file.
-#             agent_name: The name of the agent (used for the output filename).
-#         """
-#         try:
-#             with open(report_filepath, "r") as f:
-#                 report_text = f.read()
-#         except FileNotFoundError:
-#             print(f"Error: Report file not found at {report_filepath}")
-#             return
+        return analysis
 
-#         # Initial data extraction using the first prompt
-#         initial_prompt = self.initial_prompt_template.format(report_text=report_text)
-#         initial_response = self.gemini_model.get_response(initial_prompt)
+    def extract_news_and_sentiment(self, text):
+        """
+        Extracts news and sentiment details using regex.
+        """
+        news_sentiment = {}
+        # Regex patterns to capture news and sentiment details
+        recent_news_match = re.search(r"- \*\*Recent News:\*\* (.*?)(?=-|$)", text, re.DOTALL)
+        sentiment_analysis_match = re.search(r"- \*\*Sentiment Analysis:\*\* (.*?)(?=-|$)", text, re.DOTALL)
+        potential_impact_match = re.search(r"- \*\*Potential Impact:\*\* (.*?)(?=-|$)", text, re.DOTALL)
 
-#         print("-" * 30)
-#         print("Initial Data Extraction Agent Output:")
-#         print(initial_response)
-#         print("-" * 30)
+        if recent_news_match:
+            news_sentiment["recent_news"] = recent_news_match.group(1).strip()
+        if sentiment_analysis_match:
+            news_sentiment["sentiment_analysis"] = sentiment_analysis_match.group(1).strip()
+        if potential_impact_match:
+            news_sentiment["potential_impact"] = potential_impact_match.group(1).strip()
 
-#         try:
-#             # Attempt to parse the initial response as JSON
-#             initial_data_json = json.loads(initial_response)
-#             print("Successfully parsed initial Gemini response as JSON.")
-#         except json.JSONDecodeError:
-#             print("Error: Initial Gemini response is not valid JSON. Using regex as fallback.")
-#             initial_data_json = self.extract_data_to_json_with_regex(report_text)
+        return news_sentiment
 
-#         # Fetch stock data and update the JSON
-#         initial_data_json = self.fetch_stock_data(initial_data_json)
+    def extract_tavily_report(self, text):
+        """
+        Extracts key insights from Tavily report using regex.
+        """
+        tavily_report = {}
+        # Regex pattern to capture key insights from Tavily report
+        key_insights_match = re.search(r"- \*\*Key Insights:\*\* (.*?)(?=-|$)", text, re.DOTALL)
 
-#         # Refine the JSON using the second prompt
-#         refinement_prompt = self.refinement_prompt_template.format(input_json=json.dumps(initial_data_json))
-#         refined_response = self.gemini_model.get_response(refinement_prompt)
+        if key_insights_match:
+            tavily_report["key_insights"] = key_insights_match.group(1).strip()
 
-#         print("-" * 30)
-#         print("Refined Data Extraction Agent Output:")
-#         print(refined_response)
-#         print("-" * 30)
+        return tavily_report
 
-#         try:
-#             # Attempt to parse the refined response as JSON
-#             data_json = json.loads(refined_response)
-#             print("Successfully parsed refined Gemini response as JSON.")
-#         except json.JSONDecodeError:
-#             print("Error: Refined Gemini response is not valid JSON. Using initial data as fallback.")
-#             data_json = initial_data_json
+    def extract_overall_assessment(self, text):
+        """
+        Extracts overall assessment details using regex.
+        """
+        assessment = {}
+        # Regex patterns to capture overall assessment details
+        recommendation_match = re.search(r"- \*\*Recommendation:\*\* (.*)", text)
+        justification_match = re.search(r"- \*\*Justification:\*\* (.*?)(?=-|$)", text, re.DOTALL)
 
-#         # Save the JSON to a file
-#         self.save_data_to_file(data_json, agent_name)
+        if recommendation_match:
+            assessment["recommendation"] = recommendation_match.group(1).strip()
+        if justification_match:
+            assessment["justification"] = justification_match.group(1).strip()
 
-#         return data_json
+        return assessment
 
-#     def extract_data_to_json_with_regex(self, report_text):
-#         """
-#         Extracts data from the report text using regex and creates a JSON object. This is a fallback method.
-#         """
-#         data_json = {
-#             "market_metrics": {},
-#             "sources": [],
-#             "top_5_stocks": []
-#         }
-
-#         # Market Metrics
-#         market_metrics_section = re.search(r"# Market Metrics(.*?)(?=#|$)", report_text, re.DOTALL)
-#         if market_metrics_section:
-#             market_metrics_text = market_metrics_section.group(1)
-#             for line in market_metrics_text.split("\n"):
-#                 if ":" in line:
-#                     key, value = line.split(":", 1)
-#                     data_json["market_metrics"][key.strip()] = value.strip()
-
-#         # Sources
-#         sources_section = re.search(r"# Sources(.*?)(?=#|$)", report_text, re.DOTALL)
-#         if sources_section:
-#             sources_text = sources_section.group(1)
-#             data_json["sources"] = self.extract_sources(sources_text)
-
-#         # Top 5 Performing Stocks
-#         top_stocks_section = re.search(r"# Top 5 Performing Stocks(.*?)(?=#|$)", report_text, re.DOTALL)
-#         if top_stocks_section:
-#             top_stocks_text = top_stocks_section.group(1)
-#             data_json["top_5_stocks"] = self.extract_top_stocks(top_stocks_text)
-
-#         return data_json
-
-#     def extract_sources(self, text):
-#         """
-#         Extracts source URLs using regex.
-#         """
-#         sources = []
-#         source_matches = re.findall(r"(\S+)\s+\((https?://.*?)\)", text)
-#         for source_name, url in source_matches:
-#             sources.append({"name": source_name, "url": url})
-#         return sources
+    def extract_sources(self, text):
+        """
+        Extracts source URLs using regex.
+        """
+        sources = []
+        source_matches = re.findall(r"(\S+)\s+\((https?://.*?)\)", text)
+        for source_name, url in source_matches:
+            sources.append({"name": source_name, "url": url})
+        return sources
     
-#     def extract_top_stocks(self, text):
-#         """
-#         Extracts top stock information using regex.
-#         """
-#         stocks = []
-#         stock_matches = re.findall(r"-\s*\*\*([A-Za-z\s&.]+)\s*\((\w+)\):\*\*\s*(.*?)(?=-|$)", text, re.DOTALL)
-#         for stock_name, ticker, justification in stock_matches:
-#             stocks.append({
-#                 "stock_name": stock_name.strip(),
-#                 "ticker": ticker.strip(),
-#                 "justification": justification.strip()
-#             })
-#         return stocks
+    def extract_top_stocks(self, text):
+        """
+        Extracts top stock information using regex.
+        """
+        stocks = []
+        # Regex to find stock name, ticker, and justification
+        stock_matches = re.findall(r"-\s*\*\*([A-Za-z\s&.]+)\s*\((\w+)\):\*\*\s*(.*?)(?=-|$)", text, re.DOTALL)
+        for stock_name, ticker, justification in stock_matches:
+            stocks.append({
+                "stock_name": stock_name.strip(),
+                "ticker": ticker.strip(),
+                "justification": justification.strip()
+            })
+        return stocks
 
-#     def fetch_stock_data(self, data_json):
-#         """
-#         Fetches current price and 30-day performance for each stock using yfinance or RapidAPI.
-#         """
-#         if "top_5_stocks" not in data_json:
-#             return data_json
+    def fetch_stock_data(self, data_json):
+        """
+        Fetches current price and 30-day performance for each stock using yfinance or RapidAPI.
+        """
+        if "top_5_stocks" not in data_json:
+            return data_json
         
-#         for stock_data in data_json["top_5_stocks"]:
-#             ticker = stock_data["ticker"]
-#             try:
-#                 # Try yfinance first
-#                 current_price = self.yfinance_api.get_current_price(ticker)
-#                 if current_price is None:
-#                     raise ValueError("yfinance did not return a current price.")
-#                 stock_data["current_price"] = current_price
+        for stock_data in data_json["top_5_stocks"]:
+            ticker = stock_data["ticker"]
+            try:
+                # Try yfinance first
+                current_price = self.yfinance_api.get_current_price(ticker)
+                if current_price is None:
+                    raise ValueError("yfinance did not return a current price.")
+                stock_data["current_price"] = current_price
 
-#                 performance_30d = self.yfinance_api.get_performance(ticker, period="30d")
-#                 if performance_30d is None:
-#                   raise ValueError("yfinance did not return a 30-day performance.")
-#                 stock_data["30_day_performance"] = performance_30d
+                performance_30d = self.yfinance_api.get_performance(ticker, period="30d")
+                if performance_30d is None:
+                  raise ValueError("yfinance did not return a 30-day performance.")
+                stock_data["30_day_performance"] = performance_30d
 
-#             except Exception as e:
-#                 print(f"Error fetching stock data from yfinance for {ticker}: {e}")
-#                 try:
-#                     # Fallback to RapidAPI
-#                     current_price = self.rapidapi_api.get_current_price(ticker)
-#                     if current_price is None:
-#                         raise ValueError("RapidAPI did not return a current price.")
-#                     stock_data["current_price"] = current_price
+            except Exception as e:
+                print(f"Error fetching stock data from yfinance for {ticker}: {e}")
+                try:
+                    # Fallback to RapidAPI
+                    current_price = self.rapidapi_api.get_current_price(ticker)
+                    if current_price is None:
+                        raise ValueError("RapidAPI did not return a current price.")
+                    stock_data["current_price"] = current_price
 
-#                     performance_30d = self.rapidapi_api.get_performance(ticker, period="30d")
-#                     if performance_30d is None:
-#                         raise ValueError("RapidAPI did not return a 30-day performance.")
-#                     stock_data["30_day_performance"] = performance_30d
+                    performance_30d = self.rapidapi_api.get_performance(ticker, period="30d")
+                    if performance_30d is None:
+                        raise ValueError("RapidAPI did not return a 30-day performance.")
+                    stock_data["30_day_performance"] = performance_30d
 
-#                 except Exception as e_rapid:
-#                     print(f"Error fetching stock data from RapidAPI for {ticker}: {e_rapid}")
-#                     stock_data["current_price"] = "N/A"
-#                     stock_data["30_day_performance"] = "N/A"
+                except Exception as e_rapid:
+                    print(f"Error fetching stock data from RapidAPI for {ticker}: {e_rapid}")
+                    stock_data["current_price"] = "N/A"
+                    stock_data["30_day_performance"] = "N/A"
 
-#         return data_json
+        return data_json
 
-#     def save_data_to_file(self, data_json, agent_name):
-#         """
-#         Saves the extracted data to a JSON file.
-#         """
-#         reports_dir = "reports"
-#         os.makedirs(reports_dir, exist_ok=True)
+    def save_data_to_file(self, data_json, agent_name):
+        """
+        Saves the extracted data to a JSON file.
+        """
+        reports_dir = "reports"
+        os.makedirs(reports_dir, exist_ok=True)
 
-#         filename = f"{agent_name}_report.json"
-#         filepath = os.path.join(reports_dir, filename)
+        filename = f"{agent_name}_report.json"
+        filepath = os.path.join(reports_dir, filename)
 
-#         try:
-#             with open(filepath, "w") as f:
-#                 json.dump(data_json, f, indent=4)
-#             print(f"Data saved to {filepath}")
-#         except Exception as e:
-#             print(f"Error saving JSON to file: {e}")
+        try:
+            with open(filepath, "w") as f:
+                json.dump(data_json, f, indent=4)
+            print(f"Data saved to {filepath}")
+        except Exception as e:
+            print(f"Error saving JSON to file: {e}")
