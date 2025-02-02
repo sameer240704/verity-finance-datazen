@@ -249,8 +249,6 @@ const AgentsPage = () => {
       return;
     }
 
-    console.log("Agent Data:", agent);
-
     if (agent.name === "Tech Trend Analyzer") {
       navigate("/portfolio/agents/sector/tech-trend-analyzer");
     }
@@ -500,7 +498,8 @@ const AgentsPage = () => {
 
                     {/* Report Actions */}
                     <div className="mt-4 flex gap-2">
-                      {agent.hasReport || agent.name==='Tech Trend Analyzer' ? (
+                      {agent.hasReport ||
+                      agent.name === "Tech Trend Analyzer" ? (
                         <button
                           onClick={(e) => handleOpenReport(e, agent)}
                           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 transition-colors"
