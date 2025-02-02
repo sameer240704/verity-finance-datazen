@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Bot, Trash2, X, FileText, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, useNavigate, useParams } from "react-router-dom";
+import ReportDisplay from "./ReportDisplay";
+import axios from "axios";
 
 interface Agent {
   id: string;
@@ -174,6 +176,7 @@ const AgentsPage = () => {
   const [generatingReportFor, setGeneratingReportFor] = useState<string | null>(
     null
   );
+  const [data, setData] = useState(null);
 
   // Load agents from localStorage on component mount
   useEffect(() => {
@@ -239,14 +242,34 @@ const AgentsPage = () => {
     e.stopPropagation();
     setGeneratingReportFor(agentId);
 
-    // Simulate report generation
+    const agent = agents.find((agent) => agent.id === agentId);
+    if (!agent) {
+      console.error("Agent not found!");
+      setGeneratingReportFor(null);
+      return;
+    }
+
+    console.log("Agent Data:", typeof agent);
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const config = {
+        method: "post",
+        url: "http://127.0.0.1:5000/market-analysis-agent",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: agent,
+      };
+
+      const response = await axios.request(config);
+      console.log("Response Data:", response.data);
+      
+      localStorage.setItem("report", JSON.stringify(response.data));
       setAgents((prev) =>
-        prev.map((agent) =>
-          agent.id === agentId ? { ...agent, hasReport: true } : agent
-        )
+        prev.map((a) => (a.id === agentId ? { ...a, hasReport: true } : a))
       );
+    } catch (error) {
+      console.error("Error creating report:", error);
     } finally {
       setGeneratingReportFor(null);
     }
@@ -256,8 +279,10 @@ const AgentsPage = () => {
 
   const handleOpenReport = (e: React.MouseEvent, agent: Agent) => {
     e.stopPropagation();
-    navigate(`${agent.name.toLowerCase().replace(/\s/g, "-")}`);
+    navigate(`${agent.scope}/${agent.name.toLowerCase().replace(/\s/g, "-")}`);
   };
+
+  console.log("Agents Data:", data);
 
   const handleUpdateFrequencyChange = (
     agentId: string,
