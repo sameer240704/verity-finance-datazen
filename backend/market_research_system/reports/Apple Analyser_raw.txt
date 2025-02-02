@@ -1,42 +1,46 @@
 ```json
 {
   "market_metrics": {
-    "revenue": "$391 billion",
-    "net_income": "$93.7 billion",
-     "P/E_ratio": "33.5x",
-    "P/B_ratio": "47x",
-    "D/E_ratio": "1.9x",
-     "EPS": "$6.05",
-     "gross_margin": "43%",
-      "operating_margin": "29%",
-    "net_margin": "24%"
+    "total_debt": "$119.059 billion",
+    "market_cap": "$3.54 trillion",
+    "quarterly_revenue": "$391.035 billion",
+    "net_income": "$93.736 billion",
+    "trailing_pe_ratio": "37.46",
+    "forward_pe_ratio": "28.48",
+    "debt_to_equity_ratio": "~0.34",
+    "earnings_per_share": "$4.69-$5.20",
+    "gross_margin": "40%-43%",
+    "operating_margin": "~30%",
+    "net_profit_margin": "23.85%",
+    "target_mean_price": "$251.83",
+    "current_price_range": "$170-$190"
   },
   "sources": [
     {
       "name": "Seeking Alpha",
-      "url": "https://seekingalpha.com/"
+      "url": "https://seekingalpha.com"
     },
     {
       "name": "MarketBeat",
-      "url": "https://www.marketbeat.com/"
+      "url": "https://www.marketbeat.com"
     },
     {
       "name": "Yahoo Finance",
-      "url": "https://finance.yahoo.com/"
+      "url": "https://finance.yahoo.com"
     },
     {
-      "name": "Nasdaq",
-      "url": "https://www.nasdaq.com/"
+      "name": "Nasdaq News",
+      "url": "https://www.nasdaq.com"
     }
   ],
-    "top_5_stocks": [
+  "top_5_stocks": [
     {
-        "stock_name": "Apple Inc.",
-        "ticker": "AAPL",
-        "current_price": "193.79",
-        "30_day_performance": "0.02",
-        "justification": "Apple is an exceptional company with strong fundamentals, an extensive ecosystem, and leadership in innovation. However, its elevated valuation, coupled with concerns over stagnating iPhone sales and macroeconomic uncertainties, makes the stock less favorable for new purchases at current levels."
+      "stock_name": "Apple Inc.",
+      "ticker": "AAPL",
+      "current_price": "176.44",
+      "30_day_performance": "-0.039",
+       "justification": "Despite short-term challenges like iPhone sales pressure and regulatory risks, Apple remains a fundamentally strong company with a history of resilience. Its diversified revenue streams (services, wearables) and innovation potential (Vision Pro, AI) underpin its long-term growth outlook."
     }
-   ]
+  ]
 }
 ```
