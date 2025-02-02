@@ -31,5 +31,16 @@
         "unrealizedGainsLosses": -12339.36,
         "dividendYield": 0.0,
         "weightageInPortfolio": 14.29
+    },
+    {
+        "stockName": "TCS",
+        "tickerSymbol": "TCS.NS",
+        "numberOfShares": 50,
+        "purchasePrice": 3200,
+        "purchaseDate": "",
+        "currentPrice": 4073.15,
+        "unrealizedGainsLosses": 43657.5,
+        "dividendYield": 2.8,
+        "weightageInPortfolio": 61.86
     }
 ]

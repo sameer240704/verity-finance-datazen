@@ -80,22 +80,20 @@ class OrchestratorAgent:
 
             # Run Stock Analysis Agents
             stock_data_output = stock_data_collection_agent.run()
-            print(f"stock_data_output: {stock_data_output}")
 
             financial_analysis_input = data_validation_agent.validate(stock_data_output)
             news_sentiment_input = data_validation_agent.validate(stock_data_output)
 
-            print(f"financial_analysis_input: {financial_analysis_input}")
-            print(f"news_sentiment_input: {news_sentiment_input}")
-
             financial_analysis_output = financial_analysis_agent.run(financial_analysis_input)
             news_sentiment_output = news_sentiment_analysis_agent.run(news_sentiment_input)
 
-            print(f"financial_analysis_output: {financial_analysis_output}")
-            print(f"news_sentiment_output: {news_sentiment_output}")
+            # Escape curly braces in the outputs before passing to stock_reporting_agent
+            stock_data_output_escaped = self.escape_curly_braces(stock_data_output)
+            financial_analysis_output_escaped = self.escape_curly_braces(financial_analysis_output)
+            news_sentiment_output_escaped = self.escape_curly_braces(news_sentiment_output)
 
             final_report = stock_reporting_agent.run(
-                stock_data_output, financial_analysis_output, news_sentiment_output, agent_name
+                stock_data_output_escaped, financial_analysis_output_escaped, news_sentiment_output_escaped, agent_name
             )
             print(final_report)
 
@@ -106,8 +104,14 @@ class OrchestratorAgent:
                 f.write(final_report)
 
             # Extract data to JSON using the DataExtractionAgent
-            extracted_data = self.data_extraction_agent.run(report_filepath, agent_name, agent_type="stock")  # Pass agent_type
+            extracted_data = self.data_extraction_agent.run(report_filepath, agent_name, agent_type="stock")
             print("Extracted JSON:", extracted_data)
 
         else:
             print("Invalid agent type.")
+
+    def escape_curly_braces(self, text):
+        """Escapes curly braces in a string by doubling them."""
+        if isinstance(text, dict):
+            return json.dumps(text)
+        return text.replace("{", "{{").replace("}", "}}")

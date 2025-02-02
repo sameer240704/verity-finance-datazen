@@ -174,10 +174,8 @@ class DataExtractionAgent:
             f.write(response)
         print(f"Raw Gemini output saved to {raw_output_filepath}")
 
-        # Attempt to parse the response as JSON
         try:
-            # Remove ```json and ``` using regex
-            response = re.sub(r"```json|```", "", response)
+            # Attempt to parse the response as JSON
             data_json = json.loads(response)
             print(f"Successfully parsed Gemini response as JSON ({agent_type.upper()}).")
         except json.JSONDecodeError:
@@ -189,6 +187,9 @@ class DataExtractionAgent:
             else:
                 print("Error: Invalid agent type specified.")
                 return
+
+        # Save the JSON to a file
+        self.save_data_to_file(data_json, agent_name)
 
         return data_json
 
@@ -226,6 +227,9 @@ class DataExtractionAgent:
         return data_json
 
     def extract_data_to_json_with_regex_stock(self, report_text):
+        """
+        Extracts data from the stock report text using regex and creates a JSON object. This is a fallback method.
+        """
         data_json = {}
 
         # Company Details

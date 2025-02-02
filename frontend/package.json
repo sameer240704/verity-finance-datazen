@@ -22,10 +22,12 @@
     "react-flow": "^1.0.3",
     "react-loading-indicators": "^1.0.0",
     "react-router-dom": "^6.22.3",
+    "react-slick": "^0.30.3",
     "react-top-loading-bar": "^3.0.2",
     "reactflow": "^11.11.4",
     "reactour": "^1.19.4",
     "recharts": "^2.12.2",
+    "slick-carousel": "^1.8.1",
     "sonner": "^1.7.2",
     "styled-components": "^5.3.11"
   },
