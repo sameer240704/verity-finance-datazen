@@ -13,7 +13,7 @@ class OpenAIModel:
         endpoint_url (str): The URL of the OpenAI API endpoint for chat completions.
         """
         self.api_key = api_key
-        self.endpoint_url = 'https://chira-m335jmgy-northcentralus.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview'
+        self.endpoint_url = '(your_openai_endpoint)'
         self.headers = {
             'Content-Type': 'application/json',
             'api-key': self.api_key,

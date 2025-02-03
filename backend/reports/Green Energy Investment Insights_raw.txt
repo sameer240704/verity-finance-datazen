@@ -1,0 +1,97 @@
+```json
+{
+  "market_metrics": {
+    "global_renewable_energy_market_size": "$1.3 trillion",
+    "solar_energy_market_value": "$320 billion",
+    "wind_energy_market_value": "$220 billion",
+    "us_solar_market_value": "$25 billion",
+    "us_wind_energy_market_value": "$21 billion",
+    "solar_energy_historical_cagr_2020_2023": "20%",
+    "solar_energy_projected_cagr_2023_2030": "15-17%",
+    "wind_energy_historical_cagr_2020_2023": "12%",
+    "solar_installations_2023": "300 GW",
+    "solar_installations_yoy_growth_2023": "25%",
+     "wind_installations_2023": "90-100 GW",
+    "wind_installations_yoy_growth_2023": "11%",
+    "southeast_asia_latin_america_cagr": "25-30%",
+    "solar_energy_market_share": "45%",
+    "residential_solar_adoption_share": "55%",
+    "commercial_solar_projects_share": "60%",
+    "wind_energy_market_share": "29%",
+    "europe_offshore_wind_capacity_share": "60%",
+      "solar_projects_roi": "15-20%",
+    "utility_scale_solar_wind_roi": "25%",
+    "debt_to_equity_ratio": "1.2-1.5",
+    "solar_ebitda_margins": "35-45%",
+    "solar_lcoe": "$40/MWh",
+    "onshore_wind_lcoe": "$35-50/MWh",
+    "offshore_wind_lcoe": "$70/MWh",
+      "global_installed_solar_capacity_2023": "1,200 GW",
+       "china_installed_solar_capacity_2023": "450 GW",
+    "global_installed_wind_capacity_2023": "850 GW",
+    "renewable_energy_investments_2022": "$500 billion",
+    "renewable_energy_investments_forecast_increase_2023": "8-10%",
+       "us_inflation_reduction_act_clean_energy_investments": "$200 billion",
+    "california_solar_penetration_target_2030": "50%"
+  },
+  "sources": [
+    {
+      "name": "Reuters - Renewable Energy Market Insights",
+      "url": "https://www.reuters.com"
+    },
+    {
+      "name": "Enerdata - Sector Analysis on Renewables",
+      "url": "https://www.enerdata.net"
+    },
+    {
+      "name": "Wall Street Journal - Brookfield Renewable Partners Analysis",
+      "url": "https://www.wsj.com"
+    },
+    {
+      "name": "Department of Energy - Green Technology Initiatives",
+      "url": "https://www.energy.gov"
+    },
+    {
+      "name": "Energy News Network - Regulatory Developments",
+      "url": "https://www.energynews.us"
+    }
+  ],
+  "top_5_stocks": [
+    {
+      "stock_name": "Brookfield Renewable Partners",
+      "ticker": "BEP",
+      "current_price": "30.88",
+      "30_day_performance": "-4.76",
+      "justification": "Benefiting from capital inflows into clean energy and long-term PPAs protecting margins."
+    },
+    {
+      "stock_name": "First Solar",
+      "ticker": "FSLR",
+      "current_price": "184.51",
+      "30_day_performance": "-5.69",
+      "justification": "Leading solar panel producer with cost-effective thin-film technology."
+    },
+    {
+      "stock_name": "Tesla",
+      "ticker": "TSLA",
+       "current_price": "172.56",
+      "30_day_performance": "-11.86",
+      "justification": "Strong synergies in EV and renewable energy integration."
+    },
+    {
+      "stock_name": "Vestas",
+      "ticker": "VWS.CO",
+       "current_price": "168.40",
+      "30_day_performance": "-1.55",
+      "justification": "Market leader in wind turbine technologies with growing European orders."
+    },
+    {
+      "stock_name": "JinkoSolar",
+      "ticker": "JKS",
+       "current_price": "28.88",
+      "30_day_performance": "-9.85",
+      "justification": "Competitive pricing and strong presence in Asia-Pacific drive performance."
+    }
+  ]
+}
+```
