@@ -186,7 +186,7 @@ const Portfolio = () => {
         >
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-              Financial Firm's Income
+              Financial Firm's Portfolio Value
             </h2>
             <div className="bg-green-100 dark:bg-green-900/20 p-3 rounded-lg">
               <Wallet className="h-8 w-8 text-green-600 dark:text-green-400" />
