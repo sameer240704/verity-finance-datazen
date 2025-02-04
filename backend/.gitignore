@@ -1,6 +1,7 @@
 venv
 .env
-_pycache_
+backend\_pycache_
+backend\.env
 market research system\models\__pycache__
 market research system\models\.env
 backend\__pycache__
